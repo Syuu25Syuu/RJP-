@@ -1,0 +1,59 @@
+package test1.db;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+
+public class ViewMyName_And_ID {
+	public static HashMap viewMyName_And_ID(String id){
+		HashMap map = new LinkedHashMap();
+
+		try{
+				Connection cn = new OracleConnector().getCn();
+
+		        //自動コミットをOFFにする
+		        cn.setAutoCommit(false);
+
+		        System.out.println("接続完了");
+
+		        //SQL文を変数に格納する
+
+		        String sql="select USER_ID,USER_NAME from users where USER_SERIALNO = '"+id+"'";
+
+		        //Statementインターフェイスを実装するクラスの
+		        //インスタンスを取得する
+		        Statement st= cn.createStatement();
+
+		        ResultSet rs = st.executeQuery(sql);
+
+		        while(rs.next()){
+		        	String a = rs.getString("USER_ID");
+		        	String b = rs.getString("USER_NAME");
+		        	map.put("id",a);
+		        	map.put("name",b);
+		         }
+
+		        //トランザクションをコミットする
+		        cn.commit();
+
+		        //ステートメントをクローズする
+		        st.close();
+
+		        //RDBMSから切断する
+		        cn.close();
+
+		        System.out.println("切断完了");
+
+
+		        }catch(SQLException e){
+		        	e.printStackTrace();
+
+		        }
+			return map;
+
+
+		}
+}
