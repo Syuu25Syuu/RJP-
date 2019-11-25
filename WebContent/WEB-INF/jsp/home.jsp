@@ -8,20 +8,20 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-	<h1>ホーム</h1>
-
+	<p>セッションは${sessionScope.result.sessionToken}</p>
 	<form method = 'post' action = 'createtweet'>
 	<label for="kanso">ツイートする：</label><br>
 		<textarea name ="contents" id="contents" cols="40" rows="4" maxlength="150" placeholder="いまどうしてる？"></textarea>
-		<input type="hidden" id = "user_sesssion" type = "text" value="${sessionScope.flg}">
+		<input type="hidden" name = "user_session" type = "text" value="${sessionScope.result.sessionToken}">
 		<input type='submit' value='ツイート'>
+
 	</form>
 
+
 	<table border="1">
-		<tr><th>${sessionScope.user_name}</th><th>@${sessionScope.id}</th></tr>
-		<c:forEach var = "tweet" items = "${sessionScope.tweet}">
-			<tr><td>${tweet}</td><td>dddddddddddd</td></tr>
+		<tr><th>${result.name}</th><th>@${result.id}</th></tr>
+		<c:forEach var = "tweet" items = "${result.tweet}">
+			<tr><td>${result.tweet}</td><td>dddddddddddd</td></tr>
 		</c:forEach>
 
 

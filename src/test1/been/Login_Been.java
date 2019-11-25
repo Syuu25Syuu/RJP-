@@ -1,8 +1,13 @@
 package test1.been;
 
-public class Login_Been {
+import java.io.Serializable;
+
+public class Login_Been implements Serializable{
 	private String name;
     private String pass;
+    private String sessionToken;
+
+    public Login_Been() {}
 
 
     public String getName(){
@@ -16,5 +21,12 @@ public class Login_Been {
     }
     public void setPass(String pass){
         this.pass = pass;
+    }
+    public void setSessionToken(String sessionToken) {
+    	this.sessionToken = sessionToken;
+    }
+    public String getSessionToken() {
+    	System.out.println("Bean内のTokenは"+sessionToken+"です");
+    	return sessionToken;
     }
 }

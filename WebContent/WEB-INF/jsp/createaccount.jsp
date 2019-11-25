@@ -30,7 +30,7 @@ window.onload = function(){
 </head>
 
 <body style="">
-<form method="POST" action="createaccountservlet" name="frml">
+<form method="POST" action="createaccount" name="frml">
 <div id="n">名前:<input type="text" name="name"  placeholder="名前" required></div>
 
 <br><div id="i">ID:<input type="text" pattern="^[0-9A-Za-z]+$" name="id" placeholder="ID" required>※半角英数</div><br>

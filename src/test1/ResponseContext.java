@@ -7,4 +7,6 @@ public interface ResponseContext {
 	public void setTarget(String transferInfo);
 	public void setResponse(Object obj);
 	public Object getResuponse();
+	public void setSession(Object obj);
+	public Object getSession();
 }

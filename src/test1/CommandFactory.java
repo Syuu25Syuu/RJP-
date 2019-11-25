@@ -12,7 +12,7 @@ public abstract class CommandFactory {
 		Properties prop = new Properties();
 
 		try {
-			prop.load(new FileInputStream("C:/eclipse/pleiades/workspace/rjp/src/test1/commands.properties"));
+			prop.load(new FileInputStream("C:/eclipse/pleiades/workspace/test1/src/test1/commands.properties"));
 
 			String name = prop.getProperty(rc.getCommandPath());
 

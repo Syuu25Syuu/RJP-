@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import test1.been.Login_Been;
+
 
 
 public class FrontServlet extends HttpServlet{
@@ -16,25 +18,48 @@ public class FrontServlet extends HttpServlet{
             throws ServletException, IOException{
 		req.setCharacterEncoding("UTF-8");
 
+		HttpSession session  = req.getSession();
+
+
 		RequestContext rc = new WebRequestContext();
+
+		if(session!=null) {
+			rc.setSession(session);
+			System.out.println("sessionもってるよ。");
+		}else {
+			System.out.println("sessionもってないよ");
+		}
+
+
 		rc.setRequest(req);
 
 		AbstractCommand command = CommandFactory.getCommand(rc);
 
-		System.out.println(command);
+		System.out.println("コマンドの中身"+command);
 
 
-		System.out.println(rc);
+		System.out.println("rcの中身"+rc);
 
 		command.init(rc);
 
 		ResponseContext resc = command.execute();
 
+		System.out.println("rescの中身"+resc);
+
 
 		Object been = resc.getResult();
-		HttpSession session  = req.getSession();
 
 		session.setAttribute("result", been);
+
+
+
+		Login_Been getToken = new Login_Been();
+
+		String tokenString = getToken.getSessionToken();
+
+		System.out.println("tokenの中身"+tokenString);
+
+		session.setAttribute("token", tokenString);
 
 
 		RequestDispatcher dis = req.getRequestDispatcher(resc.getTarget());

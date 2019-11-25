@@ -13,5 +13,8 @@
 		パスワード:<input type='text' name='pass'><br>
 		<input type='submit' value='Login'>
 	</form>
+	<form method = 'post' action = 'crateacountform'>
+		<input type = 'submit' value ="アカウント作成はこちらです">
+	</form>
 </body>
 </html>

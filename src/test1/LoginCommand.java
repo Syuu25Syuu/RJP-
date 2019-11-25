@@ -4,6 +4,8 @@ import test1.been.Login_Been;
 import test1.db.LoginTest;
 
 public class LoginCommand extends AbstractCommand {
+	String sessionToken;
+
 
 	@Override
 	public ResponseContext execute() {
@@ -15,26 +17,28 @@ public class LoginCommand extends AbstractCommand {
 
 		ResponseContext resc = new WebResponseContext();
 
+		sessionToken =  LoginTest.insertUser_Table(name,pass); //return password
+
 		Login_Been l = new Login_Been();
 		l.setName(name);
 		l.setPass(pass);
+		l.setSessionToken(sessionToken);
 
-		String check =  LoginTest.insertUser_Table(name,pass); //return password
+		System.out.println("LoginCommand内のsessionTokenは"+sessionToken+"です");
 
-		 if(check.equals("")){
+
+
+		 if(sessionToken.equals("")){
 			 resc.setTarget("login");
 
          }else{
-        	 resc.setResult(check);
-        	 resc.setTarget("result");
+        	 resc.setResult(l);	//beanの内容を送信
+        	 resc.setTarget("result");	//URL
          }
-
-
-
-
 
 
 		return resc;
 	}
+
 
 }

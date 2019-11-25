@@ -17,11 +17,11 @@
 	<form method = 'post' action = 'createtweet'>
 	<label for="kanso">ツイートする：</label><br>
 		<textarea name ="contents" id="contents" cols="40" rows="4" maxlength="150" placeholder="いまどうしてる？"></textarea>
-		<input type="hidden" id = "user_sesssion" type = "text" value="${sessionScope.flg}">
+		<input type="hidden" name = "user_session" type = "text" value="${sessionScope.result.sessionToken}">
 		<input type='submit' value='ツイート'>
 
 	</form>
 
-	<p>セッションは${sessionScope.result}</p>
+	<p>セッションは${sessionScope.result.sessionToken}</p>
 </body>
 </html>

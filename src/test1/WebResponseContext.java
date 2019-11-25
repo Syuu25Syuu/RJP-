@@ -1,6 +1,7 @@
 package test1;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class WebResponseContext implements ResponseContext {
 
@@ -8,6 +9,8 @@ public class WebResponseContext implements ResponseContext {
 	private String target;
 
 	private HttpServletResponse _response;
+
+	private HttpSession _session;
 
 	public WebResponseContext() {}
 
@@ -43,6 +46,18 @@ public class WebResponseContext implements ResponseContext {
 	public Object getResuponse() {
 		// TODO 自動生成されたメソッド・スタブ
 		return _response;
+	}
+
+	@Override
+	public void setSession(Object obj) {
+		// TODO 自動生成されたメソッド・スタブ
+		_session = (HttpSession)obj;
+	}
+
+	@Override
+	public Object getSession() {
+		return _session;
+
 	}
 
 }

@@ -3,10 +3,12 @@ package test1;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 public class WebRequestContext implements RequestContext {
 	private Map _parameters;
 	private HttpServletRequest _request;
+	private HttpSession _session;
 
 
 	@Override
@@ -34,6 +36,18 @@ public class WebRequestContext implements RequestContext {
 		_request = (HttpServletRequest)request;
 		_parameters = _request.getParameterMap();
 
+	}
+
+	@Override
+	public void setSession(Object session) {
+		_session = (HttpSession)session;
+
+	}
+
+	@Override
+	public Object getSession() {
+		// TODO 自動生成されたメソッド・スタブ
+		return _session;
 	}
 
 }
