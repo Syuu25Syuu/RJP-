@@ -41,7 +41,6 @@ public class CreateTweetCommand extends AbstractCommand {
 		p.setId(id);
 		p.setTweet(list);
 
-
         resc.setResult(p);
         resc.setTarget("home");
 

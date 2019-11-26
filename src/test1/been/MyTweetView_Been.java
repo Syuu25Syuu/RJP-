@@ -34,23 +34,11 @@ public class MyTweetView_Been implements Serializable{
 	public ArrayList getTweet() {
 		return this.tweet;
 	}
-
-	public void setTweetdate(String tweetdate) {
-		this.tweetdate = tweetdate;
-	}
-
-	public String getTweetdate() {
-		return this.tweetdate;
-	}
-
-    public void setSessionToken(String sessionToken) {
-    	this.sessionToken = sessionToken;
-    }
-    public String getSessionToken() {
-    	System.out.println("Bean内のTokenは"+sessionToken+"です");
-    	return sessionToken;
-    }
-
-
-
+	   public void setSessionToken(String sessionToken) {
+	    	this.sessionToken = sessionToken;
+	    }
+	    public String getSessionToken() {
+	    	System.out.println("Bean内のTokenは"+sessionToken+"です");
+	    	return sessionToken;
+	    }
 }

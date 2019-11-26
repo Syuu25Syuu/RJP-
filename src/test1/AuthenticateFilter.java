@@ -22,7 +22,7 @@ public class AuthenticateFilter implements Filter{
         HttpSession session=((HttpServletRequest) req).getSession();
 
         //認証トークンを取得
-        String flag=(String)session.getAttribute("logintoken");
+        String flag=(String)session.getAttribute("token");
 
         //認証トークンがあるか判定
         if(flag!=null){
@@ -30,7 +30,7 @@ public class AuthenticateFilter implements Filter{
         	System.out.println("OK");
             chain.doFilter(req,res);
         }else{
-        	RequestDispatcher disp=req.getRequestDispatcher("logins");
+        	RequestDispatcher disp=req.getRequestDispatcher("login.jsp");
             disp.forward(req,res);
         }
     }

@@ -1,6 +1,7 @@
 package test1;
 
 import java.io.IOException;
+import java.io.Serializable;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -23,12 +24,15 @@ public class FrontServlet extends HttpServlet{
 
 		RequestContext rc = new WebRequestContext();
 
+		/*
 		if(session!=null) {
 			rc.setSession(session);
 			System.out.println("sessionもってるよ。");
 		}else {
 			System.out.println("sessionもってないよ");
 		}
+
+		*/
 
 
 		rc.setRequest(req);
@@ -49,17 +53,29 @@ public class FrontServlet extends HttpServlet{
 
 		Object been = resc.getResult();
 
-		session.setAttribute("result", been);
+		System.out.println("beenの中身は"+been);
 
 
+		//System.out.println("フラグの中身が見たくて2"+flag.equals(""));
 
-		Login_Been getToken = new Login_Been();
+		Serializable flg =(Login_Been) session.getAttribute("token");
 
-		String tokenString = getToken.getSessionToken();
+		Login_Been aBeen = new Login_Been();
 
-		System.out.println("tokenの中身"+tokenString);
+		System.out.println("aBennの中身"+aBeen);
 
-		session.setAttribute("token", tokenString);
+		System.out.println("flgの中身"+flg);
+
+		if(flg == null) {
+			session.setAttribute("token", been);
+			System.out.println("flgはNULLだったよ！");
+		}else if (flg.getClass() == been.getClass()) {
+			session.setAttribute("token", been);
+			System.out.println("flgは同じだったよね");
+		}else {
+			req.setAttribute("result",been);
+			System.out.println("flgが違ったよ");
+		}
 
 
 		RequestDispatcher dis = req.getRequestDispatcher(resc.getTarget());

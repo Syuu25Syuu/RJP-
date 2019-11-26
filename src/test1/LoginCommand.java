@@ -26,9 +26,12 @@ public class LoginCommand extends AbstractCommand {
 
 		System.out.println("LoginCommand内のsessionTokenは"+sessionToken+"です");
 
+		System.out.println(l);
 
 
-		 if(sessionToken.equals("")){
+
+		 if(sessionToken.equals("")){	//失敗だった場合
+			 resc.setResult(l);	//beanの内容を送信
 			 resc.setTarget("login");
 
          }else{
