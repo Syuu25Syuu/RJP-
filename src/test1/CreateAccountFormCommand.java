@@ -6,7 +6,6 @@ public class CreateAccountFormCommand extends AbstractCommand {
 	public ResponseContext execute() {
 		ResponseContext resc = new WebResponseContext();
 
-
 		resc.setTarget("createaccount");
 
 		return resc;

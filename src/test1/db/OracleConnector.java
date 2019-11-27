@@ -10,8 +10,8 @@ public class OracleConnector{
 	Connection cn;
 
 	public OracleConnector(){
-		String user = "hr";
-		String pass = "HR";
+		String user = "paku";
+		String pass = "paku";
 		try{
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 

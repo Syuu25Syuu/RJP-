@@ -58,7 +58,7 @@ public class FrontServlet extends HttpServlet{
 
 		//System.out.println("フラグの中身が見たくて2"+flag.equals(""));
 
-		Serializable flg =(Login_Been) session.getAttribute("token");
+		Serializable flg =(Serializable) session.getAttribute("token");
 
 		Login_Been aBeen = new Login_Been();
 
@@ -66,13 +66,15 @@ public class FrontServlet extends HttpServlet{
 
 		System.out.println("flgの中身"+flg);
 
-		if(flg == null) {
+		if(flg == null){
 			session.setAttribute("token", been);
 			System.out.println("flgはNULLだったよ！");
-		}else if (flg.getClass() == been.getClass()) {
-			session.setAttribute("token", been);
-			System.out.println("flgは同じだったよね");
-		}else {
+		}else if(been != null){
+			if(flg.getClass() == been.getClass()) {
+				session.setAttribute("token", been);
+				System.out.println("flgは同じだったよね");
+			}
+		}else{
 			req.setAttribute("result",been);
 			System.out.println("flgが違ったよ");
 		}
