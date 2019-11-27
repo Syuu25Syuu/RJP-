@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix = "c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page isELIgnored="false" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,15 +19,16 @@
 
 	</form>
 
-
-		<c:forEach  items = "${result}" var ="i">
-			${result.name}@${result.id}
-			 <div><c:out value="${i.tweet}"/></div>
-		</c:forEach>
-
-
-
-
+ <c:forEach var="data" items="${result}">
+    <div><c:out value="${data.name}"/>＠<c:out value="${data.id}"/></div>
+    <div><c:out value="${data.tweet}"/></div>
+    <form method = "post" action = 'liketweet'>
+    	<input type = "submit" value ="いいね">
+    	<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">
+    	<input type="hidden" name = "tweet_id" type = "text" value="${data.tweetId}">
+    </form>
+    <br><br>
+  </c:forEach>
 
 
 </body>

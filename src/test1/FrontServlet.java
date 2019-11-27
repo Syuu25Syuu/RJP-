@@ -73,6 +73,9 @@ public class FrontServlet extends HttpServlet{
 			if(flg.getClass() == been.getClass()) {
 				session.setAttribute("token", been);
 				System.out.println("flgは同じだったよね");
+			}else {
+				req.setAttribute("result",been);
+				System.out.println("beenの中身はnullだったよ");
 			}
 		}else{
 			req.setAttribute("result",been);

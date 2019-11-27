@@ -1,17 +1,23 @@
 package test1.been;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public class MyTweetView_Been implements Serializable{
 	public MyTweetView_Been() {}
 
-	private ArrayList tweet;
+	private String tweet;
 	private String tweetdate;
 	private String name;
 	private String id;
 	private String sessionToken;
+	private String tweetId;
 
+	public String getTweetId() {
+		return tweetId;
+	}
+	public void setTweetId(String tweetId) {
+		this.tweetId = tweetId;
+	}
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -26,15 +32,13 @@ public class MyTweetView_Been implements Serializable{
 		return id;
 	}
 
-
-	public void setTweet(ArrayList tweet) {
+	   public String getTweet() {
+		return tweet;
+	}
+	public void setTweet(String tweet) {
 		this.tweet = tweet;
 	}
-
-	public ArrayList getTweet() {
-		return this.tweet;
-	}
-	   public void setSessionToken(String sessionToken) {
+	public void setSessionToken(String sessionToken) {
 	    	this.sessionToken = sessionToken;
 	    }
 	    public String getSessionToken() {

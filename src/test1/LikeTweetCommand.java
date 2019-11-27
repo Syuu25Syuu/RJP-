@@ -6,26 +6,30 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 
 import test1.been.MyTweetView_Been;
-import test1.db.CreateTweet;
+import test1.db.CheckLikeUser;
+import test1.db.LikeTweet;
 import test1.db.ViewMyName_And_ID;
 import test1.db.ViewMy_Tweet;
 
-public class CreateTweetCommand extends AbstractCommand {
+public class LikeTweetCommand extends AbstractCommand {
 
 	@Override
 	public ResponseContext execute() {
 		RequestContext reqc = getRequestContext();
 
+		ResponseContext resc = new WebResponseContext();
+
+		String  tweet_id = reqc.getParameter("tweet_id")[0];
+
 		String  s_userid = reqc.getParameter("user_session")[0];
 
+		String flgString = CheckLikeUser.checkLikeUser(s_userid);
+		if(flgString != "") {
+			resc.setTarget("home");
+			return resc;
+		}
 
-		System.out.println("useridは"+s_userid+"だよ");
-
-		String  tweet = reqc.getParameter("contents")[0];
-
-
-		CreateTweet.createTweet(s_userid,tweet); //return password
-
+		LikeTweet.likeTweet(tweet_id, s_userid);
 		HashMap map = ViewMyName_And_ID.viewMyName_And_ID(s_userid);
 
 		String id =(String) map.get("id");
@@ -36,7 +40,7 @@ public class CreateTweetCommand extends AbstractCommand {
 		System.out.println("idさんは"+id+"だよ！！！");
 
 
-		ResponseContext resc = new WebResponseContext();
+
 
 
 
@@ -61,8 +65,6 @@ public class CreateTweetCommand extends AbstractCommand {
 
         resc.setResult(list);
         resc.setTarget("home");
-
-
 		return resc;
 	}
 
