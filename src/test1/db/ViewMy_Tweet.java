@@ -4,11 +4,11 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 public class ViewMy_Tweet {
-	public static ArrayList<String> viewMy_Tweet(String id){
-		ArrayList<String> list = new ArrayList<String>();
+	public static LinkedHashMap viewMy_Tweet(String id){
+		LinkedHashMap<String,String> map = new LinkedHashMap<String,String>();
 
 		try{
 				Connection cn = new OracleConnector().getCn();
@@ -20,7 +20,7 @@ public class ViewMy_Tweet {
 
 		        //SQL文を変数に格納する
 		        System.out.println("idを表示するよ"+id);
-		        String sql="select TWEET_CONTENT from Tweets where USER_NO = '"+id+"'";
+		        String sql="select TWEET_NO,TWEET_CONTENT from Tweets where USER_NO = '"+id+"'";
 
 		        //Statementインターフェイスを実装するクラスの
 		        //インスタンスを取得する
@@ -29,9 +29,17 @@ public class ViewMy_Tweet {
 		        ResultSet rs = st.executeQuery(sql);
 
 		        while(rs.next()){
+		        	String no = rs.getString("TWEET_NO");
 		        	String tweet = rs.getString("TWEET_CONTENT");
-		        	System.out.println("ツイートは:"+tweet);
-		        	list.add(tweet);
+
+		        	System.out.println("Bean時点でのtweetidは"+no);
+		        	System.out.println("Bean時点でのtweetは"+tweet);
+
+
+		        	map.put(no,tweet);
+
+		        	System.out.println(map.get(no));
+		        	//System.out.println(map.get(no)); //ここまではOK
 		         }
 
 		        //トランザクションをコミットする
@@ -50,7 +58,7 @@ public class ViewMy_Tweet {
 		        	e.printStackTrace();
 
 		        }
-			return list;
+			return map;
 
 
 		}
