@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 
 import test1.been.MyTweetView_Been;
+import test1.db.CheckLikeUser;
 import test1.db.CountLikeTweet;
 import test1.db.CreateTweet;
 import test1.db.ViewMyName_And_ID;
@@ -51,11 +52,21 @@ public class CreateTweetCommand extends AbstractCommand {
 			String keyID = (String)iterator.next();	//tweet_id
 			String valueTweet = (String)tweetmap.get(keyID);
 			String likecounter = CountLikeTweet.countLikeTweet(keyID);	//そのツイートのいいね数を表示
+
+			String checklike = CheckLikeUser.checkLikeUser(s_userid, keyID);	//そのツイートにいいねをしているかの判定
+
+			System.out.println("checkの中身が見たくて"+checklike);
+			if(checklike=="") {
+				checklike = "いいね";
+				System.out.println("checkを変更したよ");
+			}else {
+				checklike = "いいねをとりけす";
+			}
+
 			p.setTweet(valueTweet);
 			p.setTweetId(keyID);
 			p.setLikecounter(likecounter);
-			//System.out.println("KEYIDは"+keyID);
-			//System.out.println("ツイートは"+valueTweet);
+			p.setChecklike(checklike);
 			list.add(p);
 
 		}

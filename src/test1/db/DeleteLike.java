@@ -18,11 +18,6 @@ public class DeleteLike {
 
 	        String sql="delete from likes where  DID_LIKE_USER = '"+user_id+"' and LIKE_TWEET = '"+tweet_id+"'";
 
-
-
-
-
-
 			//Statementインターフェイスを実装するクラスの
 			//インスタンスを取得する
 			Statement st=cn.createStatement();

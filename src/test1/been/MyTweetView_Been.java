@@ -12,7 +12,14 @@ public class MyTweetView_Been implements Serializable{
 	private String sessionToken;
 	private String tweetId;
 	private String likecounter;
+	private String checklike;
 
+	public String getChecklike() {
+		return checklike;
+	}
+	public void setChecklike(String checklike) {
+		this.checklike = checklike;
+	}
 	public String getLikecounter() {
 		return likecounter;
 	}
