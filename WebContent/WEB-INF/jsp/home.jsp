@@ -13,7 +13,7 @@
 	<p>セッションは${sessionScope.token.sessionToken}</p>
 	<form method = 'post' action = 'createtweet'>
 	<label for="kanso">ツイートする：</label><br>
-		<textarea name ="contents" id="contents" cols="40" rows="4" maxlength="150" placeholder="いまどうしてる？"></textarea>
+		<textarea name ="contents" id="contents" cols="40" rows="4" maxlength="150" placeholder="いまどうしてる？" required></textarea>
 		<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">
 		<input type='submit' value='ツイート'>
 
@@ -23,7 +23,7 @@
     <div><c:out value="${data.name}"/>＠<c:out value="${data.id}"/></div>
     <div><c:out value="${data.tweet}"/></div>
     <form method = "post" action = 'liketweet'>
-    	<input type = "submit" value ="いいね">
+    	<input type = "submit" value ="いいね">いいね数<c:out value="${data.likecounter}"/>
     	<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">
     	<input type="hidden" name = "tweet_id" type = "text" value="${data.tweetId}">
     </form>

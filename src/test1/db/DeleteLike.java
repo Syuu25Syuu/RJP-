@@ -1,14 +1,11 @@
 package test1.db;
 
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class CheckLikeUser {
-	public static String checkLikeUser(String user_id,String tweet_id) {
-		String flgString = "";
-
+public class DeleteLike {
+	public static void deleteLike(String tweet_id,String user_id) {
 		try{
 			Connection cn = new OracleConnector().getCn();
 
@@ -19,21 +16,19 @@ public class CheckLikeUser {
 
 	        //SQL文を変数に格納する
 
-	        String sql="select * from likes where DID_LIKE_USER = '"+user_id+"'and LIKE_TWEET = '"+tweet_id+"'";
-
-	        //Statementインターフェイスを実装するクラスの
-	        //インスタンスを取得する
-	        Statement st= cn.createStatement();
-
-	        ResultSet rs = st.executeQuery(sql);
-
-	        while(rs.next()){
-	        	flgString=rs.getString("DID_LIKE_USER");
-	        	System.out.println(flgString);
-	         }
+	        String sql="delete from likes where  DID_LIKE_USER = '"+user_id+"' and LIKE_TWEET = '"+tweet_id+"'";
 
 
 
+
+
+
+			//Statementインターフェイスを実装するクラスの
+			//インスタンスを取得する
+			Statement st=cn.createStatement();
+
+			//SQLを実行しトランザクションが開始される。処理件数が返される
+			st.executeUpdate(sql);
 	        //トランザクションをコミットする
 	        cn.commit();
 
@@ -51,7 +46,7 @@ public class CheckLikeUser {
 
 	        }
 
-			return flgString;
+
 
 	}
 }

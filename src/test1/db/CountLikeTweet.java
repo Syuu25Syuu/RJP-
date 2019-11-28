@@ -5,11 +5,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class CheckLikeUser {
-	public static String checkLikeUser(String user_id,String tweet_id) {
-		String flgString = "";
-
-		try{
+public class CountLikeTweet {
+	public static String countLikeTweet(String tweet_no) {
+		String counter = "";
+		try {
 			Connection cn = new OracleConnector().getCn();
 
 	        //自動コミットをOFFにする
@@ -17,9 +16,7 @@ public class CheckLikeUser {
 
 	        System.out.println("接続完了");
 
-	        //SQL文を変数に格納する
-
-	        String sql="select * from likes where DID_LIKE_USER = '"+user_id+"'and LIKE_TWEET = '"+tweet_id+"'";
+	        String sql = "select count(like_tweet) from likes where like_tweet='"+tweet_no+"'";
 
 	        //Statementインターフェイスを実装するクラスの
 	        //インスタンスを取得する
@@ -28,11 +25,9 @@ public class CheckLikeUser {
 	        ResultSet rs = st.executeQuery(sql);
 
 	        while(rs.next()){
-	        	flgString=rs.getString("DID_LIKE_USER");
-	        	System.out.println(flgString);
+	        	counter= rs.getString(1);
+	        	System.out.println("counterの数は"+counter);
 	         }
-
-
 
 	        //トランザクションをコミットする
 	        cn.commit();
@@ -46,12 +41,12 @@ public class CheckLikeUser {
 	        System.out.println("切断完了");
 
 
-	        }catch(SQLException e){
-	        	e.printStackTrace();
+        }catch(SQLException e){
+        	e.printStackTrace();
 
-	        }
-
-			return flgString;
+        }
+		return counter;
 
 	}
 }
+

@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 
 import test1.been.MyTweetView_Been;
+import test1.db.CountLikeTweet;
 import test1.db.CreateTweet;
 import test1.db.ViewMyName_And_ID;
 import test1.db.ViewMy_Tweet;
@@ -33,7 +34,7 @@ public class CreateTweetCommand extends AbstractCommand {
 
 		LinkedHashMap tweetmap = ViewMy_Tweet.viewMy_Tweet(s_userid);
 
-		System.out.println("idさんは"+id+"だよ！！！");
+		//System.out.println("idさんは"+id+"だよ！！！");
 
 
 		ResponseContext resc = new WebResponseContext();
@@ -47,12 +48,14 @@ public class CreateTweetCommand extends AbstractCommand {
 			MyTweetView_Been p = new MyTweetView_Been();
 			p.setName(user_name);
 			p.setId(id);
-			String keyID = (String)iterator.next();
+			String keyID = (String)iterator.next();	//tweet_id
 			String valueTweet = (String)tweetmap.get(keyID);
+			String likecounter = CountLikeTweet.countLikeTweet(keyID);	//そのツイートのいいね数を表示
 			p.setTweet(valueTweet);
 			p.setTweetId(keyID);
-			System.out.println("KEYIDは"+keyID);
-			System.out.println("ツイートは"+valueTweet);
+			p.setLikecounter(likecounter);
+			//System.out.println("KEYIDは"+keyID);
+			//System.out.println("ツイートは"+valueTweet);
 			list.add(p);
 
 		}

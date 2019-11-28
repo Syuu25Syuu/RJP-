@@ -11,7 +11,14 @@ public class MyTweetView_Been implements Serializable{
 	private String id;
 	private String sessionToken;
 	private String tweetId;
+	private String likecounter;
 
+	public String getLikecounter() {
+		return likecounter;
+	}
+	public void setLikecounter(String likecounter) {
+		this.likecounter = likecounter;
+	}
 	public String getTweetId() {
 		return tweetId;
 	}
@@ -42,7 +49,7 @@ public class MyTweetView_Been implements Serializable{
 	    	this.sessionToken = sessionToken;
 	    }
 	    public String getSessionToken() {
-	    	System.out.println("Bean内のTokenは"+sessionToken+"です");
+	    	//System.out.println("Bean内のTokenは"+sessionToken+"です");
 	    	return sessionToken;
 	    }
 }

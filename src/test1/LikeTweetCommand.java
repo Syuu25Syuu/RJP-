@@ -7,6 +7,8 @@ import java.util.LinkedHashMap;
 
 import test1.been.MyTweetView_Been;
 import test1.db.CheckLikeUser;
+import test1.db.CountLikeTweet;
+import test1.db.DeleteLike;
 import test1.db.LikeTweet;
 import test1.db.ViewMyName_And_ID;
 import test1.db.ViewMy_Tweet;
@@ -23,13 +25,18 @@ public class LikeTweetCommand extends AbstractCommand {
 
 		String  s_userid = reqc.getParameter("user_session")[0];
 
-		String flgString = CheckLikeUser.checkLikeUser(s_userid);
+		String flgString = CheckLikeUser.checkLikeUser(s_userid,tweet_id);
 		if(flgString != "") {
-			resc.setTarget("home");
-			return resc;
+			System.out.println("いいねがすでに押されていたよ！");
+			DeleteLike.deleteLike(tweet_id,s_userid);
+
+		}else {
+			System.out.println("いいねは押されていなかったよ");
+			LikeTweet.likeTweet(tweet_id, s_userid);
 		}
 
-		LikeTweet.likeTweet(tweet_id, s_userid);
+
+
 		HashMap map = ViewMyName_And_ID.viewMyName_And_ID(s_userid);
 
 		String id =(String) map.get("id");
@@ -37,7 +44,7 @@ public class LikeTweetCommand extends AbstractCommand {
 
 		LinkedHashMap tweetmap = ViewMy_Tweet.viewMy_Tweet(s_userid);
 
-		System.out.println("idさんは"+id+"だよ！！！");
+		//System.out.println("idさんは"+id+"だよ！！！");
 
 
 
@@ -51,12 +58,14 @@ public class LikeTweetCommand extends AbstractCommand {
 			MyTweetView_Been p = new MyTweetView_Been();
 			p.setName(user_name);
 			p.setId(id);
-			String keyID = (String)iterator.next();
+			String keyID = (String)iterator.next();	//tweet_id
 			String valueTweet = (String)tweetmap.get(keyID);
+			String likecounter = CountLikeTweet.countLikeTweet(keyID);	//そのツイートのいいね数を表示
 			p.setTweet(valueTweet);
 			p.setTweetId(keyID);
-			System.out.println("KEYIDは"+keyID);
-			System.out.println("ツイートは"+valueTweet);
+			p.setLikecounter(likecounter);
+			//System.out.println("KEYIDは"+keyID);
+			//System.out.println("ツイートは"+valueTweet);
 			list.add(p);
 
 		}

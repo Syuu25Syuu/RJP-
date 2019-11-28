@@ -19,8 +19,8 @@ public class ViewMy_Tweet {
 		        System.out.println("接続完了");
 
 		        //SQL文を変数に格納する
-		        System.out.println("idを表示するよ"+id);
-		        String sql="select TWEET_NO,TWEET_CONTENT from Tweets where USER_NO = '"+id+"'";
+		        //System.out.println("idを表示するよ"+id);
+		        String sql="select TWEET_NO,TWEET_CONTENT from Tweets where USER_NO = '"+id+"' order by TWEET_DATE desc ";
 
 		        //Statementインターフェイスを実装するクラスの
 		        //インスタンスを取得する
@@ -32,13 +32,13 @@ public class ViewMy_Tweet {
 		        	String no = rs.getString("TWEET_NO");
 		        	String tweet = rs.getString("TWEET_CONTENT");
 
-		        	System.out.println("Bean時点でのtweetidは"+no);
-		        	System.out.println("Bean時点でのtweetは"+tweet);
+		        	//System.out.println("Bean時点でのtweetidは"+no);
+		        	//System.out.println("Bean時点でのtweetは"+tweet);
 
 
 		        	map.put(no,tweet);
 
-		        	System.out.println(map.get(no));
+		        	//System.out.println(map.get(no));
 		        	//System.out.println(map.get(no)); //ここまではOK
 		         }
 
