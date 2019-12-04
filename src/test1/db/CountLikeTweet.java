@@ -16,7 +16,7 @@ public class CountLikeTweet {
 
 	        System.out.println("接続完了");
 
-	        String sql = "select count(like_tweet) from likes where like_tweet='"+tweet_no+"'";
+	        String sql = "select count(likes_tweet) from likes where likes_tweet='"+tweet_no+"'";
 
 	        //Statementインターフェイスを実装するクラスの
 	        //インスタンスを取得する

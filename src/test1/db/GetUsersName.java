@@ -1,13 +1,13 @@
 package test1.db;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class LikeTweet {
-	public static void likeTweet(String tweet_id,String user_id) {
-		String likecount;
-
+public class GetUsersName {
+	public static String getUserName(String USERS_SERIALNO) {
+		String name = "";
 		try{
 			Connection cn = new OracleConnector().getCn();
 
@@ -18,17 +18,18 @@ public class LikeTweet {
 
 	        //SQL文を変数に格納する
 
-	        String sql=" insert into Likes(Likes_Tweet,Likes_User)values('"+tweet_id+"','"+user_id+"')";
+	        String sql="select USERS_NAME from users where USERS_SERIALNO = '"+USERS_SERIALNO+"'";
 
+	        //Statementインターフェイスを実装するクラスの
+	        //インスタンスを取得する
+	        Statement st= cn.createStatement();
 
+	        ResultSet rs = st.executeQuery(sql);
 
+	        while(rs.next()){
+	        	name = rs.getString(1);
+	         }
 
-			//Statementインターフェイスを実装するクラスの
-			//インスタンスを取得する
-			Statement st=cn.createStatement();
-
-			//SQLを実行しトランザクションが開始される。処理件数が返される
-			st.executeUpdate(sql);
 	        //トランザクションをコミットする
 	        cn.commit();
 
@@ -45,7 +46,7 @@ public class LikeTweet {
 	        	e.printStackTrace();
 
 	        }
-
+		return name;
 
 
 	}

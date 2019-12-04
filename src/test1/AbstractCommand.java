@@ -13,6 +13,3 @@ public abstract class AbstractCommand {
 	}
 	public abstract ResponseContext execute();
 }
-
-//きにしないで(しゅんより)
-//aaaaa

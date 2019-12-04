@@ -26,12 +26,11 @@ public class LikeTweetCommand extends AbstractCommand {
 		String  s_userid = reqc.getParameter("user_session")[0];
 
 		String flgString = CheckLikeUser.checkLikeUser(s_userid,tweet_id);
-		if(flgString != "") {
-			System.out.println("いいねがすでに押されていたよ！");
+		System.out.println("flgStringの中身は"+flgString);
+		if(flgString.equals("いいねをとりけす")) {
 			DeleteLike.deleteLike(tweet_id,s_userid);
 
 		}else {
-			System.out.println("いいねは押されていなかったよ");
 			LikeTweet.likeTweet(tweet_id, s_userid);
 		}
 
@@ -63,15 +62,6 @@ public class LikeTweetCommand extends AbstractCommand {
 			String likecounter = CountLikeTweet.countLikeTweet(keyID);	//そのツイートのいいね数を表示
 
 			String checklike = CheckLikeUser.checkLikeUser(s_userid, keyID);	//そのツイートにいいねをしているかの判定
-
-			System.out.println("checkの中身が見たくて"+checklike);
-			if(checklike=="") {
-				checklike = "いいね";
-				System.out.println("checkを変更したよ");
-			}else {
-				checklike = "いいねをとりけす";
-			}
-
 
 			p.setTweet(valueTweet);
 			p.setTweetId(keyID);

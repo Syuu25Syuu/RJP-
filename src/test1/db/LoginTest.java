@@ -17,7 +17,7 @@ public class LoginTest{
         System.out.println("接続完了");
 
         //SQL文を変数に格納する
-        String sql="select User_SerialNo from users where user_pass = '"+UserPass+"' AND user_id = '"+userID+"'";
+        String sql="select Users_SerialNo from users where users_pass = '"+UserPass+"' AND users_id = '"+userID+"'";
 
         //Statementインターフェイスを実装するクラスの
         //インスタンスを取得する
@@ -26,7 +26,7 @@ public class LoginTest{
         ResultSet rs = st.executeQuery(sql);
 
         while(rs.next()){
-        	a=rs.getString("User_SerialNo");
+        	a=rs.getString(1);
         	System.out.println("シリアルナンバー:"+a);
          }
 

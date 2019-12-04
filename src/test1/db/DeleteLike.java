@@ -16,7 +16,7 @@ public class DeleteLike {
 
 	        //SQL文を変数に格納する
 
-	        String sql="delete from likes where  DID_LIKE_USER = '"+user_id+"' and LIKE_TWEET = '"+tweet_id+"'";
+	        String sql="delete from likes where  Likes_User = '"+user_id+"' and LIKES_TWEET = '"+tweet_id+"'";
 
 			//Statementインターフェイスを実装するクラスの
 			//インスタンスを取得する

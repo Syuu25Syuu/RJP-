@@ -7,22 +7,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
-<script>
-
-</script>
-
 </head>
 <body>
-<h1>ほーむ</h1>
+	<h1>自分がいいねしたツイートを表示するページ</h1>
 
 	<form method = 'post' action='logout'>
 		<input type = "submit" value = "ログアウト">
-	</form>
-
-	<form method = 'post' action = 'viewmylike'>
-		<input type = "submit" value = "いいね一覧">
-		<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">
 	</form>
 
 	<form action="search_tweet" method="post">
@@ -30,7 +20,6 @@
 		<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">
 		<input type="submit" value="検索">
 	</form>
-
 
 	<p>セッションは${sessionScope.token.sessionToken}</p>
 	<form method = 'post' action = 'createtweet'>
@@ -55,8 +44,6 @@
     </form>
     <br><br>
   </c:forEach>
-
-
 
 </body>
 </html>

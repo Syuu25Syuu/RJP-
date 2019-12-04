@@ -19,7 +19,7 @@ public class CheckLikeUser {
 
 	        //SQL文を変数に格納する
 
-	        String sql="select * from likes where DID_LIKE_USER = '"+user_id+"'and LIKE_TWEET = '"+tweet_id+"'";
+	        String sql="select Likes_User from likes where Likes_User = '"+user_id+"'and Likes_Tweet = '"+tweet_id+"'";
 
 	        //Statementインターフェイスを実装するクラスの
 	        //インスタンスを取得する
@@ -28,9 +28,15 @@ public class CheckLikeUser {
 	        ResultSet rs = st.executeQuery(sql);
 
 	        while(rs.next()){
-	        	flgString=rs.getString("DID_LIKE_USER");
-	        	System.out.println(flgString);
+	        	flgString=rs.getString(1);
+	        	System.out.println("flgStringの中身は"+flgString+"です");
 	         }
+
+	    	if(flgString=="") {
+	    		flgString = "いいね";
+			}else {
+				flgString = "いいねをとりけす";
+			}
 
 
 
@@ -48,6 +54,7 @@ public class CheckLikeUser {
 
 	        }catch(SQLException e){
 	        	e.printStackTrace();
+
 
 	        }
 

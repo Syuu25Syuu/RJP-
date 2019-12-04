@@ -55,14 +55,6 @@ public class CreateTweetCommand extends AbstractCommand {
 
 			String checklike = CheckLikeUser.checkLikeUser(s_userid, keyID);	//そのツイートにいいねをしているかの判定
 
-			System.out.println("checkの中身が見たくて"+checklike);
-			if(checklike=="") {
-				checklike = "いいね";
-				System.out.println("checkを変更したよ");
-			}else {
-				checklike = "いいねをとりけす";
-			}
-
 			p.setTweet(valueTweet);
 			p.setTweetId(keyID);
 			p.setLikecounter(likecounter);
