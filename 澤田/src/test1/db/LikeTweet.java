@@ -18,7 +18,7 @@ public class LikeTweet {
 
 	        //SQL文を変数に格納する
 
-	        String sql=" insert into Likes(Like_Tweet,Did_Like_User)values('"+tweet_id+"','"+user_id+"')";
+	        String sql=" insert into Likes(Likes_Tweet,Likes_User)values('"+tweet_id+"','"+user_id+"')";
 
 
 

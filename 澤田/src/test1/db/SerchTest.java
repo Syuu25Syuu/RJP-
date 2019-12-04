@@ -19,7 +19,7 @@ public class SerchTest{
 	        System.out.println("接続完了");
 
 	        //SQL文を変数に格納する
-	        String sql="select User_ID,User_Name,User_SerialNo from users where User_ID LIKE '%"+UserId+"%'";
+	        String sql="select Users_ID,Users_Name,Users_SerialNo from users where Users_ID LIKE '%"+UserId+"%'";
 
 	        //Statementインターフェイスを実装するクラスの
 	        //インスタンスを取得する
@@ -28,8 +28,8 @@ public class SerchTest{
 	        ResultSet rs = st.executeQuery(sql);
 
 	        while(rs.next()){
-	        	String a=rs.getString("User_ID");
-	        	String b=rs.getString("User_Name");
+	        	String a=rs.getString("Users_ID");
+	        	String b=rs.getString("Users_Name");
 	        	String c=rs.getString(3);
 
 	        	System.out.println("ユーザID:"+a);

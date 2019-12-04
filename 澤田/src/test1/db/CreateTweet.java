@@ -18,7 +18,7 @@ public class CreateTweet {
 
 		        //SQL文を変数に格納する
 
-		        String sql="insert into Tweets(User_No,Tweet_Content) values('"+id+"','"+tweet+"')";
+		        String sql="insert into Tweets(Users_No,Tweets_Content) values('"+id+"','"+tweet+"')";
 
 				//Statementインターフェイスを実装するクラスの
 				//インスタンスを取得する

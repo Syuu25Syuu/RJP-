@@ -26,7 +26,7 @@ public class Login_Been implements Serializable{
     	this.sessionToken = sessionToken;
     }
     public String getSessionToken() {
-    	System.out.println("Bean内のTokenは"+sessionToken+"です");
+    	//System.out.println("Bean内のTokenは"+sessionToken+"です");
     	return sessionToken;
     }
 }

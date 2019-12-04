@@ -21,10 +21,9 @@ public class CreateAccountCommand extends AbstractCommand {
 		String flg = CreateAccount.createAcount(name,id,pass,mail);
 
 		if(flg.equals("アカウントの作成に成功しました")) {
-			resc.setResult(flg);
        	 	resc.setTarget("login");
 		}else {
-			resc.setResult(flg);
+
        	 	resc.setTarget("createaccount");
 		}
 

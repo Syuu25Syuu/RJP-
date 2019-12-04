@@ -17,7 +17,7 @@ public class CreateAccount {
 
 		        //SQL文を変数に格納する
 
-		        String sql="insert into users(User_ID,User_Name,User_Pass,User_Mail) values('"+userId+"','"+userName+"','"+userPass+"','"+userMail+"')";
+		        String sql="insert into users(Users_ID,Users_Name,Users_Pass,Users_Mail) values('"+userId+"','"+userName+"','"+userPass+"','"+userMail+"')";
 
 				//Statementインターフェイスを実装するクラスの
 				//インスタンスを取得する

@@ -16,12 +16,12 @@ public class AjaxServlet extends HttpServlet{
             throws ServletException, IOException{
 		req.setCharacterEncoding("UTF-8");
 
-		int  userId = Integer.parseInt(req.getParameter("userId"));
+		int  userNo = Integer.parseInt(req.getParameter("userNo"));
 		int  followedNo = Integer.parseInt(req.getParameter("followedNo"));
 
-		FollowTest.follow(userId, followedNo);
+		FollowTest.follow(userNo, followedNo);
 
-		System.out.print("aaaa");
+		System.out.print("フォローしました");
 
 
         }

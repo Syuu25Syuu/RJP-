@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class FollowTest{
-	public static void follow(int UserId,int FollowedNo){
+	public static void follow(int UserNo,int FollowedNo){
 
         try{
 	        //Driverインターフェイスを実装するクラスをロードする
@@ -16,7 +16,7 @@ public class FollowTest{
 	        System.out.println("接続完了");
 
 	        //SQL文を変数に格納する
-	        String sql="insert into follows(user_no,followed_no) values("+UserId+","+FollowedNo+")";
+	        String sql="insert into follows(users_no,followed_no) values("+UserNo+","+FollowedNo+")";
 
 	        //Statementインターフェイスを実装するクラスの
 	        //インスタンスを取得する
@@ -38,6 +38,7 @@ public class FollowTest{
 	        System.out.println("切断完了");
 
         }catch(SQLException e){
+
         	e.printStackTrace();
         }
 	}
