@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>ホーム画面</title>
+<title>リプライ</title>
 
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 <style>
@@ -20,7 +20,7 @@
 <body>
 
 	<form method = 'post' action = 'comebackhome' id = 'comebackhome'>
-		<div onclick = "document.getElementById('comebackhome').submit();"><h1>ホーム画面</h1></div>
+		<div onclick = "document.getElementById('comebackhome').submit();"><h1>リプライ画面</h1></div>
 		<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">
 	</form>
 
@@ -51,24 +51,26 @@
 		<input type='submit' value='ツイート'>
 	</form>
 
- 	<c:forEach var="data" items="${result}">
-	 	<form method = 'post' id="myFORM" action = 'showprofiles'>
+<!-- 返信元を表示 -->
+
+<form method = 'post' id="myFORM" action = 'showprofiles'>
 
 	 		<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">
-	 		<input type="hidden" name = "user_id" type = "text" value="${data.serialuserid}">
-	 		<input type = "submit" name = "user_id" value= " ${data.name}  ＠${data.id}" class="button">
+
+
+
 
 	    </form>
 
 
-	    <div>${data.tweet}</div>
+	    <div>${result.tweet}</div>
 
 
 	    <div class = "reply"  >
 			<form method = 'post' action = 'replytweet'>
 				<textarea name ="replycontent" id="replycontent" cols="40" rows="4" maxlength="150" placeholder="返信をツイート" required></textarea>
 				<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">
-				<input type="hidden" name = "replyid" type = "text" value="${data.tweetId}">
+				<input type="hidden" name = "replyid" type = "text" value="${result.tweetId}">
 
 				<input type='submit' value='返信'>
 			</form>
@@ -76,10 +78,35 @@
 
 	    <form method = "post" action = 'liketweet'>
 
-	    		<input type = "submit" id = "check" value = "${data.checklike}">いいね数<c:out value="${data.likecounter}"/>
+	    		<input type = "submit" id = "check" value = "${result.checklike}">いいね数<c:out value="${result.likecounter}"/>
 
 	    	<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">
-	    	<input type="hidden" name = "tweet_id" type = "text" value="${data.tweetId}">
+	    	<input type="hidden" name = "tweet_id" type = "text" value="${result.tweetId}">
+
+	    </form>
+	    <br><br>
+
+<!-- リプライを表示 -->
+
+   	<c:forEach var="data2" items="${result}">
+	 	<form method = 'post' id="myFORM" action = 'showprofiles'>
+
+	 		<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">
+	 		<input type="hidden" name = "user_id" type = "text" value="${data2.childSerialNo}">
+	 		<input type = "submit" name = "user_id" value= " ${data2.childUserName}  ＠${data2.childUserId}" class="button">
+
+	    </form>
+
+
+	    <div>${data2.childTweetContent}</div>
+
+
+	    <form method = "post" action = 'liketweet'>
+
+	    		<input type = "submit" id = "check" value = "${data2.childCheckLike}">いいね数<c:out value="${data2.childTweetLikeCount}"/>
+
+	    	<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">
+	    	<input type="hidden" name = "tweet_id" type = "text" value="${data2.childTweetId}">
 
 	    </form>
 	    <br><br>

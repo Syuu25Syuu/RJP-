@@ -8,25 +8,17 @@ import java.util.LinkedHashMap;
 import test1.been.MyTweetView_Been;
 import test1.db.CheckLikeUser;
 import test1.db.CountLikeTweet;
-import test1.db.CreateTweet;
 import test1.db.ViewMyName_And_ID;
 import test1.db.ViewMy_Tweet;
 
-public class CreateTweetCommand extends AbstractCommand {
+public class ComebackHomeCommand extends AbstractCommand {
 
 	@Override
 	public ResponseContext execute() {
 		RequestContext reqc = getRequestContext();
+		ResponseContext resc = new WebResponseContext();
 
 		String  s_userid = reqc.getParameter("user_session")[0];
-
-
-		System.out.println("useridは"+s_userid+"だよ");
-
-		String  tweet = reqc.getParameter("contents")[0];
-
-
-		CreateTweet.createTweet(s_userid,tweet); //return password
 
 		HashMap map = ViewMyName_And_ID.viewMyName_And_ID(s_userid);
 
@@ -35,10 +27,8 @@ public class CreateTweetCommand extends AbstractCommand {
 
 		LinkedHashMap tweetmap = ViewMy_Tweet.viewMy_Tweet(s_userid);
 
-		//System.out.println("idさんは"+id+"だよ！！！");
 
 
-		ResponseContext resc = new WebResponseContext();
 
 
 
@@ -63,8 +53,6 @@ public class CreateTweetCommand extends AbstractCommand {
 			list.add(p);
 
 		}
-
-
 
         resc.setResult(list);
         resc.setTarget("home");

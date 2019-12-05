@@ -6,11 +6,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import test1.been.MyTweetView_Been;
+public class SerchTest{
+	public static ArrayList<ArrayList> serchUser(String UserId){
 
-public class SerchTweet {
-	public static ArrayList getSerchTweet(String word,String sessionToken) {
-		ArrayList<MyTweetView_Been> data=new ArrayList<MyTweetView_Been>();
+		ArrayList<ArrayList> data=new ArrayList<ArrayList>();
         try{
 	        //Driverインターフェイスを実装するクラスをロードする
 	        Connection cn = new OracleConnector().getCn();
@@ -20,7 +19,7 @@ public class SerchTweet {
 	        System.out.println("接続完了");
 
 	        //SQL文を変数に格納する
-	        String sql="select TWEETS_SERIALNO,USERS_NO,TWEETS_CONTENT from tweets where TWEETS_CONTENT LIKE '%"+word+"%'";
+	        String sql="select Users_ID,Users_Name,Users_SerialNo from users where Users_ID LIKE '%"+UserId+"%'";
 
 	        //Statementインターフェイスを実装するクラスの
 	        //インスタンスを取得する
@@ -29,36 +28,20 @@ public class SerchTweet {
 	        ResultSet rs = st.executeQuery(sql);
 
 	        while(rs.next()){
-	        	String t_no = rs.getString(1);
-	        	String u_no = rs.getString(2);
-	        	String tweet = rs.getString(3);
+	        	String a=rs.getString("Users_ID");
+	        	String b=rs.getString("Users_Name");
+	        	String c=rs.getString(3);
 
-	        	String userName = GetUsersName.getUserName(u_no);
+	        	System.out.println("ユーザID:"+a);
+	        	System.out.println("ユーザ名:"+b);
 
-	        	String userId = GetUsersId.getUserId(u_no);
+	        	ArrayList<String> childdata=new ArrayList<String>();
 
-	        	String likeCheck = CheckLikeUser.checkLikeUser(sessionToken, t_no);
+	        	childdata.add(a);
+	        	childdata.add(b);
+	        	childdata.add(c);
 
-	        	String likeCount = CountLikeTweet.countLikeTweet(t_no);
-
-	        	MyTweetView_Been b = new MyTweetView_Been();
-
-	        	b.setName(userName);
-
-	        	b.setId(userId);
-
-	        	b.setTweetId(t_no);
-
-	        	b.setChecklike(likeCheck);
-
-	        	b.setLikecounter(likeCount);
-
-	        	b.setTweet(tweet);
-
-	        	b.setSerialuserid(u_no);
-
-	        	data.add(b);
-
+	        	data.add(childdata);
 
 	         }
 
@@ -81,5 +64,5 @@ public class SerchTweet {
 
         return data;
 
-	}
+        }
 }

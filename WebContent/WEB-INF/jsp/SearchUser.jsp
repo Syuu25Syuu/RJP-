@@ -7,10 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form method='post' action='serchuser'>
-		ユーザーID:<input type='text' name='name'><br>
-		パスワード:<input type='text' name='pass'><br>
-		<input type='submit' value='Login'>
+	<p>セッションは${sessionScope.token.sessionToken}</p>
+	<form action="search" method="post">
+		<input type="text" name="id" placeholder="ユーザIDを入力" >
+		<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">
+		<input type="submit" value="検索">
 	</form>
 </body>
 </html>

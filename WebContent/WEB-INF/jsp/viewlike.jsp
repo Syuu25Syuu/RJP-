@@ -6,10 +6,27 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>いいねページ</title>
+
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+
+<script>
+
+</script>
+
+<style>
+	<%@include file="./test.css" %>
+</style>
+
+
 </head>
+
 <body>
-	<h1>自分がいいねしたツイートを表示するページ</h1>
+
+	<form method = 'post' action = 'comebackhome' id = 'comebackhome'>
+		<div onclick = "document.getElementById('comebackhome').submit();"><h1>自分がしたいいね一覧ページ</h1></div>
+		<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">
+	</form>
 
 	<form method = 'post' action='logout'>
 		<input type = "submit" value = "ログアウト">
@@ -31,7 +48,15 @@
 	</form>
 
  <c:forEach var="data" items="${result}">
-    <div><c:out value="${data.name}"/>＠<c:out value="${data.id}"/></div>
+	 	<form method = 'post' id="myFORM" action = 'showprofiles'>
+	 	<div class="profbtn">
+	 		<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">
+	 		<input type="hidden" name = "user_id" type = "text" value="${data.serialuserid}"></div>
+	 		<input type = "submit" name = "user_id" value= " ${data.name}" class="button">
+
+
+	    </form>
+    ＠<c:out value="${data.id}"/>
     <div><c:out value="${data.tweet}"/></div>
 
     <form method = "post" action = 'liketweet'>

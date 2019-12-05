@@ -28,6 +28,24 @@
 	</servlet-mapping>
 
 	<servlet>
+		<servlet-name>AjaxServlet</servlet-name>
+		<servlet-class>test1.AjaxServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AjaxServlet</servlet-name>
+		<url-pattern>/AjaxServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>BjaxServlet</servlet-name>
+		<servlet-class>test1.BjaxServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>BjaxServlet</servlet-name>
+		<url-pattern>/BjaxServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
 		<servlet-name>LogoutServlet</servlet-name>
 		<servlet-class>test1.LogoutServlet</servlet-class>
 	</servlet>
@@ -35,8 +53,6 @@
 		<servlet-name>LogoutServlet</servlet-name>
 		<url-pattern>/logout</url-pattern>
 	</servlet-mapping>
-
-
 
 
 
