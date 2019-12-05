@@ -9,7 +9,8 @@
 <body>
 	<p>セッションは${sessionScope.token.sessionToken}</p>
 	<form action="search" method="post">
-		<input type="text" name="id" placeholder="ユーザIDを入力" >
+		<input type="text" name="id" placeholder="ユーザIDを入力"  required>
+		<input type="hidden" name="user_session" value=${sessionScope.token.sessionToken}>
 		<input type="submit" value="検索">
 	</form>
 </body>

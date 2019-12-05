@@ -6,11 +6,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class SerchTest{
-	public static ArrayList<ArrayList> serchUser(String UserId,String SessionNo){
-
-		ArrayList<ArrayList> data=new ArrayList<ArrayList>();
-        try{
+public class SearchUserTest {
+	public static ArrayList getS(String searchId) {
+		String searchSerialId = "";
+		ArrayList list = new ArrayList();
+		try{
 	        //Driverインターフェイスを実装するクラスをロードする
 	        Connection cn = new OracleConnector().getCn();
 	        //自動コミットをOFFにする
@@ -19,7 +19,7 @@ public class SerchTest{
 	        System.out.println("接続完了");
 
 	        //SQL文を変数に格納する
-	        String sql="select Users_ID,Users_Name,Users_SerialNo from users where Users_ID LIKE '%"+UserId+"%' and Users_SerialNo != '"+SessionNo+"'";
+	        String sql="select USERS_SERIALNO from users where Users_ID LIKE '%"+searchId+"%'";
 
 	        //Statementインターフェイスを実装するクラスの
 	        //インスタンスを取得する
@@ -28,20 +28,9 @@ public class SerchTest{
 	        ResultSet rs = st.executeQuery(sql);
 
 	        while(rs.next()){
-	        	String a=rs.getString("Users_ID");
-	        	String b=rs.getString("Users_Name");
-	        	String c=rs.getString(3);
-
-	        	System.out.println("ユーザID:"+a);
-	        	System.out.println("ユーザ名:"+b);
-
-	        	ArrayList<String> childdata=new ArrayList<String>();
-
-	        	childdata.add(a);
-	        	childdata.add(b);
-	        	childdata.add(c);
-
-	        	data.add(childdata);
+	        	searchSerialId = rs.getString(1);
+	        	System.out.println("さーちてすと"+searchSerialId+"desu");
+	        	list.add(searchSerialId);
 
 	         }
 
@@ -62,7 +51,7 @@ public class SerchTest{
         	e.printStackTrace();
         }
 
-        return data;
+        return list;
 
         }
 }

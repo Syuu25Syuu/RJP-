@@ -6,10 +6,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class SerchTest{
-	public static ArrayList<ArrayList> serchUser(String UserId,String SessionNo){
-
-		ArrayList<ArrayList> data=new ArrayList<ArrayList>();
+public class FollowCheckTest{
+	public static ArrayList<String> followCheck(int SessionNo,int FollowNo){
+		//送るデータ既にフォローされているユーザのシリアルナンバーを配列で返す
+		ArrayList<String> data=new ArrayList<String>();
         try{
 	        //Driverインターフェイスを実装するクラスをロードする
 	        Connection cn = new OracleConnector().getCn();
@@ -19,7 +19,7 @@ public class SerchTest{
 	        System.out.println("接続完了");
 
 	        //SQL文を変数に格納する
-	        String sql="select Users_ID,Users_Name,Users_SerialNo from users where Users_ID LIKE '%"+UserId+"%' and Users_SerialNo != '"+SessionNo+"'";
+	        String sql="select Followed_No from follows where Users_No = '"+SessionNo+"' and Followed_No = '"+FollowNo+"'";
 
 	        //Statementインターフェイスを実装するクラスの
 	        //インスタンスを取得する
@@ -28,20 +28,11 @@ public class SerchTest{
 	        ResultSet rs = st.executeQuery(sql);
 
 	        while(rs.next()){
-	        	String a=rs.getString("Users_ID");
-	        	String b=rs.getString("Users_Name");
-	        	String c=rs.getString(3);
+	        	String a=rs.getString("Followed_No");
 
-	        	System.out.println("ユーザID:"+a);
-	        	System.out.println("ユーザ名:"+b);
+	        	System.out.println("既にフォローされているユーザシリアルナンバー:"+a);
 
-	        	ArrayList<String> childdata=new ArrayList<String>();
-
-	        	childdata.add(a);
-	        	childdata.add(b);
-	        	childdata.add(c);
-
-	        	data.add(childdata);
+	        	data.add(a);
 
 	         }
 

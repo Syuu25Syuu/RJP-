@@ -6,12 +6,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import test1.db.FollowCancelTest;
+import test1.db.FollowTest;
 
 
 //@WebServlet("/AjaxServlet")
-public class BjaxServlet extends HttpServlet{
+public class FollowAjaxServlet extends HttpServlet{
 	public void doPost(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException{
 		req.setCharacterEncoding("UTF-8");
@@ -19,9 +20,12 @@ public class BjaxServlet extends HttpServlet{
 		int  userNo = Integer.parseInt(req.getParameter("userNo"));
 		int  followedNo = Integer.parseInt(req.getParameter("followedNo"));
 
-		FollowCancelTest.cancelFollow(userNo, followedNo);
+		FollowTest.follow(userNo, followedNo);
 
-		System.out.print("フォロー解除しました");
+		System.out.print("フォローしました");
+
+		HttpSession session=req.getSession();
+		session.setAttribute("followedNo", followedNo);
 
 
         }

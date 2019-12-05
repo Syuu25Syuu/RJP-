@@ -61,12 +61,14 @@ public class LikeTweetCommand extends AbstractCommand {
 			String valueTweet = (String)tweetmap.get(keyID);
 			String likecounter = CountLikeTweet.countLikeTweet(keyID);	//そのツイートのいいね数を表示
 
+
 			String checklike = CheckLikeUser.checkLikeUser(s_userid, keyID);	//そのツイートにいいねをしているかの判定
 
 			p.setTweet(valueTweet);
 			p.setTweetId(keyID);
 			p.setLikecounter(likecounter);
 			p.setChecklike(checklike);
+			p.setSerialuserid(keyID);
 			list.add(p);
 
 

@@ -55,6 +55,8 @@ public class SerchTweet {
 
 	        	b.setTweet(tweet);
 
+	        	b.setSerialuserid(u_no);
+
 	        	data.add(b);
 
 

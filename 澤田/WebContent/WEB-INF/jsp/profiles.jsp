@@ -6,16 +6,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>プロフィール画面</title>
 
 <style>
 	<%@include file="./test.css" %>
 </style>
 
+
 </head>
 <body>
+
 	<form method = 'post' action = 'comebackhome' id = 'comebackhome'>
-		<div onclick = "document.getElementById('comebackhome').submit();"><h1>ツイートの検索結果</h1></div>
+		<div onclick = "document.getElementById('comebackhome').submit();"><h1>プロフィール画面</h1></div>
 		<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">
 	</form>
 
@@ -35,16 +37,7 @@
 	</form>
 
 
-	<p>セッションは${sessionScope.token.sessionToken}</p>
-	<form method = 'post' action = 'createtweet'>
-	<label for="kanso">ツイートする：</label><br>
-		<textarea name ="contents" id="contents" cols="40" rows="4" maxlength="150" placeholder="いまどうしてる？" required></textarea>
-		<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">
-		<input type='submit' value='ツイート'>
-
-	</form>
-
- <c:forEach var="data" items="${result}">
+	<c:forEach var="data" items="${result}">
     	<form method = 'post' action = 'showprofiles'>
 
 	 		<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">
@@ -52,20 +45,19 @@
 	 		<input type = "submit" name = "user_id" value= " ${data.name}  ＠${data.id}" class="button">
 
 	    </form>
-    <div><c:out value="${data.tweet}"/></div>
+    	<div><c:out value="${data.tweet}"/></div>
 
-    <form method = "post" action = 'liketweet'>
+    	<form method = "post" action = 'liketweet'>
 
-    		<input type = "submit" id = "check" value = "${data.checklike}">いいね数<c:out value="${data.likecounter}"/>
+	    	<input type = "submit" id = "check" value = "${data.checklike}">いいね数<c:out value="${data.likecounter}"/>
 
-    	<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">
-    	<input type="hidden" name = "tweet_id" type = "text" value="${data.tweetId}">
+	    	<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">
+	    	<input type="hidden" name = "tweet_id" type = "text" value="${data.tweetId}">
 
-    </form>
+    	</form>
+
     <br><br>
   </c:forEach>
-
-
 
 </body>
 </html>

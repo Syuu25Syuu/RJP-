@@ -7,6 +7,16 @@ public class SerchBean implements Serializable{
 	private String username;
 	private String userid;
 	private String userno;
+	private String check;
+
+
+	public String getCheck() {
+		return check;
+	}
+
+	public void setCheck(String check) {
+		this.check = check;
+	}
 
 	public SerchBean() {}
 

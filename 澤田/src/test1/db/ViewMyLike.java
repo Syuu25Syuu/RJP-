@@ -34,8 +34,12 @@ public class ViewMyLike {
         while(rs.next()){
         	String t_no = rs.getString(1);
 
-        	String s_uid = GetUserNo_fromTweet.GetUserNo(t_no);	//いいねした人のシリアルナンバーを取得
+        	String s_uid = GetUserNo_fromTweet.GetUserNo(t_no);	//自分がいいねした人のシリアルナンバーを取得
+
+        	System.out.println("ツイート主のシリアルナンバー"+s_uid);
+
         	String u_name = GetUsersName.getUserName(s_uid);
+
 
         	String u_id = GetUsersId.getUserId(s_uid);	//いいねをした人のID
 
@@ -56,6 +60,8 @@ public class ViewMyLike {
         	b.setTweet(t_content);
 
         	b.setChecklike(checklike);
+
+        	b.setSerialuserid(s_uid);
 
 
         	b.setLikecounter(count);

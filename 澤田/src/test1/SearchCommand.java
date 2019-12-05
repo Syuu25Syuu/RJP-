@@ -1,9 +1,13 @@
 package test1;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import test1.been.SerchBean;
-import test1.db.SerchTest;
+import test1.db.CheckFollow_by_yuta;
+import test1.db.GetUsersId;
+import test1.db.GetUsersName;
+import test1.db.SearchUserTest;
 
 public class SearchCommand extends AbstractCommand{
 	public ResponseContext execute() {
@@ -11,22 +15,40 @@ public class SearchCommand extends AbstractCommand{
 
 		String  id = reqc.getParameter("id")[0];
 
+		String sessionToken = reqc.getParameter("user_session")[0];
+
 		ResponseContext resc = new WebResponseContext();
 
-		ArrayList<ArrayList> data=SerchTest.serchUser(id);
+		ArrayList search_sid = SearchUserTest.getS(id);
+
+		ArrayList result = new ArrayList();
+
+
+		Iterator iterator = search_sid.iterator();
+
+		while(iterator.hasNext()) {
+			String serialid = (String)iterator.next();
+
+			String userName = GetUsersName.getUserName(serialid);
+
+			String userId = GetUsersId.getUserId(serialid);
+
+			String checkfollow =CheckFollow_by_yuta.getA(sessionToken, serialid);
 
 
 
-		ArrayList<SerchBean> result=new ArrayList<SerchBean>();
 
-		for(int i=0; i<data.size(); i++) {
-			SerchBean sb=new SerchBean();
+			SerchBean b = new SerchBean();
 
-			sb.setUserId((String)data.get(i).get(0));
-			sb.setUserName((String)data.get(i).get(1));
-			sb.setUserNo((String)data.get(i).get(2));
+			b.setUserNo(serialid);
+			b.setUserName(userName);
+			b.setUserId(userId);
+			b.setCheck(checkfollow);
 
-			result.add(i, sb);
+			result.add(b);
+
+
+
 		}
 
 		resc.setResult(result);

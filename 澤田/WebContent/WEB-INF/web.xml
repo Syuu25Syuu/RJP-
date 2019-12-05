@@ -28,21 +28,30 @@
 	</servlet-mapping>
 
 	<servlet>
-		<servlet-name>AjaxServlet</servlet-name>
-		<servlet-class>test1.AjaxServlet</servlet-class>
+		<servlet-name>FollowCheckAjaxServlet</servlet-name>
+		<servlet-class>test1.FollowCheckAjaxServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>AjaxServlet</servlet-name>
-		<url-pattern>/AjaxServlet</url-pattern>
+		<servlet-name>FollowCheckAjaxServlet</servlet-name>
+		<url-pattern>/FollowCheckAjaxServlet</url-pattern>
 	</servlet-mapping>
 
 	<servlet>
-		<servlet-name>BjaxServlet</servlet-name>
-		<servlet-class>test1.BjaxServlet</servlet-class>
+		<servlet-name>FollowAjaxServlet</servlet-name>
+		<servlet-class>test1.FollowAjaxServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>BjaxServlet</servlet-name>
-		<url-pattern>/BjaxServlet</url-pattern>
+		<servlet-name>FollowAjaxServlet</servlet-name>
+		<url-pattern>/FollowAjaxServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>FollowCancelAjaxServlet</servlet-name>
+		<servlet-class>test1.FollowCancelAjaxServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FollowCancelAjaxServlet</servlet-name>
+		<url-pattern>/FollowCancelAjaxServlet</url-pattern>
 	</servlet-mapping>
 
 	<servlet>

@@ -7,13 +7,20 @@
 
 </script>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>ログイン成功</title>
 
 </head>
 <body>
-	<h1>よおこそ</h1>
+	<form method = 'post' action = 'comebackhome' id = 'comebackhome'>
+		<div onclick = "document.getElementById('comebackhome').submit();"><h1>よおこそ</h1></div>
+		<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">
+	</form>
 	<form method = 'post' action='logout'>
 		<input type = "submit" value = "ログアウト">
+	</form>
+
+	<form method = 'post' action = 'searchuser'>
+		<input type = 'submit' value = "検索">
 	</form>
 
 		<form method = 'post' action = 'viewmylike'>
@@ -26,8 +33,6 @@
 		<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">
 		<input type="submit" value="検索">
 	</form>
-
-	<a href="searchuser">アカウント検索ページへ</a>
 
 
 	<form method = 'post' action = 'createtweet'>

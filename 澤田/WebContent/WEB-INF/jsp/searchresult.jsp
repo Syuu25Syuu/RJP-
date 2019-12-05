@@ -32,7 +32,7 @@
 	    	  	$(followedcheck).val('解除');
 
 	    	  	$.ajax({
-	  	          url: "AjaxServlet",
+	  	          url: "FollowAjaxServlet",
 	  	          type: "POST",
 	  	          data: {userNo : userNo,followedNo : followedNo}
 	  	        }).done(function (result) {
@@ -49,7 +49,7 @@
 	    		  $(followedcheck).val('フォロー');
 	    		  console.log("解除します");
 	    		  $.ajax({
-		  	          url: "BjaxServlet",
+		  	          url: "FollowCancelAjaxServlet",
 		  	          type: "POST",
 		  	          data: {userNo : userNo,followedNo : followedNo}
 		  	      }).done(function (result) {
@@ -72,7 +72,8 @@
 	<table border="1">
 		<tr><th>id</th><th>name</th></tr>
 		<c:forEach var = "search" items = "${result}">
-			<tr><td id="userid">${search.userId}</td><td>${search.userName}</td><td><input type="hidden" id="" class="${search.userNo}"  value="${search.userNo}"><input type="button" id="${search.userNo}"  class="followbtn" value="フォロー"></td></tr>
+			<tr><td id="userid">${search.userId}</td><td>${search.userName}</td><td><input type="hidden" id="" class="${search.userNo}"
+			 value="${search.userNo}"><input type="button" id="${search.userNo}"  class="followbtn" value="${search.check}"></td></tr>
 		</c:forEach>
 	</table>
 	<input type="hidden" value="${sessionScope.token.sessionToken }" id="sessionId"></input>
