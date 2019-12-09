@@ -1,6 +1,10 @@
+//Ajaxを使用するため現在は使用していないクラス
+
 package test1;
 
 import test1.db.FollowTest;
+
+
 
 public class FollowCommand extends AbstractCommand{
 
@@ -9,8 +13,8 @@ public class FollowCommand extends AbstractCommand{
 		RequestContext reqc = getRequestContext();
 		ResponseContext resc = new WebResponseContext();
 
-		String  userId = reqc.getParameter("userId")[0];
-		String  followedNo = reqc.getParameter("followedNo")[0];
+		int  userId = Integer.parseInt(reqc.getParameter("userId")[0]);
+		int  followedNo = Integer.parseInt(reqc.getParameter("followedNo")[0]);
 
 		FollowTest.follow(userId, followedNo);
 

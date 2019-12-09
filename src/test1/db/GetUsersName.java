@@ -1,3 +1,5 @@
+/*USERS_SERIALNOを使用してUSERS_NAMEを取得する*/
+
 package test1.db;
 
 import java.sql.Connection;

@@ -28,6 +28,11 @@
 		<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">
 	</form>
 
+	<form method = 'post' action = 'viewmyRT'>
+		<input type = "submit" value = "RT一覧">
+		<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">
+	</form>
+
 	<form action="search_tweet" method="post">
 		<input type="text" name="tweetWord" placeholder="検索したいツイートを入力" >
 		<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">

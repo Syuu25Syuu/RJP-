@@ -1,3 +1,5 @@
+/*ユーザーを作成する*/
+
 package test1.db;
 
 import java.sql.Connection;

@@ -1,3 +1,5 @@
+/*そのツイートに対していいねをするためのコマンド*/
+
 package test1;
 
 import java.util.ArrayList;
@@ -7,7 +9,9 @@ import java.util.LinkedHashMap;
 
 import test1.been.MyTweetView_Been;
 import test1.db.CheckLikeUser;
+import test1.db.CheckRTUser;
 import test1.db.CountLikeTweet;
+import test1.db.CountRT;
 import test1.db.DeleteLike;
 import test1.db.LikeTweet;
 import test1.db.ViewMyName_And_ID;
@@ -34,7 +38,7 @@ public class LikeTweetCommand extends AbstractCommand {
 			LikeTweet.likeTweet(tweet_id, s_userid);
 		}
 
-
+		/*以下、HOMEにツイートなどを表示させるための処理*/
 
 		HashMap map = ViewMyName_And_ID.viewMyName_And_ID(s_userid);
 
@@ -63,6 +67,14 @@ public class LikeTweetCommand extends AbstractCommand {
 
 
 			String checklike = CheckLikeUser.checkLikeUser(s_userid, keyID);	//そのツイートにいいねをしているかの判定
+
+			String checkRT = CheckRTUser.checkRTUser(s_userid, keyID);		//そのツイートにＲＴしているかの判定
+			String countRT = CountRT.countRT(keyID);	//そのツイートのＲＴ数を表示
+
+
+
+			p.setCountRT(countRT);
+			p.setCheckRT(checkRT);
 
 			p.setTweet(valueTweet);
 			p.setTweetId(keyID);

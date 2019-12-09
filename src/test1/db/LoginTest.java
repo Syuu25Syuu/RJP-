@@ -1,3 +1,5 @@
+/*ログインができるかの判定*/
+
 package test1.db;
 
 import java.sql.Connection;

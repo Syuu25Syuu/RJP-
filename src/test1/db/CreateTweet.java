@@ -1,3 +1,5 @@
+/*ツイートをする*/
+
 package test1.db;
 
 import java.sql.Connection;
@@ -6,7 +8,7 @@ import java.sql.Statement;
 
 public class CreateTweet {
 
-	public static void createTweet(String id,String tweet){
+	public static void createTweet(String sessionToken,String tweetContent){
 
 		try{
 				Connection cn = new OracleConnector().getCn();
@@ -18,7 +20,7 @@ public class CreateTweet {
 
 		        //SQL文を変数に格納する
 
-		        String sql="insert into Tweets(Users_No,Tweets_Content) values('"+id+"','"+tweet+"')";
+		        String sql="insert into Tweets(Users_No,Tweets_Content) values('"+sessionToken+"','"+tweetContent+"')";
 
 				//Statementインターフェイスを実装するクラスの
 				//インスタンスを取得する

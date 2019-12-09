@@ -1,3 +1,5 @@
+/*ユーザーのプロフィールページに遷移するコマンド*/
+
 package test1;
 
 import java.util.ArrayList;
@@ -10,11 +12,11 @@ public class ShowProfileCommand extends AbstractCommand {
 	public ResponseContext execute() {
 		RequestContext reqc = getRequestContext();
 
-		String userid  = reqc.getParameter("user_id")[0];
+		String userid  = reqc.getParameter("user_id")[0];	//プロフィールに遷移するユーザーのUSERS_SERIALNO
 
 		System.out.println("userid"+userid+"だよ");
 
-		String  sessionToken = reqc.getParameter("user_session")[0];
+		String  sessionToken = reqc.getParameter("user_session")[0];	//ログインしてるユーザーのsessionToken
 
 		ResponseContext resc = new WebResponseContext();
 

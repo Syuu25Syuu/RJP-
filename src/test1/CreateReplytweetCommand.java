@@ -48,24 +48,19 @@ public class CreateReplytweetCommand extends AbstractCommand {
 		String parentLikeCount = CountLikeTweet.countLikeTweet(replyid);
 
 		System.out.println("-------------serialuserid-----------------は"+parentSerialUserNo);
-		/*
 
-		b.setSerialuserid(parentSerialUserNo);
-		b.setName(parentUserName);
-		b.setId(parentUserId);
-		b.setSessionToken(sessionToken);
-		b.setTweet(parentTweetContent);
-		b.setTweetId(replyid);
-		b.setLikecounter(parentLikeCount);
-		b.setChecklike(parentLikeCheck);
+		MyTweetView_Been b = new MyTweetView_Been();
+
 
 		//list.add(b);
 
-		 */
+
 
 		ArrayList chiledrenlist = GetChildrenTweetSerialNo.getChildrenTweetSerialNo(replyid);
 
 		Iterator it = chiledrenlist.iterator();
+
+		boolean flg = true;
 
 		while(it.hasNext()) {
 			String childTweetId = (String)it.next();
@@ -83,27 +78,58 @@ public class CreateReplytweetCommand extends AbstractCommand {
 
 			String childrenLikeCount = CountLikeTweet.countLikeTweet(childTweetId);
 
-			MyTweetView_Been b = new MyTweetView_Been();
+			b = new MyTweetView_Been();
 
-			b.setSerialuserid(parentSerialUserNo);
-			b.setName(parentUserName);
-			b.setId(parentUserId);
-			b.setSessionToken(sessionToken);
-			b.setTweet(parentTweetContent);
-			b.setTweetId(replyid);
-			b.setLikecounter(parentLikeCount);
-			b.setChecklike(parentLikeCheck);
+			if(flg==true) {
+				//親ツイートをBeanに格納
+				b.setChildSerialNo(parentSerialUserNo);
+				b.setChildUserName(parentUserName);
+				b.setChildUserId(parentUserId);
+				b.setSessionToken(sessionToken);
+				b.setChildTweetContent(parentTweetContent);
+				b.setChildTweetId(replyid);
+				b.setChildTweetLikeCount(parentLikeCount);
+				b.setChildCheckLike(parentLikeCheck);
+				list.add(b);
+				flg = false;
+				System.out.println("if文には入ったよ");
+
+				//最初のリプライをBeanに格納
+				b = new MyTweetView_Been();
+
+				b.setChildSerialNo(childrenSerialUserNo);
+				b.setChildUserName(childrenUserName);
+				b.setChildUserId(childrenUserId);
+				b.setChildTweetContent(childrenTweetContent);
+				b.setChildCheckLike(childrenCheckLike);
+				b.setChildTweetLikeCount(childrenLikeCount);
+				b.setChildTweetId(childTweetId);
+				b.setParentSerialUserNo(parentSerialUserNo);
+				b.setParentUserId(parentUserId);
+
+				list.add(b);
+
+			}else {
+				//2番目以降のリプライをBeanに格納
+				b.setChildSerialNo(childrenSerialUserNo);
+				b.setChildUserName(childrenUserName);
+				b.setChildUserId(childrenUserId);
+				b.setChildTweetContent(childrenTweetContent);
+				b.setChildCheckLike(childrenCheckLike);
+				b.setChildTweetLikeCount(childrenLikeCount);
+				b.setChildTweetId(childTweetId);
+				b.setParentSerialUserNo(parentSerialUserNo);
+				b.setParentUserId("@"+parentUserId);
+				System.out.println("if文には入ってないよ");
+
+				list.add(b);
 
 
-			b.setChildSerialNo(childrenSerialUserNo);
-			b.setChildUserName(childrenUserName);
-			b.setChildUserId(childrenUserId);
-			b.setChildTweetContent(childrenTweetContent);
-			b.setChildCheckLike(childrenCheckLike);
-			b.setChildTweetLikeCount(childrenLikeCount);
-			b.setChildTweetId(childTweetId);
+			}
 
-			list.add(b);
+
+
+
 
 		}
 

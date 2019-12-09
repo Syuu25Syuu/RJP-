@@ -1,3 +1,5 @@
+
+
 package test1.db;
 
 import java.sql.Connection;
@@ -8,7 +10,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 public class ViewMyName_And_ID {
-	public static HashMap viewMyName_And_ID(String id){
+	public static HashMap viewMyName_And_ID(String users_serialno){
 		HashMap map = new LinkedHashMap();
 
 		try{
@@ -21,7 +23,7 @@ public class ViewMyName_And_ID {
 
 		        //SQL文を変数に格納する
 
-		        String sql="select USERS_ID,USERS_NAME from users where USERS_SERIALNO = '"+id+"'";
+		        String sql="select USERS_ID,USERS_NAME from users where USERS_SERIALNO = '"+users_serialno+"'";
 
 		        //Statementインターフェイスを実装するクラスの
 		        //インスタンスを取得する
@@ -30,10 +32,10 @@ public class ViewMyName_And_ID {
 		        ResultSet rs = st.executeQuery(sql);
 
 		        while(rs.next()){
-		        	String a = rs.getString(1);
-		        	String b = rs.getString(2);
-		        	map.put("id",a);
-		        	map.put("name",b);
+		        	String users_id = rs.getString(1);
+		        	String users_name = rs.getString(2);
+		        	map.put("id",users_id);
+		        	map.put("name",users_name);
 		         }
 
 		        //トランザクションをコミットする

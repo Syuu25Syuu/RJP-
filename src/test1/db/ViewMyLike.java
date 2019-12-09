@@ -51,6 +51,14 @@ public class ViewMyLike {
 
         	MyTweetView_Been b = new MyTweetView_Been();
 
+        	String checkRT = CheckRTUser.checkRTUser(s_userid, t_no);		//そのツイートにＲＴしているかの判定
+			String countRT = CountRT.countRT(t_no);	//そのツイートのＲＴ数を表示
+
+
+
+			b.setCountRT(countRT);
+			b.setCheckRT(checkRT);
+
         	b.setName(u_name);
 
         	b.setId(u_id);
@@ -69,37 +77,6 @@ public class ViewMyLike {
         	list.add(b);
 
 
-
-        	/*
-        	String sql2 = "select users_name,users_id,TWEETS_SERIALNO,TWEETS_CONTENT from users,tweets where TWEETS_SERIALNO = '"+t_no+"'";
-
-        	 Statement st2= cn.createStatement();
-
-             ResultSet rs2 = st2.executeQuery(sql2);
-
-             while(rs2.next()) {
-            	MyTweetView_Been b = new MyTweetView_Been();
-
-            	b.setName(rs2.getString(1));
-
-            	b.setId(rs2.getString(2));
-
-            	b.setTweetId(rs2.getString(3));
-
-            	b.setTweet(rs2.getString(4));
-
-            	String checklike = CheckLikeUser.checkLikeUser(s_userid, rs2.getString(3));
-
-            	b.setChecklike(checklike);
-
-            	String count = CountLikeTweet.countLikeTweet(t_no);
-
-            	b.setLikecounter(count);
-
-            	list.add(b);
-
-             }
-             */
 
 
          }

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+//フォローをするクラス
 public class FollowTest{
 	public static void follow(int UserNo,int FollowedNo){
 
@@ -15,13 +16,15 @@ public class FollowTest{
 
 	        System.out.println("接続完了");
 
+	        //セッションしているユーザのシリアルナンバーとフォローされる
+	        //ユーザのシリアルナンバーを表(Follows表)に格納する
 	        //SQL文を変数に格納する
 	        String sql="insert into follows(users_no,followed_no) values("+UserNo+","+FollowedNo+")";
 
 	        //Statementインターフェイスを実装するクラスの
 	        //インスタンスを取得する
 	        Statement st= cn.createStatement();
-
+	        //SQLの実行
 	        int rs = st.executeUpdate(sql);
 
 	        //トランザクションをコミットする

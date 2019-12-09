@@ -58,7 +58,7 @@ public class FrontServlet extends HttpServlet{
 
 		//System.out.println("フラグの中身が見たくて2"+flag.equals(""));
 
-		Serializable flg =(Serializable) session.getAttribute("token");
+		Serializable flg =(Serializable) session.getAttribute("token");		//sessionScopeの「token」をSerializable型でget
 
 		Login_Been aBeen = new Login_Been();
 
@@ -67,18 +67,18 @@ public class FrontServlet extends HttpServlet{
 		System.out.println("flgの中身"+flg);
 
 		if(flg == null){
-			session.setAttribute("token", been);
+			session.setAttribute("token", been);	//flgがnullならsessionTokenを発行
 			System.out.println("flgはNULLだったよ！");
-		}else if(been != null){
+		}else if(been != null){		//Beanが存在した場合
 			if(flg.getClass() == been.getClass()) {
-				session.setAttribute("token", been);
+				session.setAttribute("token", been);	//sessionTokenを発行
 				System.out.println("flgは同じだったよね");
 			}else {
-				req.setAttribute("result",been);
+				req.setAttribute("result",been);	//sessionTokenが存在するのでrequestScopeでresultを発行
 				System.out.println("beenの中身はnullだったよ");
 			}
 		}else{
-			req.setAttribute("result",been);
+			req.setAttribute("result",been);	//sessionTokenが存在するのでrequestScopeでresultを発行
 			System.out.println("flgが違ったよ");
 		}
 

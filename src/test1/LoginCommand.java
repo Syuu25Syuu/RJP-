@@ -1,3 +1,5 @@
+/*ログインするためのコマンド*/
+
 package test1;
 
 import test1.been.Login_Been;

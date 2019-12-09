@@ -53,42 +53,13 @@
 
 <!-- 返信元を表示 -->
 
-<form method = 'post' id="myFORM" action = 'showprofiles'>
-
-	 		<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">
-
-
-
-
-	    </form>
-
-
-	    <div>${result.tweet}</div>
-
-
-	    <div class = "reply"  >
-			<form method = 'post' action = 'replytweet'>
-				<textarea name ="replycontent" id="replycontent" cols="40" rows="4" maxlength="150" placeholder="返信をツイート" required></textarea>
-				<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">
-				<input type="hidden" name = "replyid" type = "text" value="${result.tweetId}">
-
-				<input type='submit' value='返信'>
-			</form>
-	    </div>
-
-	    <form method = "post" action = 'liketweet'>
-
-	    		<input type = "submit" id = "check" value = "${result.checklike}">いいね数<c:out value="${result.likecounter}"/>
-
-	    	<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">
-	    	<input type="hidden" name = "tweet_id" type = "text" value="${result.tweetId}">
-
-	    </form>
-	    <br><br>
 
 <!-- リプライを表示 -->
 
    	<c:forEach var="data2" items="${result}">
+
+
+		<div id = "parentId">${data2.parentUserId}</div>
 	 	<form method = 'post' id="myFORM" action = 'showprofiles'>
 
 	 		<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">

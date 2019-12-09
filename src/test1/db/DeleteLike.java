@@ -1,3 +1,5 @@
+/*そのツイートに対するいいねを取り消す*/
+
 package test1.db;
 
 import java.sql.Connection;
@@ -5,7 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DeleteLike {
-	public static void deleteLike(String tweet_id,String user_id) {
+	public static void deleteLike(String tweet_id,String sessionToken) {
 		try{
 			Connection cn = new OracleConnector().getCn();
 
@@ -16,7 +18,7 @@ public class DeleteLike {
 
 	        //SQL文を変数に格納する
 
-	        String sql="delete from likes where  Likes_User = '"+user_id+"' and LIKES_TWEET = '"+tweet_id+"'";
+	        String sql="delete from likes where  Likes_User = '"+sessionToken+"' and LIKES_TWEET = '"+tweet_id+"'";
 
 			//Statementインターフェイスを実装するクラスの
 			//インスタンスを取得する

@@ -1,3 +1,5 @@
+/*そのツイートに対するリプライのTWEETS_SERIALNOを取得する*/
+
 package test1.db;
 
 import java.sql.Connection;

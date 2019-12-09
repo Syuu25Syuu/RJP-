@@ -1,3 +1,5 @@
+/*対象のツイートにいいねをする*/
+
 package test1.db;
 
 import java.sql.Connection;
@@ -5,7 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class LikeTweet {
-	public static void likeTweet(String tweet_id,String user_id) {
+	public static void likeTweet(String tweet_id,String sessionToken) {
 		String likecount;
 
 		try{
@@ -18,7 +20,7 @@ public class LikeTweet {
 
 	        //SQL文を変数に格納する
 
-	        String sql=" insert into Likes(Likes_Tweet,Likes_User)values('"+tweet_id+"','"+user_id+"')";
+	        String sql=" insert into Likes(Likes_Tweet,Likes_User)values('"+tweet_id+"','"+sessionToken+"')";
 
 
 

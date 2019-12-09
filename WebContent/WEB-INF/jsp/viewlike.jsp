@@ -59,6 +59,12 @@
     ＠<c:out value="${data.id}"/>
     <div><c:out value="${data.tweet}"/></div>
 
+        <form method = "post" action = 'createRT'>
+	    	<input type = "submit" id = "check" value = "${data.checkRT}">RT数<c:out value="${data.countRT}"/>
+	    	<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">
+	    	<input type="hidden" name = "tweet_id" type = "text" value="${data.tweetId}">
+	    </form>
+
     <form method = "post" action = 'liketweet'>
 
     		<input type = "submit" id = "check" value = "${data.checklike}">いいね数<c:out value="${data.likecounter}"/>

@@ -1,3 +1,5 @@
+/*そのツイートに自分がいいねをしているかの判定*/
+
 package test1.db;
 
 import java.sql.Connection;

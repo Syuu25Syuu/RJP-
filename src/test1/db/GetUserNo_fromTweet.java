@@ -1,3 +1,5 @@
+/*TWEETS_SERIALNOを使用してUSERS_NOを取得する*/
+
 package test1.db;
 
 import java.sql.Connection;

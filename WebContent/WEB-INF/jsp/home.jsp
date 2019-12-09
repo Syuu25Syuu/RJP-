@@ -35,6 +35,11 @@
 		<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">
 	</form>
 
+	<form method = 'post' action = 'viewmyRT'>
+		<input type = "submit" value = "RT一覧">
+		<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">
+	</form>
+
 	<form action="search_tweet" method="post">
 		<input type="text" name="tweetWord" placeholder="検索したいツイートを入力" >
 		<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">
@@ -60,8 +65,11 @@
 
 	    </form>
 
-
-	    <div>${data.tweet}</div>
+		<form method = 'post' action = 'viewtweet'>
+	    	<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">
+	 		<input type="hidden" name = "tweet_id" type = "text" value="${data.tweetId}">
+	    	<input type = "submit"  value= "${data.tweet}" class="button">
+	    </form>
 
 
 	    <div class = "reply"  >
@@ -74,9 +82,16 @@
 			</form>
 	    </div>
 
+
+    	<form method = "post" action = 'createRT'>
+	    	<input type = "submit" id = "checkRT" value = "${data.checkRT}">RT数<c:out value="${data.countRT}"/>
+	    	<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">
+	    	<input type="hidden" name = "tweet_id" type = "text" value="${data.tweetId}">
+	    </form>
+
 	    <form method = "post" action = 'liketweet'>
 
-	    		<input type = "submit" id = "check" value = "${data.checklike}">いいね数<c:out value="${data.likecounter}"/>
+	    	<input type = "submit" id = "checkLike" value = "${data.checklike}">いいね数<c:out value="${data.likecounter}"/>
 
 	    	<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">
 	    	<input type="hidden" name = "tweet_id" type = "text" value="${data.tweetId}">

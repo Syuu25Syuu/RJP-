@@ -1,3 +1,5 @@
+/*ログアウトするためのコマンド*/
+
 package test1;
 
 import java.io.IOException;

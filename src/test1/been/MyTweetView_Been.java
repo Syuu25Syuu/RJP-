@@ -14,6 +14,9 @@ public class MyTweetView_Been implements Serializable{
 	private String tweetId;
 	private String likecounter;
 	private String checklike;
+	private String countRT;
+
+	private String checkRT;
 
 	private String childSerialNo;
 	private String childUserName;
@@ -23,6 +26,38 @@ public class MyTweetView_Been implements Serializable{
 	private String childTweetLikeCount;
 	private String childCheckLike;
 
+
+	private String parentSerialUserNo;
+	private String parentUserId;
+
+
+
+	public String getCountRT() {
+		return countRT;
+	}
+	public void setCountRT(String countRT) {
+		this.countRT = countRT;
+	}
+	public String getCheckRT() {
+		return checkRT;
+	}
+	public void setCheckRT(String checkRT) {
+		this.checkRT = checkRT;
+	}
+
+
+	public String getParentSerialUserNo() {
+		return parentSerialUserNo;
+	}
+	public void setParentSerialUserNo(String parentSerialUserNo) {
+		this.parentSerialUserNo = parentSerialUserNo;
+	}
+	public String getParentUserId() {
+		return parentUserId;
+	}
+	public void setParentUserId(String parentUserId) {
+		this.parentUserId = parentUserId;
+	}
 	public String getChildSerialNo() {
 		return childSerialNo;
 	}

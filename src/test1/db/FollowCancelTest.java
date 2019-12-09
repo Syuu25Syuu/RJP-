@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+//フォローを解除するクラス
 public class FollowCancelTest{
 	public static void cancelFollow(int UserNo,int FollowedNo){
 
@@ -15,6 +16,9 @@ public class FollowCancelTest{
 
 	        System.out.println("接続完了");
 
+	        //セッションしているユーザのシリアルナンバー(UserNo)と
+	        //そのユーザーにフォローされているユーザの
+	        //シリアルナンバーがある行を削除する
 	        //SQL文を変数に格納する
 	        String sql="delete from follows where users_no="+UserNo+" and followed_no="+FollowedNo;
 

@@ -1,3 +1,5 @@
+/*自分がしたいいね一覧を表示するコマンド*/
+
 package test1;
 
 import java.util.ArrayList;
@@ -12,7 +14,7 @@ public class ViewLikeCommand extends AbstractCommand {
 
 		ResponseContext resc = new WebResponseContext();
 
-		String  s_userid = reqc.getParameter("user_session")[0];	//シリアルナンバー
+		String  s_userid = reqc.getParameter("user_session")[0];
 
 		ArrayList list = ViewMyLike.viewMyLike(s_userid);
 

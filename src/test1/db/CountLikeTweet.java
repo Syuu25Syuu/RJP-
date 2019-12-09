@@ -1,3 +1,5 @@
+/*そのツイートがどれだけいいねされているかのカウント*/
+
 package test1.db;
 
 import java.sql.Connection;
@@ -26,7 +28,7 @@ public class CountLikeTweet {
 
 	        while(rs.next()){
 	        	counter= rs.getString(1);
-	        	System.out.println("counterの数は"+counter);
+	        	//System.out.println("counterの数は"+counter);
 	         }
 
 	        //トランザクションをコミットする

@@ -1,3 +1,5 @@
+/*検索したい文字列が含まれるツイートを検索し表示させるためのコマンド*/
+
 package test1;
 
 import java.util.ArrayList;
@@ -9,15 +11,14 @@ public class SearchTweetCommand extends AbstractCommand {
 	@Override
 	public ResponseContext execute() {
 		RequestContext reqc = getRequestContext();
-
-		String  word = reqc.getParameter("tweetWord")[0];
-
-		String  s_userid = reqc.getParameter("user_session")[0];
-
 		ResponseContext resc = new WebResponseContext();
 
+		String  word = reqc.getParameter("tweetWord")[0];	//検索対象文字列
 
-		ArrayList list = SerchTweet.getSerchTweet(word,s_userid);
+		String  sessionToken = reqc.getParameter("user_session")[0];
+
+
+		ArrayList list = SerchTweet.getSerchTweet(word,sessionToken);
 
 		resc.setResult(list);
 

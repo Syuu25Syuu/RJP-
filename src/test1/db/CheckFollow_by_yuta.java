@@ -1,3 +1,5 @@
+/* 自分が他のユーザーをフォローしているかどうかを判定する */
+
 package test1.db;
 
 import java.sql.Connection;
@@ -6,7 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class CheckFollow_by_yuta {
-	public static String getA(String sessionToken,String follow) {
+	public static String checkFollow(String sessionToken,String follow) {
 
 		String flgString ="";
         try{
@@ -28,11 +30,11 @@ public class CheckFollow_by_yuta {
 	        	flgString=rs.getString(1);
 	        	System.out.println("flgStringの中身は"+flgString+"です");
 	         }
-
+	        //フォローしていなかった場合flgStringには空白が返される
 	    	if(flgString=="") {
-	    		flgString = "フォロー";
+	    		flgString = "フォロー";	//フォローしていなかった場合
 			}else {
-				flgString = "解除";
+				flgString = "解除";			//フォローしていた場合
 			}
 
 	        //トランザクションをコミットする

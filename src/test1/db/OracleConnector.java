@@ -1,3 +1,5 @@
+/*Oracleに接続する用のクラス*/
+
 package test1.db;
 
 

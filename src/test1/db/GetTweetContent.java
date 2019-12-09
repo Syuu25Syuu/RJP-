@@ -1,3 +1,5 @@
+/*TWEETS_SERIALNOを使用してツイート内容を取得する*/
+
 package test1.db;
 
 import java.sql.Connection;

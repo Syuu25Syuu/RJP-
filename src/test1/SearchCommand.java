@@ -33,7 +33,7 @@ public class SearchCommand extends AbstractCommand{
 
 			String userId = GetUsersId.getUserId(serialid);
 
-			String checkfollow =CheckFollow_by_yuta.getA(sessionToken, serialid);
+			String checkfollow =CheckFollow_by_yuta.checkFollow(sessionToken, serialid);
 
 
 

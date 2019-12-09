@@ -1,3 +1,5 @@
+/*そのツイートに対する返信(リプライ)*/
+
 package test1.db;
 
 import java.sql.Connection;
