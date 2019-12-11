@@ -1,15 +1,14 @@
-/*そのツイートに自分がいいねをしているかの判定*/
-
 package test1.db;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
-public class CheckLikeUser {
-	public static String checkLikeUser(String user_id,String tweet_id) {
-		String flgString = "";
+public class getMyFollowUser {
+	public static ArrayList<String> getMyFollowUsers(String sessionToken) {
+		ArrayList<String> list = new ArrayList<String>();
 
 		try{
 			Connection cn = new OracleConnector().getCn();
@@ -20,8 +19,8 @@ public class CheckLikeUser {
 	        System.out.println("接続完了");
 
 	        //SQL文を変数に格納する
-
-	        String sql="select Likes_User from likes where Likes_User = '"+user_id+"'and Likes_Tweet = '"+tweet_id+"'";
+	        //System.out.println("idを表示するよ"+id);
+	        String sql="select followed_no from follows where users_no = '"+sessionToken+"' ";
 
 	        //Statementインターフェイスを実装するクラスの
 	        //インスタンスを取得する
@@ -30,17 +29,8 @@ public class CheckLikeUser {
 	        ResultSet rs = st.executeQuery(sql);
 
 	        while(rs.next()){
-	        	flgString=rs.getString(1);
-	        	System.out.println("flgStringの中身は"+flgString+"です");
-	         }
-
-	    	if(flgString=="") {
-	    		flgString = "";
-			}else {
-				flgString = "checked";
-			}
-
-
+	        	list.add((String)rs.getString(1));
+	        }
 
 	        //トランザクションをコミットする
 	        cn.commit();
@@ -57,10 +47,8 @@ public class CheckLikeUser {
 	        }catch(SQLException e){
 	        	e.printStackTrace();
 
-
 	        }
 
-			return flgString;
-
+		return list;
 	}
 }

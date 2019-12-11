@@ -16,6 +16,15 @@ public class MyTweetView_Been implements Serializable{
 	private String checklike;
 	private String countRT;
 
+	private String rtuser;
+
+	public String getRtuser() {
+		return rtuser;
+	}
+	public void setRtuser(String rtuser) {
+		this.rtuser = rtuser;
+	}
+
 	private String checkRT;
 
 	private String childSerialNo;

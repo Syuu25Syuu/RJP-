@@ -11,7 +11,7 @@
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 
 <script>
-
+	<%@include file="./js/likecheck.js" %>
 </script>
 
 <style>
@@ -52,12 +52,26 @@
 	 	<div class="profbtn">
 	 		<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">
 	 		<input type="hidden" name = "user_id" type = "text" value="${data.serialuserid}"></div>
-	 		<input type = "submit" name = "user_id" value= " ${data.name}" class="button">
+	 		<input type = "submit" name = "user_id" value= " ${data.name}  ＠${data.id}" class="button">
 
 
 	    </form>
-    ＠<c:out value="${data.id}"/>
-    <div><c:out value="${data.tweet}"/></div>
+
+ 		<form method = 'post' action = 'viewtweet'>
+	    	<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">
+	 		<input type="hidden" name = "tweet_id" type = "text" value="${data.tweetId}">
+	    	<input type = "submit"  value= "${data.tweet}" class="button">
+	    </form>
+
+	     <div class = "reply"  >
+			<form method = 'post' action = 'replytweet'>
+				<textarea name ="replycontent" id="replycontent" cols="40" rows="4" maxlength="150" placeholder="返信をツイート" required></textarea>
+				<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">
+				<input type="hidden" name = "replyid" type = "text" value="${data.tweetId}">
+
+				<input type='submit' value='返信'>
+			</form>
+	    </div>
 
         <form method = "post" action = 'createRT'>
 	    	<input type = "submit" id = "check" value = "${data.checkRT}">RT数<c:out value="${data.countRT}"/>
@@ -65,14 +79,16 @@
 	    	<input type="hidden" name = "tweet_id" type = "text" value="${data.tweetId}">
 	    </form>
 
-    <form method = "post" action = 'liketweet'>
+		 <form method = "post" action = 'liketweet'>
 
-    		<input type = "submit" id = "check" value = "${data.checklike}">いいね数<c:out value="${data.likecounter}"/>
+	    	いいねはこちら→<INPUT type="checkbox" id="${data.tweetId}"  class="likebtn" ${data.checklike}>
+			<div id ="likecount"></div>
+	    	<input type="hidden" name = "sessionToken" type = "text" value="${sessionScope.token.sessionToken}">
+	    	<input type="hidden" name = "tweetID" type = "text" value="${data.tweetId}">
+	    	<div id = "sessionToken">${sessionScope.token.sessionToken}</div>
 
-    	<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">
-    	<input type="hidden" name = "tweet_id" type = "text" value="${data.tweetId}">
+	    </form>
 
-    </form>
     <br><br>
   </c:forEach>
 

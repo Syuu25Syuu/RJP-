@@ -17,3 +17,6 @@
 #parent{
 	color:blue;
 }
+#sessionToken{
+	display:none;
+}

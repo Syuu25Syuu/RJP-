@@ -12,11 +12,9 @@
 <style>
 	<%@include file="./test.css" %>
 </style>
-
 <script>
-	<%@include file="./js/likecheck.js" %>
-</script>
 
+</script>
 
 </head>
 <body>
@@ -30,15 +28,16 @@
 		<input type = "submit" value = "ログアウト">
 	</form>
 
+	<a href="searchuser">アカウント検索ページへ</a>
+
 	<form method = 'post' action = 'viewmylike'>
 		<input type = "submit" value = "いいね一覧">
 		<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">
 	</form>
 
-	<form action="searchuser" method="post">
-		<input type="text" name="id" placeholder="ユーザIDを入力" >
+	<form method = 'post' action = 'viewmyRT'>
+		<input type = "submit" value = "RT一覧">
 		<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">
-		<input type="submit" value="検索">
 	</form>
 
 	<form action="search_tweet" method="post">
@@ -46,6 +45,9 @@
 		<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">
 		<input type="submit" value="検索">
 	</form>
+
+
+	<p>セッションは${sessionScope.token.sessionToken}</p>
 
 	<form method = 'post' action = 'createtweet'>
 		<label for="kanso">ツイートする：</label><br>
@@ -69,7 +71,8 @@
 	    	<input type = "submit"  value= "${data.tweet}" class="button">
 	    </form>
 
-	     <div class = "reply"  >
+
+	    <div class = "reply"  >
 			<form method = 'post' action = 'replytweet'>
 				<textarea name ="replycontent" id="replycontent" cols="40" rows="4" maxlength="150" placeholder="返信をツイート" required></textarea>
 				<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">
@@ -80,15 +83,18 @@
 	    </div>
 
 
+    	<form method = "post" action = 'createRT'>
+	    	<input type = "submit" id = "checkRT" value = "${data.checkRT}">RT数<c:out value="${data.countRT}"/>
+	    	<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">
+	    	<input type="hidden" name = "tweet_id" type = "text" value="${data.tweetId}">
+	    </form>
 
 	    <form method = "post" action = 'liketweet'>
 
-	    	いいねはこちら→<INPUT type="checkbox" id="${data.tweetId}"  class="likebtn" ${data.checklike}>
-			<div id ="likecount"></div>
-	    	<input type="hidden" name = "sessionToken" type = "text" value="${sessionScope.token.sessionToken}">
-	    	<input type="hidden" name = "tweetID" type = "text" value="${data.tweetId}">
-			<p>ツイートIDは${data.tweetId}だよ</p>
-			<div id = "sessionToken">${sessionScope.token.sessionToken}</div>
+	    	<input type = "submit" id = "checkLike" value = "${data.checklike}">いいね数<c:out value="${data.likecounter}"/>
+
+	    	<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">
+	    	<input type="hidden" name = "tweet_id" type = "text" value="${data.tweetId}">
 
 	    </form>
 	    <br><br>

@@ -6,7 +6,7 @@ import java.sql.Statement;
 
 //フォローを解除するクラス
 public class FollowCancelTest{
-	public static void cancelFollow(int UserNo,int FollowedNo){
+	public static void cancelFollow(String UserNo,String FollowedNo){
 
         try{
 	        //Driverインターフェイスを実装するクラスをロードする
@@ -26,7 +26,7 @@ public class FollowCancelTest{
 	        //インスタンスを取得する
 	        Statement st= cn.createStatement();
 
-	        int rs = st.executeUpdate(sql);
+	        st.executeUpdate(sql);
 
 	        //トランザクションをコミットする
 	        cn.commit();

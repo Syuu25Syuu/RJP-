@@ -7,14 +7,20 @@
 <head>
 <meta charset="UTF-8">
 <title>プロフィール画面</title>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+
 
 <style>
 	<%@include file="./test.css" %>
 </style>
 
+<script>
+<%@include file="./js/likecheck.js" %>
+</script>
 
 </head>
 <body>
+
 
 	<form method = 'post' action = 'comebackhome' id = 'comebackhome'>
 		<div onclick = "document.getElementById('comebackhome').submit();"><h1>プロフィール画面</h1></div>
@@ -47,14 +53,21 @@
 	    </form>
     	<div><c:out value="${data.tweet}"/></div>
 
-    	<form method = "post" action = 'liketweet'>
-
-	    	<input type = "submit" id = "check" value = "${data.checklike}">いいね数<c:out value="${data.likecounter}"/>
-
+    	 <form method = "post" action = 'createRT'>
+	    	<input type = "submit" id = "checkRT" value = "${data.checkRT}">RT数<c:out value="${data.countRT}"/>
 	    	<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">
 	    	<input type="hidden" name = "tweet_id" type = "text" value="${data.tweetId}">
+	    </form>
 
-    	</form>
+	    <form method = "post" action = 'liketweet'>
+
+	    	いいねはこちら→<INPUT type="checkbox" id="${data.tweetId}"  class="likebtn" ${data.checklike}>
+			<div id ="likecount"></div>
+	    	<input type="hidden" name = "sessionToken" type = "text" value="${sessionScope.token.sessionToken}">
+	    	<input type="hidden" name = "tweetID" type = "text" value="${data.tweetId}">
+	    	<div id = "sessionToken">${sessionScope.token.sessionToken}</div>
+
+	    </form>
 
     <br><br>
   </c:forEach>

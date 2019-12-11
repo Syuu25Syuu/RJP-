@@ -32,9 +32,9 @@ public class CheckFollow_by_yuta {
 	         }
 	        //フォローしていなかった場合flgStringには空白が返される
 	    	if(flgString=="") {
-	    		flgString = "フォロー";	//フォローしていなかった場合
+	    		flgString = "";	//フォローしていなかった場合
 			}else {
-				flgString = "解除";			//フォローしていた場合
+				flgString = "checked";			//フォローしていた場合
 			}
 
 	        //トランザクションをコミットする

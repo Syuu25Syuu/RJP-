@@ -1,5 +1,3 @@
-/*そのツイートに自分がいいねをしているかの判定*/
-
 package test1.db;
 
 import java.sql.Connection;
@@ -7,9 +5,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class CheckLikeUser {
-	public static String checkLikeUser(String user_id,String tweet_id) {
-		String flgString = "";
+public class GetTweets_Serialno {
+	public static String getTweets_Serialno(String sessionToken) {
+		String tweets_serialnoString = "";
 
 		try{
 			Connection cn = new OracleConnector().getCn();
@@ -20,8 +18,8 @@ public class CheckLikeUser {
 	        System.out.println("接続完了");
 
 	        //SQL文を変数に格納する
-
-	        String sql="select Likes_User from likes where Likes_User = '"+user_id+"'and Likes_Tweet = '"+tweet_id+"'";
+	        //System.out.println("idを表示するよ"+id);
+	        String sql="select TWEETS_SERIALNO from Tweets where USERS_NO = '"+sessionToken+"' order by TWEETS_DATE desc ";
 
 	        //Statementインターフェイスを実装するクラスの
 	        //インスタンスを取得する
@@ -30,17 +28,8 @@ public class CheckLikeUser {
 	        ResultSet rs = st.executeQuery(sql);
 
 	        while(rs.next()){
-	        	flgString=rs.getString(1);
-	        	System.out.println("flgStringの中身は"+flgString+"です");
+	        
 	         }
-
-	    	if(flgString=="") {
-	    		flgString = "";
-			}else {
-				flgString = "checked";
-			}
-
-
 
 	        //トランザクションをコミットする
 	        cn.commit();
@@ -57,10 +46,8 @@ public class CheckLikeUser {
 	        }catch(SQLException e){
 	        	e.printStackTrace();
 
-
 	        }
 
-			return flgString;
-
+		return tweets_serialnoString;
 	}
 }

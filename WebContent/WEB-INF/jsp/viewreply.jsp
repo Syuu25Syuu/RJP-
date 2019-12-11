@@ -12,8 +12,10 @@
 <style>
 	<%@include file="./test.css" %>
 </style>
-<script>
 
+
+<script>
+	<%@include file="./js/likecheck.js" %>
 </script>
 
 </head>
@@ -72,14 +74,16 @@
 	    <div>${data2.childTweetContent}</div>
 
 
-	    <form method = "post" action = 'liketweet'>
+		 <form method = "post" action = 'liketweet'>
 
-	    		<input type = "submit" id = "check" value = "${data2.childCheckLike}">いいね数<c:out value="${data2.childTweetLikeCount}"/>
-
-	    	<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">
-	    	<input type="hidden" name = "tweet_id" type = "text" value="${data2.childTweetId}">
+	    	いいねはこちら→<INPUT type="checkbox" id="${data.tweetId}"  class="likebtn" ${data.checklike}>
+			<div id ="likecount"></div>
+	    	<input type="hidden" name = "sessionToken" type = "text" value="${sessionScope.token.sessionToken}">
+	    	<input type="hidden" name = "tweetID" type = "text" value="${data.tweetId}">
+	    	<div id = "sessionToken">${sessionScope.token.sessionToken}</div>
 
 	    </form>
+
 	    <br><br>
   </c:forEach>
 

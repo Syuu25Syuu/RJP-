@@ -7,10 +7,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 <style>
 	<%@include file="./test.css" %>
 </style>
+
+<script>
+	<%@include file="./js/likecheck.js" %>
+</script>
 
 </head>
 <body>
@@ -54,14 +58,17 @@
 	    </form>
     <div><c:out value="${data.tweet}"/></div>
 
-    <form method = "post" action = 'liketweet'>
+	    <form method = "post" action = 'liketweet'>
 
-    		<input type = "submit" id = "check" value = "${data.checklike}">いいね数<c:out value="${data.likecounter}"/>
+	    	いいねはこちら→<INPUT type="checkbox" id="${data.tweetId}"  class="likebtn" ${data.checklike}>
+			<div id ="likecount"></div>
+	    	<input type="hidden" name = "sessionToken" type = "text" value="${sessionScope.token.sessionToken}">
+	    	<input type="hidden" name = "tweetID" type = "text" value="${data.tweetId}">
+			<p>ツイートIDは${data.tweetId}だよ</p>
+			<div id = "sessionToken">${sessionScope.token.sessionToken}</div>
 
-    	<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">
-    	<input type="hidden" name = "tweet_id" type = "text" value="${data.tweetId}">
+	    </form>
 
-    </form>
     <br><br>
   </c:forEach>
 

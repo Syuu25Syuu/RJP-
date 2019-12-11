@@ -6,7 +6,7 @@ import java.sql.Statement;
 
 //フォローをするクラス
 public class FollowTest{
-	public static void follow(int UserNo,int FollowedNo){
+	public static void follow(String UserNo,String FollowedNo){
 
         try{
 	        //Driverインターフェイスを実装するクラスをロードする
@@ -25,7 +25,7 @@ public class FollowTest{
 	        //インスタンスを取得する
 	        Statement st= cn.createStatement();
 	        //SQLの実行
-	        int rs = st.executeUpdate(sql);
+	        st.executeUpdate(sql);
 
 	        //トランザクションをコミットする
 	        cn.commit();

@@ -19,8 +19,10 @@
 		<input type = "submit" value = "ログアウト">
 	</form>
 
-	<form method = 'post' action = 'searchuser'>
-		<input type = 'submit' value = "検索">
+	<form action="searchuser" method="post">
+		<input type="text" name="id" placeholder="ユーザIDを入力" >
+		<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">
+		<input type="submit" value="検索">
 	</form>
 
 		<form method = 'post' action = 'viewmylike'>

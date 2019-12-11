@@ -14,9 +14,9 @@ public class ViewLikeCommand extends AbstractCommand {
 
 		ResponseContext resc = new WebResponseContext();
 
-		String  s_userid = reqc.getParameter("user_session")[0];
+		String  sessionToken = reqc.getParameter("user_session")[0];
 
-		ArrayList list = ViewMyLike.viewMyLike(s_userid);
+		ArrayList list = ViewMyLike.viewMyLike(sessionToken);
 
         resc.setResult(list);
 
