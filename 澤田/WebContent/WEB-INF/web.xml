@@ -27,32 +27,35 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
-	<servlet>
-		<servlet-name>FollowCheckAjaxServlet</servlet-name>
-		<servlet-class>test1.FollowCheckAjaxServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>FollowCheckAjaxServlet</servlet-name>
-		<url-pattern>/FollowCheckAjaxServlet</url-pattern>
-	</servlet-mapping>
 
 	<servlet>
 		<servlet-name>FollowAjaxServlet</servlet-name>
-		<servlet-class>test1.FollowAjaxServlet</servlet-class>
+		<servlet-class>test1.ajax.FollowAjaxServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>FollowAjaxServlet</servlet-name>
 		<url-pattern>/FollowAjaxServlet</url-pattern>
 	</servlet-mapping>
 
+
 	<servlet>
-		<servlet-name>FollowCancelAjaxServlet</servlet-name>
-		<servlet-class>test1.FollowCancelAjaxServlet</servlet-class>
+		<servlet-name>LikeAjaxServlet</servlet-name>
+		<servlet-class>test1.ajax.LikeAjaxServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>FollowCancelAjaxServlet</servlet-name>
-		<url-pattern>/FollowCancelAjaxServlet</url-pattern>
+		<servlet-name>LikeAjaxServlet</servlet-name>
+		<url-pattern>/LikeAjaxServlet</url-pattern>
 	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>SendMessageDMAjaxServlet</servlet-name>
+		<servlet-class>test1.ajax.SendMessageDMAjaxServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SendMessageDMAjaxServlet</servlet-name>
+		<url-pattern>/SendMessageDMAjaxServlet</url-pattern>
+	</servlet-mapping>
+
 
 	<servlet>
 		<servlet-name>LogoutServlet</servlet-name>
