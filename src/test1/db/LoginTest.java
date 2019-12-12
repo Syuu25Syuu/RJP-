@@ -8,11 +8,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class LoginTest{
-	public static String insertUser_Table(String userID,String UserPass){
+	public static String insertUser_Table(String userID,String UserPass,Connection cn){
         String a ="";
         try{
         //Driverインターフェイスを実装するクラスをロードする
-        Connection cn = new OracleConnector().getCn();
+        //Connection cn = new OracleConnector().getCn();
         //自動コミットをOFFにする
         cn.setAutoCommit(false);
 
@@ -35,15 +35,15 @@ public class LoginTest{
         //トランザクションをコミットする
         cn.commit();
 
-        rs.close();
+        //rs.close();
 
         //ステートメントをクローズする
-        st.close();
+        //st.close();
 
         //RDBMSから切断する
-        cn.close();
+        //cn.close();
 
-        System.out.println("切断完了");
+        //System.out.println("切断完了");
 
 
         }catch(SQLException e){

@@ -66,7 +66,7 @@
 	    	<input type="hidden" name = "sessionToken" type = "text" value="${sessionScope.token.sessionToken}">
 	    	<input type="hidden" name = "tweetID" type = "text" value="${data.tweetId}">
 	    	<div id = "sessionToken">${sessionScope.token.sessionToken}</div>
-
+			ツイートIDさんは${data.tweetId}
 	    </form>
 
     <br><br>

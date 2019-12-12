@@ -6,20 +6,22 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import test1.been.SerchBean;
+
 public class SearchUserTest {
-	public static ArrayList getS(String searchId) {
-		String searchSerialId = "";
+	public static ArrayList getS(String sessionToken,String searchId,Connection cn) {
+
 		ArrayList list = new ArrayList();
 		try{
 	        //Driverインターフェイスを実装するクラスをロードする
-	        Connection cn = new OracleConnector().getCn();
+	        //Connection cn = new OracleConnector().getCn();
 	        //自動コミットをOFFにする
-	        cn.setAutoCommit(false);
+	        //cn.setAutoCommit(false);
 
 	        System.out.println("接続完了");
 
 	        //SQL文を変数に格納する
-	        String sql="select USERS_SERIALNO from users where Users_ID LIKE '%"+searchId+"%'";
+	        String sql="select USERS_SERIALNO,USERS_ID,USERS_NAME from users where Users_ID LIKE '%"+searchId+"%'";
 
 	        //Statementインターフェイスを実装するクラスの
 	        //インスタンスを取得する
@@ -28,24 +30,33 @@ public class SearchUserTest {
 	        ResultSet rs = st.executeQuery(sql);
 
 	        while(rs.next()){
-	        	searchSerialId = rs.getString(1);
-	        	System.out.println("さーちてすと"+searchSerialId+"desu");
-	        	list.add(searchSerialId);
+	        	String serialNO = rs.getString(1);
+	        	String userName = rs.getString(2);
+	        	String userID = rs.getString(3);
+	        	String followCheck = CheckFollow.checkFollow(sessionToken, serialNO, cn);
+
+	        	SerchBean b = new SerchBean();
+	        	b.setUserNo(serialNO);
+	        	b.setUserName(userName);
+	        	b.setUserId(userID);
+	        	b.setCheck(followCheck);
+
+	        	list.add(b);
 
 	         }
 
 	        //トランザクションをコミットする
-	        cn.commit();
+	        //cn.commit();
 
-	        rs.close();
+	        //rs.close();
 
 	        //ステートメントをクローズする
-	        st.close();
+	        //st.close();
 
 	        //RDBMSから切断する
-	        cn.close();
+	       // cn.close();
 
-	        System.out.println("切断完了");
+	       //System.out.println("切断完了");
 
         }catch(SQLException e){
         	e.printStackTrace();

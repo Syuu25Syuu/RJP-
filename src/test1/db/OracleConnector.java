@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 
 public class OracleConnector{
-	Connection cn;
+	static Connection cn;
 
 	public OracleConnector(){
 		String user = "paku";
@@ -34,5 +34,10 @@ public class OracleConnector{
 	}
 	public static void closeConnection(Connection cn)throws SQLException{
 		cn.close();
+	}
+
+	public static void closeConnection(Object cnObject)throws SQLException{
+		cn = (Connection)cnObject;
+		closeConnection(cn);
 	}
 }

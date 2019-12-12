@@ -2,8 +2,11 @@
 
 package test1;
 
+import java.sql.Connection;
+
 import test1.been.Login_Been;
 import test1.db.LoginTest;
+import test1.db.OracleConnector;
 
 public class LoginCommand extends AbstractCommand {
 	String sessionToken;
@@ -19,7 +22,14 @@ public class LoginCommand extends AbstractCommand {
 
 		ResponseContext resc = new WebResponseContext();
 
-		sessionToken =  LoginTest.insertUser_Table(name,pass); //return password
+		Connection cn = new OracleConnector().getCn();
+
+		try {
+		sessionToken =  LoginTest.insertUser_Table(name,pass,cn); //return password
+		cn.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 
 		Login_Been l = new Login_Been();
 		l.setName(name);

@@ -1,12 +1,10 @@
 package test1;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Iterator;
 
-import test1.been.SerchBean;
-import test1.db.CheckFollow_by_yuta;
-import test1.db.GetUsersId;
-import test1.db.GetUsersName;
+import test1.db.OracleConnector;
 import test1.db.SearchUserTest;
 
 public class SearchUserCommand extends AbstractCommand{
@@ -19,39 +17,18 @@ public class SearchUserCommand extends AbstractCommand{
 
 		ResponseContext resc = new WebResponseContext();
 
-		ArrayList search_sid = SearchUserTest.getS(id);
+		Connection cn = new OracleConnector().getCn();
 
-		ArrayList result = new ArrayList();
+		ArrayList list = SearchUserTest.getS(sessionToken, id, cn);
 
-
-		Iterator iterator = search_sid.iterator();
-
-		while(iterator.hasNext()) {
-			String serialid = (String)iterator.next();
-
-			String userName = GetUsersName.getUserName(serialid);
-
-			String userId = GetUsersId.getUserId(serialid);
-
-			String checkfollow =CheckFollow_by_yuta.checkFollow(sessionToken, serialid);
-
-
-
-
-			SerchBean b = new SerchBean();
-
-			b.setUserNo(serialid);
-			b.setUserName(userName);
-			b.setUserId(userId);
-			b.setCheck(checkfollow);
-
-			result.add(b);
-
-
-
+		try {
+			cn.close();
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
 		}
 
-		resc.setResult(result);
+		resc.setResult(list);
 
 		resc.setTarget("searchresult");
 

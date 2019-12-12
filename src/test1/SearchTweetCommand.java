@@ -2,8 +2,11 @@
 
 package test1;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
+import test1.db.OracleConnector;
 import test1.db.SerchTweet;
 
 public class SearchTweetCommand extends AbstractCommand {
@@ -17,8 +20,20 @@ public class SearchTweetCommand extends AbstractCommand {
 
 		String  sessionToken = reqc.getParameter("user_session")[0];
 
+		Connection cn = new OracleConnector().getCn();
+		ArrayList list = new ArrayList<>();
 
-		ArrayList list = SerchTweet.getSerchTweet(word,sessionToken);
+		try {
+			cn.setAutoCommit(false);
+			list = SerchTweet.getSerchTweet(word,sessionToken,cn);
+
+
+			cn.commit();
+			cn.close();
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
 
 		resc.setResult(list);
 

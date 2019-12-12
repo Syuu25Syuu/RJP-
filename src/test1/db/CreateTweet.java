@@ -8,10 +8,10 @@ import java.sql.Statement;
 
 public class CreateTweet {
 
-	public static void createTweet(String sessionToken,String tweetContent){
+	public static void createTweet(String sessionToken,String tweetContent,Connection cn){
 
 		try{
-				Connection cn = new OracleConnector().getCn();
+				//Connection cn = new OracleConnector().getCn();
 
 		        //自動コミットをOFFにする
 		        cn.setAutoCommit(false);
@@ -29,13 +29,13 @@ public class CreateTweet {
 				//SQLを実行しトランザクションが開始される。処理件数が返される
 				st.executeUpdate(sql);
 		        //トランザクションをコミットする
-		        cn.commit();
+		        //cn.commit();
 
 		        //ステートメントをクローズする
-		        st.close();
+		        //st.close();
 
 		        //RDBMSから切断する
-		        cn.close();
+		        //cn.close();
 
 		        System.out.println("切断完了");
 

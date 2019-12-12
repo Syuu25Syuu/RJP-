@@ -1,19 +1,86 @@
 package test1.db;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.TreeMap;
 
 import test1.been.MyTweetView_Been;
+import test1.newDB.CheckLikeUser;
 
 public class ComebackHome {
-	public static ArrayList comeBackHome(String sessionToken) {
+	public static ArrayList comeBackHome(String sessionToken,Connection cn) {
 		ArrayList list = new ArrayList<>();
+
+
+		try{
+	        //Driverインターフェイスを実装するクラスをロードする
+	        //Connection cn = new OracleConnector().getCn();
+	        //自動コミットをOFFにする
+	        cn.setAutoCommit(false);
+
+	        //SQL文を変数に格納する
+	        String sql="select USERS_SERIALNO,USERS_NAME,Users_id,tweets.TWEETS_SERIALNO,tweets.TWEETS_CONTENT from USERS " +
+	        		"join tweets on USERS_SERIALNO = tweets.USERS_NO " +
+	        		"where users_serialno = '"+sessionToken+"'" +
+	        		"or (USERS_NO) IN  (select FOLLOWED_NO from follows where users_no = '"+sessionToken+"') " +
+	        		"order by tweets.TWEETS_DATE desc";
+
+	        //Statementインターフェイスを実装するクラスの
+	        //インスタンスを取得する
+	        Statement st= cn.createStatement();
+
+	        ResultSet rs = st.executeQuery(sql);
+
+	        while(rs.next()){
+	        	MyTweetView_Been b = new MyTweetView_Been();
+	        	String user_sirial_no = rs.getString(1);
+	        	String users_name = rs.getString(2);
+	        	String users_id = rs.getString(3);
+	        	String tweets_no = rs.getString(4);
+	        	String tweets_content = rs.getString(5);
+
+	        	String checklike = CheckLikeUser.checkLikeUser(sessionToken, tweets_no, cn);
+
+	        	System.out.println(checklike);
+
+
+	        	b.setName(users_name);
+	        	b.setId(users_id);
+	        	b.setSerialuserid(user_sirial_no);
+	        	b.setTweetId(tweets_no);
+	        	b.setTweet(tweets_content);
+	        	b.setChecklike(checklike);
+	        	list.add(b);
+
+	         }
+
+	        //トランザクションをコミットする
+
+
+	        //rs.close();
+
+	        //ステートメントをクローズする
+	        //st.close();
+
+	        //RDBMSから切断する
+	        //cn.close();
+
+	        //System.out.println("切断完了");
+
+
+	        }catch(SQLException e){
+	        	e.printStackTrace();
+	        }
+
+
+
+	/*
 		TreeMap<String, String[]> tweetTreeMap = new TreeMap<String, String[]>();
 
 
-		/*フォローしてる人のRTを格納する処理*/
+		//フォローしてる人のRTを格納する処理
 		ArrayList myFollowes = getMyFollowUser.getMyFollowUsers(sessionToken);	//自分がフォローしているユーザーのリストをゲット
 		Iterator iterator = myFollowes.iterator();
 		while (iterator.hasNext()) {
@@ -53,7 +120,7 @@ public class ComebackHome {
 				}
 			}
 
-			/*自分のRTを格納*/
+			//自分のRTを格納
 
 			LinkedHashMap myRTtweetmap = ViewRT_Tweet.viewRT_Tweet(sessionToken);	//自分の全ツイートのTWEETS_SERIALNOを取得
 
@@ -90,7 +157,7 @@ public class ComebackHome {
 
 		}
 
-		/*自分と自分のフォロワーのツイートを表示*/
+		//自分と自分のフォロワーのツイートを表示
 
 		LinkedHashMap myTweetmap = ViewMy_All_Tweet.viewMy_Tweet(sessionToken);	//自分の全ツイートのTWEETS_SERIALNOを取得
 
@@ -160,7 +227,7 @@ public class ComebackHome {
 			list.add(p);
 
 		}
-
+		*/
 
 		return list;
 	}

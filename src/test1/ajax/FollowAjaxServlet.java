@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import test1.db.CheckFollow_by_yuta;
+import test1.db.CheckFollow;
 import test1.db.FollowCancelTest;
 import test1.db.FollowTest;
 
@@ -27,7 +27,7 @@ public class FollowAjaxServlet extends HttpServlet{
 		//follow()の引数に取得したパラメータを入れる
 		//取得したパラメータをDBに格納するメソッド(Follows表に)
 
-		String flgString = CheckFollow_by_yuta.checkFollow(sessionToken, followedNo);
+		String flgString = CheckFollow.checkFollow(sessionToken, followedNo);
 
 		if(flgString.equals("checked")) {
 			FollowCancelTest.cancelFollow(sessionToken, followedNo);

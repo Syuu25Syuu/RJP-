@@ -26,6 +26,7 @@
 		<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">
 	</form>
 
+
 	<form method = 'post' action='logout'>
 		<input type = "submit" value = "ログアウト">
 	</form>

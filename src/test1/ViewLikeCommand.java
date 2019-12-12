@@ -2,9 +2,12 @@
 
 package test1;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
-import test1.db.ViewMyLike;
+import test1.db.OracleConnector;
+import test1.newDB.ViewMyLike;
 
 public class ViewLikeCommand extends AbstractCommand {
 
@@ -14,9 +17,21 @@ public class ViewLikeCommand extends AbstractCommand {
 
 		ResponseContext resc = new WebResponseContext();
 
+		ArrayList list = new ArrayList<>();
+
 		String  sessionToken = reqc.getParameter("user_session")[0];
 
-		ArrayList list = ViewMyLike.viewMyLike(sessionToken);
+		Connection cn = new OracleConnector().getCn();
+
+		try {
+		list = ViewMyLike.viewMyLike(sessionToken, cn);
+
+		cn.close();
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+
 
         resc.setResult(list);
 

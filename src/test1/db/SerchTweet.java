@@ -7,20 +7,27 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import test1.been.MyTweetView_Been;
+import test1.newDB.CheckLikeUser;
 
 public class SerchTweet {
-	public static ArrayList getSerchTweet(String word,String sessionToken) {
+	public static ArrayList getSerchTweet(String word,String sessionToken,Connection cn) {
 		ArrayList<MyTweetView_Been> data=new ArrayList<MyTweetView_Been>();
         try{
 	        //Driverインターフェイスを実装するクラスをロードする
-	        Connection cn = new OracleConnector().getCn();
+	        //Connection cn = new OracleConnector().getCn();
 	        //自動コミットをOFFにする
-	        cn.setAutoCommit(false);
 
-	        System.out.println("接続完了");
+
+	        //System.out.println("接続完了");
 
 	        //SQL文を変数に格納する
-	        String sql="select TWEETS_SERIALNO,USERS_NO,TWEETS_CONTENT from tweets where TWEETS_CONTENT LIKE '%"+word+"%'";
+	        String sql="select USERS_SERIALNO,USERS_NAME,Users_id,tweets.TWEETS_SERIALNO,tweets.TWEETS_CONTENT from USERS " +
+	        		"join tweets on USERS_SERIALNO = tweets.USERS_NO " +
+	        		"where TWEETS_CONTENT LIKE '%"+word+"%' "+
+	        		"order by tweets.TWEETS_DATE desc";
+
+
+
 
 	        //Statementインターフェイスを実装するクラスの
 	        //インスタンスを取得する
@@ -29,51 +36,30 @@ public class SerchTweet {
 	        ResultSet rs = st.executeQuery(sql);
 
 	        while(rs.next()){
-	        	String t_no = rs.getString(1);
-	        	String u_no = rs.getString(2);
-	        	String tweet = rs.getString(3);
-
-	        	String userName = GetUsersName.getUserName(u_no);
-
-	        	String userId = GetUsersId.getUserId(u_no);
-
-	        	String likeCheck = CheckLikeUser.checkLikeUser(sessionToken, t_no);
-
-	        	String likeCount = CountLikeTweet.countLikeTweet(t_no);
-
 	        	MyTweetView_Been b = new MyTweetView_Been();
+	        	String user_sirial_no = rs.getString(1);
+	        	String users_name = rs.getString(2);
+	        	String users_id = rs.getString(3);
+	        	String tweets_no = rs.getString(4);
+	        	String tweets_content = rs.getString(5);
 
-	        	b.setName(userName);
+	        	String checklike = CheckLikeUser.checkLikeUser(sessionToken, tweets_no, cn);
 
-	        	b.setId(userId);
+	        	System.out.println(checklike);
 
-	        	b.setTweetId(t_no);
 
-	        	b.setChecklike(likeCheck);
-
-	        	b.setLikecounter(likeCount);
-
-	        	b.setTweet(tweet);
-
-	        	b.setSerialuserid(u_no);
-
+	        	b.setName(users_name);
+	        	b.setId(users_id);
+	        	b.setSerialuserid(user_sirial_no);
+	        	b.setTweetId(tweets_no);
+	        	b.setTweet(tweets_content);
+	        	b.setChecklike(checklike);
 	        	data.add(b);
-
 
 	         }
 
 	        //トランザクションをコミットする
-	        cn.commit();
 
-	        rs.close();
-
-	        //ステートメントをクローズする
-	        st.close();
-
-	        //RDBMSから切断する
-	        cn.close();
-
-	        System.out.println("切断完了");
 
         }catch(SQLException e){
         	e.printStackTrace();
