@@ -6,8 +6,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import test1.CheckLikeUser;
 import test1.been.MyTweetView_Been;
-import test1.newDB.CheckLikeUser;
 
 public class SerchTweet {
 	public static ArrayList getSerchTweet(String word,String sessionToken,Connection cn) {

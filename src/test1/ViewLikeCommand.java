@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import test1.db.OracleConnector;
-import test1.newDB.ViewMyLike;
 
 public class ViewLikeCommand extends AbstractCommand {
 

@@ -3,7 +3,7 @@ package test1.db;
 import java.sql.Connection;
 import java.util.ArrayList;
 
-import test1.newDB.GetUser_and_Tweet;
+import test1.GetUser_and_Tweet;
 
 public class ShowProfile {
 	public static ArrayList getShowProfile(String user_id,String sessionToken) {

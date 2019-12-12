@@ -1,6 +1,6 @@
 /*そのツイートに自分がいいねをしているかの判定*/
 
-package test1.newDB;
+package test1;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
