@@ -1,0 +1,152 @@
+*{
+  background-color: #15202B;
+  color: #fff;
+}
+
+*:focus{
+  outline: none;
+}
+
+div.myuser{
+  border: solid 2px #fff;
+  padding-bottom: 110px;
+}
+.pro{
+  border-radius: 50%;
+    height: 100px;
+    width: 100px;
+    position: relative;
+}
+div.main div.myuser img.pro{
+    position: absolute;
+}
+
+.hako{
+  border: 1px solid #15202B;
+  resize: none;
+  font-size: 20px;
+}
+
+.hako:focus::placeholder{
+  color: #fff;
+}
+
+.tweetbutton{
+  display: block;
+  margin-left: auto;
+  margin-right: 600px;
+  border: 1px solid #999;
+  padding: 3px 10px;
+  border-radius: 20px;
+  height: 2.3em;
+}
+
+  div.main div.myuser table.info{
+    padding-left:120px;
+  }
+
+.name{
+    font-size: 25px;
+  }
+
+.id{
+    color: #687784;
+  }
+
+  div.main div.myuser div.sentence{
+    padding-left:120px;
+    font-size: 20px;
+  }
+
+  .add{
+    /*widows: 712px;*/
+    height: 403px;
+    border-radius: 5%;
+    object-fit: cover;
+  }
+
+  .heart {
+    position: absolute;
+    transform: translate(-50%, -50%);
+  }
+
+  input.likebtn[type="checkbox"] {
+    position: absolute;
+    left: -9999px;
+  }
+
+  label.ht {
+    top: 50px;
+    left: 50px;
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    background: url(https://cssanimation.rocks/images/posts/steps/heart.png) no-repeat;
+    cursor: pointer;
+  }
+
+  label.ht:hover{
+    border-radius: 50%;
+    border: solid 2px rgb(119, 50, 74);
+  }
+
+  label.ht{
+    border-radius: 50%;
+  }
+
+  input.likebtn:checked + label.ht {
+    background-position: -2800px 0;
+      transition: background 1s steps(28);
+    }
+    @keyframes fave-heart {
+      0% {
+        background-position: 0 0;
+      }
+      100% {
+        background-position: -2800px 0;
+      }
+    }
+
+    label.ht p{
+      margin: 35px 0 0 100px;
+    }
+
+  .retweet{
+    position: absolute;
+    margin-left: 200px;
+  }
+  .retweet label.re:before {
+    top: 50px;
+    left: 50px;
+    height: 96px;
+    width: 96px;
+    line-height: 120px;
+    border-radius: 50%;
+    border: solid 2px #15202B;
+    backface-visibility: hidden;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    display: inline-block;
+    content: url("https://raw.githubusercontent.com/Syuu25Syuu/RJP-/master/WebContent/WEB-INF/images/rt.png");
+  }
+
+
+  .retweet input.r:checked ~ label.re:before {
+    content: url("https://raw.githubusercontent.com/Syuu25Syuu/RJP-/master/WebContent/WEB-INF/images/rtw.png");
+  }
+
+  .retweet input.r {
+    display: none;
+  }
+
+  .retweet label.re:hover::before{
+    border-radius: 50%;
+    border: solid 2px rgb(79, 212, 35);
+  }
+
+  label.re p{
+    font-size: 20px;
+    margin: 36px 0 0 100px;
+  }
