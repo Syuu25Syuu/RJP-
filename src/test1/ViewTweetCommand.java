@@ -73,19 +73,21 @@ public class ViewTweetCommand extends AbstractCommand {
 
 			String childrenLikeCount = CountLikeTweet.countLikeTweet(childTweetId);
 
+			//String tweetID = GetTweets_Serialno.getTweets_Serialno(sessionToken);
+
 			b = new MyTweetView_Been();
 
 			//そのツイートに対するリプライがあった場合
 			if(flg==true) {
 				//親ツイートをBeanに格納
-				b.setChildSerialNo(parentSerialUserNo);
-				b.setChildUserName(parentUserName);
-				b.setChildUserId(parentUserId);
+				b.setSerialuserid(parentSerialUserNo);
+				b.setName(parentUserName);
+				b.setId(parentUserId);
 				b.setSessionToken(sessionToken);
-				b.setChildTweetContent(parentTweetContent);
-				b.setChildTweetId(replyid);
-				b.setChildTweetLikeCount(parentLikeCount);
-				b.setChildCheckLike(parentLikeCheck);
+				b.setTweet(parentTweetContent);
+				b.setTweetId(replyid);
+				b.setLikecounter(parentLikeCount);
+				b.setChecklike(parentLikeCheck);
 				list.add(b);
 				flg = false;
 				System.out.println("if文には入ったよ");
@@ -93,29 +95,29 @@ public class ViewTweetCommand extends AbstractCommand {
 				//1件目のリプライをBeanに格納
 				b = new MyTweetView_Been();
 
-				b.setChildSerialNo(childrenSerialUserNo);
-				b.setChildUserName(childrenUserName);
-				b.setChildUserId(childrenUserId);
-				b.setChildTweetContent(childrenTweetContent);
-				b.setChildCheckLike(childrenCheckLike);
-				b.setChildTweetLikeCount(childrenLikeCount);
-				b.setChildTweetId(childTweetId);
-				b.setParentSerialUserNo(parentSerialUserNo);
-				b.setParentUserId(parentUserId);
+				b.setSerialuserid(childrenSerialUserNo);
+				b.setName(childrenUserName);
+				b.setId(childrenUserId);
+				b.setTweet(childrenTweetContent);
+				b.setChecklike(childrenCheckLike);
+				b.setLikecounter(childrenLikeCount);
+				b.setTweetId(childTweetId);
+				//b.setParentSerialUserNo(parentSerialUserNo);
+				//b.setParentUserId(parentUserId);
 
 				list.add(b);
 
 			}else {
 				//2件目以降をBeanに格納
-				b.setChildSerialNo(childrenSerialUserNo);
-				b.setChildUserName(childrenUserName);
-				b.setChildUserId(childrenUserId);
-				b.setChildTweetContent(childrenTweetContent);
-				b.setChildCheckLike(childrenCheckLike);
-				b.setChildTweetLikeCount(childrenLikeCount);
-				b.setChildTweetId(childTweetId);
-				b.setParentSerialUserNo(parentSerialUserNo);
-				b.setParentUserId("@"+parentUserId);
+				b.setSerialuserid(childrenSerialUserNo);
+				b.setName(childrenUserName);
+				b.setId(childrenUserId);
+				b.setTweet(childrenTweetContent);
+				b.setChecklike(childrenCheckLike);
+				b.setLikecounter(childrenLikeCount);
+				b.setTweetId(childTweetId);
+				//b.setParentSerialUserNo(parentSerialUserNo);
+				//b.setParentUserId("@"+parentUserId);
 				System.out.println("if文には入ってないよ");
 
 				list.add(b);
@@ -127,14 +129,14 @@ public class ViewTweetCommand extends AbstractCommand {
 		}
 		//そのツイートに対するリプライが一切なかった場合の処理
 		if(flg==true) {
-			b.setChildSerialNo(parentSerialUserNo);
-			b.setChildUserName(parentUserName);
-			b.setChildUserId(parentUserId);
+			b.setSerialuserid(parentSerialUserNo);
+			b.setName(parentUserName);
+			b.setId(parentUserId);
 			b.setSessionToken(sessionToken);
-			b.setChildTweetContent(parentTweetContent);
-			b.setChildTweetId(replyid);
-			b.setChildTweetLikeCount(parentLikeCount);
-			b.setChildCheckLike(parentLikeCheck);
+			b.setTweet(parentTweetContent);
+			b.setTweetId(replyid);
+			b.setLikecounter(parentLikeCount);
+			b.setChecklike(parentLikeCheck);
 			list.add(b);
 			flg = false;
 

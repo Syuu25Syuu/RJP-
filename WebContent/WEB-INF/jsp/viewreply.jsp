@@ -58,34 +58,46 @@
 
 <!-- リプライを表示 -->
 
-   	<c:forEach var="data2" items="${result}">
-
-
-		<div id = "parentId">${data2.parentUserId}</div>
+ 	<c:forEach var="data" items="${result}">
 	 	<form method = 'post' id="myFORM" action = 'showprofiles'>
 
 	 		<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">
-	 		<input type="hidden" name = "user_id" type = "text" value="${data2.childSerialNo}">
-	 		<input type = "submit" name = "user_id" value= " ${data2.childUserName}  ＠${data2.childUserId}" class="button">
+	 		<input type="hidden" name = "user_id" type = "text" value="${data.serialuserid}">
+	 		<input type = "submit" name = "user_id" value= " ${data.name}  ＠${data.id}" class="button">
 
 	    </form>
 
+		<form method = 'post' action = 'viewtweet'>
+	    	<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">
+	 		<input type="hidden" name = "tweet_id" type = "text" value="${data.tweetId}">
+	    	<input type = "submit"  value= "${data.tweet}" class="button">
+	    </form>
 
-	    <div>${data2.childTweetContent}</div>
+	     <div class = "reply"  >
+			<form method = 'post' action = 'replytweet'>
+				<textarea name ="replycontent" id="replycontent" cols="40" rows="4" maxlength="150" placeholder="返信をツイート" required></textarea>
+				<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">
+				<input type="hidden" name = "replyid" type = "text" value="${data.tweetId}">
+
+				<input type='submit' value='返信'>
+			</form>
+	    </div>
 
 
-		 <form method = "post" action = 'liketweet'>
+
+	    <form method = "post" action = 'liketweet'>
 
 	    	いいねはこちら→<INPUT type="checkbox" id="${data.tweetId}"  class="likebtn" ${data.checklike}>
 			<div id ="likecount"></div>
 	    	<input type="hidden" name = "sessionToken" type = "text" value="${sessionScope.token.sessionToken}">
 	    	<input type="hidden" name = "tweetID" type = "text" value="${data.tweetId}">
-	    	<div id = "sessionToken">${sessionScope.token.sessionToken}</div>
+			<p>ツイートIDは${data.tweetId}だよ</p>
+			<div id = "sessionToken">${sessionScope.token.sessionToken}</div>
 
 	    </form>
-
 	    <br><br>
   </c:forEach>
+
 
 
 

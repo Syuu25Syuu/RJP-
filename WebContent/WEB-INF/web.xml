@@ -46,7 +46,16 @@
 		<servlet-name>LikeAjaxServlet</servlet-name>
 		<url-pattern>/LikeAjaxServlet</url-pattern>
 	</servlet-mapping>
-
+	
+	<servlet>
+		<servlet-name>SendMessageDMAjaxServlet</servlet-name>
+		<servlet-class>test1.ajax.SendMessageDMAjaxServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SendMessageDMAjaxServlet</servlet-name>
+		<url-pattern>/SendMessageDMAjaxServlet</url-pattern>
+	</servlet-mapping>
+	
 
 	<servlet>
 		<servlet-name>LogoutServlet</servlet-name>

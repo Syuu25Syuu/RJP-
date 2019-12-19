@@ -7,7 +7,8 @@ public interface RequestContext {
 	public void setRequest(Object request);
 	public void setSession(Object session);
 	public Object getSession();
-
+	public void setResult(Object bean);
+	public Object getResult();
 
 }
 

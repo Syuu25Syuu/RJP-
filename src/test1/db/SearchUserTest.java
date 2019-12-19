@@ -21,7 +21,7 @@ public class SearchUserTest {
 	        System.out.println("接続完了");
 
 	        //SQL文を変数に格納する
-	        String sql="select USERS_SERIALNO,USERS_ID,USERS_NAME from users where Users_ID LIKE '%"+searchId+"%'";
+	        String sql="select USERS_SERIALNO,USERS_ID,USERS_NAME from users where Users_ID LIKE '%"+searchId+"%' AND users_serialno!='"+sessionToken+"'";
 
 	        //Statementインターフェイスを実装するクラスの
 	        //インスタンスを取得する
@@ -31,8 +31,8 @@ public class SearchUserTest {
 
 	        while(rs.next()){
 	        	String serialNO = rs.getString(1);
-	        	String userName = rs.getString(2);
-	        	String userID = rs.getString(3);
+	        	String userID = rs.getString(2);
+	        	String userName = rs.getString(3);
 	        	String followCheck = CheckFollow.checkFollow(sessionToken, serialNO, cn);
 
 	        	SerchBean b = new SerchBean();

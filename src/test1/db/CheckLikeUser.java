@@ -8,20 +8,15 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class CheckLikeUser {
-	public static String checkLikeUser(String user_id,String tweet_id) {
+	public static String checkLikeUser(String sessionToken,String TWEETS_SERIALNO,Connection cn) {
 		String flgString = "";
 
 		try{
-			Connection cn = new OracleConnector().getCn();
 
-	        //自動コミットをOFFにする
-	        cn.setAutoCommit(false);
-
-	        System.out.println("接続完了");
 
 	        //SQL文を変数に格納する
 
-	        String sql="select Likes_User from likes where Likes_User = '"+user_id+"'and Likes_Tweet = '"+tweet_id+"'";
+	        String sql="select Likes_User from likes where Likes_User = '"+sessionToken+"'and Likes_Tweet = '"+TWEETS_SERIALNO+"'";
 
 	        //Statementインターフェイスを実装するクラスの
 	        //インスタンスを取得する
@@ -31,7 +26,7 @@ public class CheckLikeUser {
 
 	        while(rs.next()){
 	        	flgString=rs.getString(1);
-	        	System.out.println("flgStringの中身は"+flgString+"です");
+	        	//System.out.println("flgStringの中身は"+flgString+"です");
 	         }
 
 	    	if(flgString=="") {
@@ -42,16 +37,43 @@ public class CheckLikeUser {
 
 
 
-	        //トランザクションをコミットする
-	        cn.commit();
+	        }catch(SQLException e){
+	        	e.printStackTrace();
 
-	        //ステートメントをクローズする
-	        st.close();
 
-	        //RDBMSから切断する
-	        cn.close();
+	        }
 
-	        System.out.println("切断完了");
+			return flgString;
+
+	}
+	public static String checkLikeUser(String sessionToken,String TWEETS_SERIALNO) {
+		String flgString = "";
+
+		try{
+
+			Connection cn = new OracleConnector().getCn();
+
+	        //SQL文を変数に格納する
+
+	        String sql="select Likes_User from likes where Likes_User = '"+sessionToken+"'and Likes_Tweet = '"+TWEETS_SERIALNO+"'";
+
+	        //Statementインターフェイスを実装するクラスの
+	        //インスタンスを取得する
+	        Statement st= cn.createStatement();
+
+	        ResultSet rs = st.executeQuery(sql);
+
+	        while(rs.next()){
+	        	flgString=rs.getString(1);
+	        	//System.out.println("flgStringの中身は"+flgString+"です");
+	         }
+
+	    	if(flgString=="") {
+	    		flgString = "";
+			}else {
+				flgString = "checked";
+			}
+
 
 
 	        }catch(SQLException e){

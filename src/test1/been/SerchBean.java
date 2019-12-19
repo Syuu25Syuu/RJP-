@@ -8,6 +8,10 @@ public class SerchBean implements Serializable{
 	private String userid;
 	private String userno;
 	private String check;
+	private String dmcontent;
+	private String senduserno;
+	private String receiveuserno;
+	private String dmtime;
 
 
 	public String getCheck() {
@@ -39,5 +43,37 @@ public class SerchBean implements Serializable{
 	}
 	public String getUserNo(){
 		return userno;
+	}
+
+	public String getDmContent() {
+		return dmcontent;
+	}
+
+	public void setDmContent(String dmcontent) {
+		this.dmcontent = dmcontent;
+	}
+
+	public String getSendUserNo() {
+		return senduserno;
+	}
+
+	public void setSendUserNo(String senduserno) {
+		this.senduserno = senduserno;
+	}
+
+	public String getReceiveUserNo() {
+		return receiveuserno;
+	}
+
+	public void setReceiveUserNo(String receiveuserno) {
+		this.receiveuserno = receiveuserno;
+	}
+
+	public String getDmTime() {
+		return dmtime;
+	}
+
+	public void setDmTime(String dmtime) {
+		this.dmtime = dmtime;
 	}
 }

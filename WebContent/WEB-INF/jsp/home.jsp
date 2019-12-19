@@ -60,7 +60,11 @@
 
 	 		<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">
 	 		<input type="hidden" name = "user_id" type = "text" value="${data.serialuserid}">
-	 		<input type = "submit" name = "user_id" value= " ${data.name}  ＠${data.id}" class="button">
+
+	 		<!-- ここを変えた(12-13) -->
+	 		<input type = "submit" name = "user_name" value= " ${data.name}" class="button">
+	 		<input type = "submit" name = "user_id" value= " ＠${data.id}" class="button">
+	 		<!-- 以上 -->
 
 	    </form>
 

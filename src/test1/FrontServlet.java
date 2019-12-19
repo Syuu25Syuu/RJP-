@@ -53,6 +53,15 @@ public class FrontServlet extends HttpServlet{
 
 		Object been = resc.getResult();
 
+		//12/12に澤田が修正した----------------------------------
+		Object requestbeen = rc.getResult();
+
+		if(requestbeen != null) {
+			req.setAttribute("requestbeen", requestbeen);
+		}
+		System.out.println("requestbeenの中身は"+requestbeen);
+		//-------------------------------------------------------
+
 		System.out.println("beenの中身は"+been);
 
 

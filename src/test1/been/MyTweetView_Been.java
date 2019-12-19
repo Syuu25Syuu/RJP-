@@ -27,17 +27,6 @@ public class MyTweetView_Been implements Serializable{
 
 	private String checkRT;
 
-	private String childSerialNo;
-	private String childUserName;
-	private String childUserId;
-	private String childTweetId;
-	private String childTweetContent;
-	private String childTweetLikeCount;
-	private String childCheckLike;
-
-
-	private String parentSerialUserNo;
-	private String parentUserId;
 
 
 
@@ -55,60 +44,6 @@ public class MyTweetView_Been implements Serializable{
 	}
 
 
-	public String getParentSerialUserNo() {
-		return parentSerialUserNo;
-	}
-	public void setParentSerialUserNo(String parentSerialUserNo) {
-		this.parentSerialUserNo = parentSerialUserNo;
-	}
-	public String getParentUserId() {
-		return parentUserId;
-	}
-	public void setParentUserId(String parentUserId) {
-		this.parentUserId = parentUserId;
-	}
-	public String getChildSerialNo() {
-		return childSerialNo;
-	}
-	public void setChildSerialNo(String childSerialNo) {
-		this.childSerialNo = childSerialNo;
-	}
-	public String getChildUserName() {
-		return childUserName;
-	}
-	public void setChildUserName(String childUserName) {
-		this.childUserName = childUserName;
-	}
-	public String getChildUserId() {
-		return childUserId;
-	}
-	public void setChildUserId(String childUserId) {
-		this.childUserId = childUserId;
-	}
-	public String getChildTweetId() {
-		return childTweetId;
-	}
-	public void setChildTweetId(String childTweetId) {
-		this.childTweetId = childTweetId;
-	}
-	public String getChildTweetContent() {
-		return childTweetContent;
-	}
-	public void setChildTweetContent(String childTweetContent) {
-		this.childTweetContent = childTweetContent;
-	}
-	public String getChildTweetLikeCount() {
-		return childTweetLikeCount;
-	}
-	public void setChildTweetLikeCount(String childTweetLikeCount) {
-		this.childTweetLikeCount = childTweetLikeCount;
-	}
-	public String getChildCheckLike() {
-		return childCheckLike;
-	}
-	public void setChildCheckLike(String childCheckLike) {
-		this.childCheckLike = childCheckLike;
-	}
 	public String getChecklike() {
 		return checklike;
 	}

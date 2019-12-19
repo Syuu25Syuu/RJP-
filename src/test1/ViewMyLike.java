@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import test1.been.MyTweetView_Been;
+import test1.db.CheckLikeUser;
 
 public class ViewMyLike {
 	public static ArrayList viewMyLike(String sessionToken,Connection cn) {

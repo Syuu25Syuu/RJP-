@@ -9,6 +9,7 @@ public class WebRequestContext implements RequestContext {
 	private Map _parameters;
 	private HttpServletRequest _request;
 	private HttpSession _session;
+	private Object result;
 
 
 	@Override
@@ -48,6 +49,16 @@ public class WebRequestContext implements RequestContext {
 	public Object getSession() {
 		// TODO 自動生成されたメソッド・スタブ
 		return _session;
+	}
+
+	public void setResult(Object been) {
+		result = been;
+
+	}
+
+	public Object getResult() {
+		// TODO 自動生成されたメソッド・スタブ
+		return result;
 	}
 
 }

@@ -49,6 +49,11 @@
 		<input type='submit' value='ツイート'>
 
 	</form>
+
+	<form method="post" action="followershowDM">
+		<input type="hidden" name="user_session" value="${sessionScope.token.sessionToken}">
+		<input type="submit" value="DMページへ">
+	</form>
 	<p>セッションは${sessionScope.token.sessionToken}</p>
 
 </body>

@@ -1,9 +1,10 @@
+/*今使ってないよ*/
+
 package test1;
 
 import java.util.ArrayList;
 
 import test1.db.CheckRTUser;
-import test1.db.tukawanComebackHome;
 import test1.db.CreateRT;
 import test1.db.DeleteRT;
 

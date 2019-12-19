@@ -28,7 +28,7 @@ public class GetTweets_Serialno {
 	        ResultSet rs = st.executeQuery(sql);
 
 	        while(rs.next()){
-	        
+
 	         }
 
 	        //トランザクションをコミットする

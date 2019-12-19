@@ -1,4 +1,4 @@
-package test1;
+package test1.db;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -36,7 +36,6 @@ public class GetUser_and_Tweet {
 	        	String tweets_no = rs.getString(3);
 	        	String tweets_content = rs.getString(4);
 
-	        	System.out.println("祝え!"+tweets_no);
 
 	        	String checklike = CheckLikeUser.checkLikeUser(sessionToken, tweets_no, cn);
 

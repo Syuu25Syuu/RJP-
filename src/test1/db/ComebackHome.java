@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import test1.CheckLikeUser;
 import test1.been.MyTweetView_Been;
 
 public class ComebackHome {
@@ -42,9 +41,6 @@ public class ComebackHome {
 	        	String tweets_content = rs.getString(5);
 
 	        	String checklike = CheckLikeUser.checkLikeUser(sessionToken, tweets_no, cn);
-
-	        	System.out.println(checklike);
-
 
 	        	b.setName(users_name);
 	        	b.setId(users_id);
