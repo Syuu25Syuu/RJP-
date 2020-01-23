@@ -35,4 +35,13 @@ $(function(){
 
   });
 
+
+  /*1月23日追加分*/
+  $('.changeProf').on('click',function(){
+	  $('#profchangeform').submit();
+  });
+
+
+
+
 });
