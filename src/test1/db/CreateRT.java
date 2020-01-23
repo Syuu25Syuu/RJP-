@@ -8,7 +8,7 @@ import java.sql.Statement;
 
 public class CreateRT {
 	public static void createRT(String sessionToken,String tweet_Id) {
-		String likecount;
+		//String likecount;
 
 		try{
 			Connection cn = new OracleConnector().getCn();

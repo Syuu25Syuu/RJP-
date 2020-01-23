@@ -22,8 +22,6 @@ public class ShowProfileCommand extends AbstractCommand {
 
 		ArrayList list = ShowProfile.getShowProfile(userid, sessionToken);
 
-
-
 		resc.setResult(list);
 
 		resc.setTarget("profiles");

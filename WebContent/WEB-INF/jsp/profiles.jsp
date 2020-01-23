@@ -15,7 +15,9 @@
 </style>
 
 <script>
-<%@include file="./js/likecheck.js" %>
+	<%@include file="./js/likecheck.js" %>
+	<%@include file="./js/rtcheck.js" %>
+	<%@include file="./js/followcheck.js" %>
 </script>
 
 </head>
@@ -43,7 +45,59 @@
 	</form>
 
 
+
+
+	<c:forEach var="data" items="${result}" end = "0">
+
+	<form id = "likeform" method = "post" action = "showproflike">
+			<input type="hidden" name = "sessionToken" type = "text" value="${sessionScope.token.sessionToken}">
+	 		<input type="hidden" name = "serialuserid" type = "text" value="${data.serialuserid}">
+	</form>
+
+	<form id = "tweetform" method = 'post' action = 'showprofiles' >
+		<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">
+		<input type="hidden" name = "user_id" type = "text" value="${data.serialuserid}">
+	</form>
+
+
+
+		<h2>${data.profUserName}</h2>
+		<h5>@${data.profUserId}</h5>
+
+		<input type="checkbox" id="${data.serialuserid}"  class="followbtn" ${data.checkFollow}>
+		<input type="hidden" value="${sessionScope.token.sessionToken }" id="sessionId"></input>
+
+		<h3>${data.profile}</h3>
+
+		<form method = 'post' action = 'showFollows'>
+			<input type = "submit" value="${data.countFollows}フォロー中">
+			<input type="hidden" name = "sessionToken" type = "text" value="${sessionScope.token.sessionToken}">
+	 		<input type="hidden" name = "serialuserid" type = "text" value="${data.serialuserid}">
+		</form>
+
+		<form method = 'post' action = 'showFollowers'>
+			<input type = "submit" value="${data.countFollowers}フォローされています">
+			<input type="hidden" name = "sessionToken" type = "text" value="${sessionScope.token.sessionToken}">
+	 		<input type="hidden" name = "serialuserid" type = "text" value="${data.serialuserid}">
+		</form>
+　
+	</c:forEach>
+
+	<br><br>
+
+	<form id = "tweetform" method = "post" action = "showproftweet">
+			<input type="hidden" name = "sessionToken" type = "text" value="${sessionScope.token.sessionToken}">
+	 		<input type="hidden" name = "serialuserid" type = "text" value="${data.serialuserid}">
+	</form>
+
+
+	<button type="submit" form = "tweetform" >ツイート</button>    <button type="submit" form = "likeform" >いいね</button>
+
+	<br><br>
+
+
 	<c:forEach var="data" items="${result}">
+		 ${data.rtuser}
     	<form method = 'post' action = 'showprofiles'>
 
 	 		<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">
@@ -51,13 +105,14 @@
 	 		<input type = "submit" name = "user_id" value= " ${data.name}  ＠${data.id}" class="button">
 
 	    </form>
-    	<div><c:out value="${data.tweet}"/></div>
 
-    	 <form method = "post" action = 'createRT'>
-	    	<input type = "submit" id = "checkRT" value = "${data.checkRT}">RT数<c:out value="${data.countRT}"/>
+
+		<form method = 'post' action = 'viewtweet'>
 	    	<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">
-	    	<input type="hidden" name = "tweet_id" type = "text" value="${data.tweetId}">
+	 		<input type="hidden" name = "tweet_id" type = "text" value="${data.tweetId}">
+	    	<input type = "submit"  value= "${data.tweet}" class="button">
 	    </form>
+
 
 	    <form method = "post" action = 'liketweet'>
 
@@ -66,7 +121,16 @@
 	    	<input type="hidden" name = "sessionToken" type = "text" value="${sessionScope.token.sessionToken}">
 	    	<input type="hidden" name = "tweetID" type = "text" value="${data.tweetId}">
 	    	<div id = "sessionToken">${sessionScope.token.sessionToken}</div>
-			ツイートIDさんは${data.tweetId}
+
+	    </form>
+
+	    <form method = "post" action = 'rttweet'>
+
+	    	RTはこちら→<INPUT type="checkbox" id="${data.tweetId}"  class="rtbtn" ${data.checkRT}>
+			<div id ="rtcount"></div>
+	    	<input type="hidden" name = "sessionToken" type = "text" value="${sessionScope.token.sessionToken}">
+	    	<input type="hidden" name = "tweetID" type = "text" value="${data.tweetId}">
+
 	    </form>
 
     <br><br>

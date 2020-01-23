@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class CreateAccount {
-	public static String createAcount(String userName,String userId,String userPass,String userMail){
+	public static String createAcount(String userName,String userId,String userPass,String userMail,String userImgPath){
 
 		try{
 				Connection cn = new OracleConnector().getCn();
@@ -19,7 +19,7 @@ public class CreateAccount {
 
 		        //SQL文を変数に格納する
 
-		        String sql="insert into users(Users_ID,Users_Name,Users_Pass,Users_Mail) values('"+userId+"','"+userName+"','"+userPass+"','"+userMail+"')";
+		        String sql="insert into users(Users_ID,Users_Name,Users_Pass,Users_Mail,USERS_PROF_IMAGE) values('"+userId+"','"+userName+"','"+userPass+"','"+userMail+"','"+userImgPath+"')";
 
 				//Statementインターフェイスを実装するクラスの
 				//インスタンスを取得する

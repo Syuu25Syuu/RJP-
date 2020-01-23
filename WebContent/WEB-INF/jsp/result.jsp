@@ -49,10 +49,16 @@
 		<input type='submit' value='ツイート'>
 
 	</form>
-
+	<!-- DM -->
 	<form method="post" action="followershowDM">
 		<input type="hidden" name="user_session" value="${sessionScope.token.sessionToken}">
 		<input type="submit" value="DMページへ">
+	</form>
+	<!-- ランキング -->
+	<form method="post" action="ranking">
+		<input type="hidden" name="user_session" value="${sessionScope.token.sessionToken}">
+		<input type="hidden" name="check_value" value="good">
+		<input type="submit" value="ランキングページへ">
 	</form>
 	<p>セッションは${sessionScope.token.sessionToken}</p>
 

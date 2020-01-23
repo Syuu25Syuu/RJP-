@@ -51,4 +51,37 @@ public class GetUserNo_fromTweet {
 		return user_no;
 
 	}
+
+	public static String GetUserNo(String tweet_no,Connection cn) {
+		String user_no = "";
+		try{
+
+
+	        //SQL文を変数に格納する
+
+	        String sql="select USERS_NO from tweets where TWEETS_SERIALNO = '"+tweet_no+"'";
+
+	        //Statementインターフェイスを実装するクラスの
+	        //インスタンスを取得する
+	        Statement st= cn.createStatement();
+
+	        ResultSet rs = st.executeQuery(sql);
+
+	        while(rs.next()){
+	        	user_no = rs.getString(1);
+	         }
+
+
+
+	        System.out.println("切断完了");
+
+
+	        }catch(SQLException e){
+	        	e.printStackTrace();
+
+	        }
+		return user_no;
+
+	}
 }
+

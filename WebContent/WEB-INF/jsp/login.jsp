@@ -18,5 +18,8 @@
 	<form method = 'post' action = 'crateacountform'>
 		<input type = 'submit' value ="アカウント作成はこちらです">
 	</form>
+	<form method = 'post' action = 'passwordreminderpage'>
+		<input type = 'submit' value ="パスワードを忘れた方はこちら">
+	</form>
 </body>
 </html>

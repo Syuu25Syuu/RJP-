@@ -8,17 +8,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class GetUsersId {
-	public static String getUserId(String USERS_SERIALNO) {
+	public static String getUserId(String USERS_SERIALNO,Connection cn) {
 		String name = "";
 		try{
-			Connection cn = new OracleConnector().getCn();
 
-	        //自動コミットをOFFにする
-	        cn.setAutoCommit(false);
-
-	        System.out.println("接続完了");
-
-	        //SQL文を変数に格納する
 
 	        String sql="select USERS_ID from users where USERS_SERIALNO = '"+USERS_SERIALNO+"'";
 
@@ -32,14 +25,6 @@ public class GetUsersId {
 	        	name = rs.getString(1);
 	         }
 
-	        //トランザクションをコミットする
-	        cn.commit();
-
-	        //ステートメントをクローズする
-	        st.close();
-
-	        //RDBMSから切断する
-	        cn.close();
 
 	        System.out.println("切断完了");
 

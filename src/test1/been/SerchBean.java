@@ -12,6 +12,7 @@ public class SerchBean implements Serializable{
 	private String senduserno;
 	private String receiveuserno;
 	private String dmtime;
+	private String usericon;
 
 
 	public String getCheck() {
@@ -75,5 +76,13 @@ public class SerchBean implements Serializable{
 
 	public void setDmTime(String dmtime) {
 		this.dmtime = dmtime;
+	}
+
+	public String getUserIcon() {
+		return usericon;
+	}
+
+	public void setUserIcon(String usericon) {
+		this.usericon = usericon;
 	}
 }

@@ -14,10 +14,33 @@ public class MyTweetView_Been implements Serializable{
 	private String tweetId;
 	private String likecounter;
 	private String checklike;
+	private String checkFollow;
 	private String countRT;
 
 	private String rtuser;
 
+	private String profUserName;
+
+	private String profUserId;
+
+	private String countFollowers;
+
+	private String countFollows;
+
+	private String profile;
+
+	public String getCountFollowers() {
+		return countFollowers;
+	}
+	public void setCountFollowers(String countFollowers) {
+		this.countFollowers = countFollowers;
+	}
+	public String getCountFollows() {
+		return countFollows;
+	}
+	public void setCountFollows(String countFollows) {
+		this.countFollows = countFollows;
+	}
 	public String getRtuser() {
 		return rtuser;
 	}
@@ -96,5 +119,29 @@ public class MyTweetView_Been implements Serializable{
 
 	public void setSerialuserid(String serialuserid) {
 		this.serialuserid = serialuserid;
+	}
+	public String getProfUserName() {
+		return profUserName;
+	}
+	public void setProfUserName(String profUserName) {
+		this.profUserName = profUserName;
+	}
+	public String getProfUserId() {
+		return profUserId;
+	}
+	public void setProfUserId(String profUserId) {
+		this.profUserId = profUserId;
+	}
+	public String getCheckFollow() {
+		return checkFollow;
+	}
+	public void setCheckFollow(String checkFollow) {
+		this.checkFollow = checkFollow;
+	}
+	public String getProfile() {
+		return profile;
+	}
+	public void setProfile(String profile) {
+		this.profile = profile;
 	}
 }

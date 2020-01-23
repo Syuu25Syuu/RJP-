@@ -4,7 +4,13 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.TreeMap;
 
 import test1.been.MyTweetView_Been;
 
@@ -19,12 +25,21 @@ public class ComebackHome {
 	        //自動コミットをOFFにする
 	        cn.setAutoCommit(false);
 
+	        String myName = GetUsersName.getUserName(sessionToken, cn);
+
+	        System.out.println("myNameは"+myName);
+
+
 	        //SQL文を変数に格納する
-	        String sql="select USERS_SERIALNO,USERS_NAME,Users_id,tweets.TWEETS_SERIALNO,tweets.TWEETS_CONTENT from USERS " +
-	        		"join tweets on USERS_SERIALNO = tweets.USERS_NO " +
-	        		"where users_serialno = '"+sessionToken+"'" +
-	        		"or (USERS_NO) IN  (select FOLLOWED_NO from follows where users_no = '"+sessionToken+"') " +
-	        		"order by tweets.TWEETS_DATE desc";
+	        String sql="select TWEETS.TWEETS_DATE,rt.RT_TIME,USERS_SERIALNO,USERS_NAME,tweets.TWEETS_SERIALNO,tweets.USERS_NO,tweets.TWEETS_CONTENT from users "+
+	        		"RIGHT outer JOIN RT  rt on  rt.RT_USER = USERS.USERS_SERIALNO "+
+	        		"RIGHT OUTER JOIN TWEETS on  rt.RT_TWEET = TWEETS.TWEETS_SERIALNO "+
+	        		"where users_serialno = '"+sessionToken+"' "+
+	        		"or (USERS_NO) IN  (select FOLLOWED_NO from follows where users_no = '"+sessionToken+"') "+
+	        		"or tweets.USERS_NO = '"+sessionToken+"'" +
+	        		"or rt.RT_USER = '"+sessionToken+"' "+
+	        		"or (rt.RT_USER)IN (select FOLLOWED_NO from follows where users_no = '"+sessionToken+"') "+
+	        		"order by rt.RT_TIME desc";
 
 	        //Statementインターフェイスを実装するクラスの
 	        //インスタンスを取得する
@@ -32,199 +47,157 @@ public class ComebackHome {
 
 	        ResultSet rs = st.executeQuery(sql);
 
+            TreeMap<Date,String[]> map = new TreeMap<Date,String[]>(new Comparator<Date>() {
+    			public int compare(String k1, String k2) {
+    				return k2.compareTo(k1) ;
+    			}
+
+				@Override
+				public int compare(Date o1, Date o2) {
+					// TODO 自動生成されたメソッド・スタブ
+					return o2.compareTo(o1);
+				}
+    		});
+
+            LinkedHashMap <String,String[]> tweetMap = new LinkedHashMap <String,String[]>();
+
 	        while(rs.next()){
 	        	MyTweetView_Been b = new MyTweetView_Been();
-	        	String user_sirial_no = rs.getString(1);
-	        	String users_name = rs.getString(2);
-	        	String users_id = rs.getString(3);
-	        	String tweets_no = rs.getString(4);
-	        	String tweets_content = rs.getString(5);
 
-	        	String checklike = CheckLikeUser.checkLikeUser(sessionToken, tweets_no, cn);
+	        	String tweetTimeString = rs.getString(1);
 
-	        	b.setName(users_name);
-	        	b.setId(users_id);
-	        	b.setSerialuserid(user_sirial_no);
-	        	b.setTweetId(tweets_no);
-	        	b.setTweet(tweets_content);
-	        	b.setChecklike(checklike);
-	        	list.add(b);
+
+
+	        	String rtTimeString = rs.getString(2);
+
+	        	System.out.println(rtTimeString);
+
+	        	SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.S");
+	            Date tweetDate = sdFormat.parse(tweetTimeString);
+
+
+
+
+	            String[] aStrings = new String[9];
+
+	            String users_Serialno = rs.getString(6);	//そのツイートをした人のユーザーシリアルナンバー
+	            String tweet_Serialno = rs.getString(5);
+
+	            aStrings[0] = tweet_Serialno;	//ツイートシリアルナンバー
+	            aStrings[1] = users_Serialno;	//そのツイートをした人のユーザーシリアルナンバー
+	            aStrings[2] = rs.getString(7);	//ツイート本文
+	            aStrings[3] = CheckLikeUser.checkLikeUser(sessionToken, tweet_Serialno,cn);
+
+	            aStrings[4] = CheckRTUser.checkRTUser(sessionToken, tweet_Serialno, cn);
+
+	            String tweetUserName = GetUsersName.getUserName(users_Serialno, cn);
+
+	            aStrings[5] = tweetUserName;
+
+	            aStrings[6] = GetUsersId.getUserId(users_Serialno, cn);	//そのツイートをした人のuser_id
+
+
+
+
+
+	            if(rtTimeString!=null) {
+	            	Date rtDate = sdFormat.parse(rtTimeString);
+	            	String rtUser = rs.getString(4);	//tweetをRTしたユーザー名
+	            	//System.out.println("ここは生きていますか？"+rtUser);	//生きてた
+	            	aStrings[7] = rtUser;
+	            	if (aStrings[1].equals(sessionToken)) {
+
+	            		if(aStrings[7].equals(myName)) {
+
+
+	    	            	map.put(rtDate,aStrings);
+	    	            	System.out.println("ここは生きていますか？"+rtUser);
+	            		}else {
+
+	            		}
+					}else {
+		            	aStrings[7] = rtUser;
+
+		            	map.put(rtDate,aStrings);
+					}
+
+	            }else {
+	            	map.put(tweetDate,aStrings);
+	            }
 
 	         }
 
-	        //トランザクションをコミットする
+	        for (Date key : map.keySet()) {
+				String tweetID = (String)map.get(key)[0];
+				System.out.println("ここの"+tweetID);
+
+				String[] newlistStrings = map.get(key);
+
+				if(tweetMap.containsKey(tweetID)) {		//重複したらmapに含めない
+
+				}else {
+					tweetMap.put(tweetID, newlistStrings);
+				}
+
+			}
+
+	        for(String key:tweetMap.keySet()) {
+
+	        	MyTweetView_Been bean = new MyTweetView_Been();
+
+	        	String userName = (String)tweetMap.get(key)[5];
+
+	        	System.out.println("こんにちはuserNameです"+userName);
+
+	        	String userId = (String)tweetMap.get(key)[6];
+
+	        	String tweetSerialNo = key;
+
+	        	String tweetValue = (String)tweetMap.get(key)[2];
+
+	        	String userSerialNo = (String)tweetMap.get(key)[1];
+
+	        	String checkLike = (String)tweetMap.get(key)[3];
+
+	        	System.out.println("checklikeだよ"+checkLike);
+
+	        	String checkRT = (String)tweetMap.get(key)[4];
+
+	        	String rtUserName = (String)tweetMap.get(key)[7];
 
 
-	        //rs.close();
+	        	if(rtUserName != null) {
+	        		if(rtUserName.equals(myName)){
+	        			rtUserName = "リツイート済み";
+	        		}else {
+	        			rtUserName += "さんがRTしました";
+	        		}
 
-	        //ステートメントをクローズする
-	        //st.close();
+	        	}
 
-	        //RDBMSから切断する
-	        //cn.close();
+	        	bean.setName(userName);
+	        	bean.setId(userId);
+	        	bean.setTweetId(tweetSerialNo);
+	        	bean.setTweet(tweetValue);
+	        	bean.setChecklike(checkLike);
+	        	bean.setCheckRT(checkRT);
+	        	bean.setSerialuserid(userSerialNo);
+	        	bean.setRtuser(rtUserName);
+	        	list.add(bean);
 
-	        //System.out.println("切断完了");
-
-
-	        }catch(SQLException e){
-	        	e.printStackTrace();
 	        }
 
 
 
-	/*
-		TreeMap<String, String[]> tweetTreeMap = new TreeMap<String, String[]>();
 
-
-		//フォローしてる人のRTを格納する処理
-		ArrayList myFollowes = getMyFollowUser.getMyFollowUsers(sessionToken);	//自分がフォローしているユーザーのリストをゲット
-		Iterator iterator = myFollowes.iterator();
-		while (iterator.hasNext()) {
-			String followUser_id = (String) iterator.next();
-			System.out.println("21行目"+followUser_id+"です");
-			LinkedHashMap followtweetmap = ViewRT_Tweet.viewRT_Tweet(followUser_id);	//自分の全ツイートのTWEETS_SERIALNOを取得
-
-			Iterator followeriterator = followtweetmap.keySet().iterator();	//TWEETS_SERIALNOをキーにする
-			while(followeriterator.hasNext()) {
-				String tweetID = (String)followeriterator.next();	//tweet_id
-
-				boolean tweetflg = tweetTreeMap.containsKey(tweetID);
-				if(tweetflg == false) {
-					String user_serialno = GetUserNo_fromTweet.GetUserNo(tweetID);
-					System.out.println("31行目"+user_serialno);
-					String user_id = GetUsersId.getUserId(user_serialno);
-					String user_name = GetUsersName.getUserName(user_serialno);
-					//System.out.println("user_nameは"+user_name);
-
-					String valueTweet = GetTweetContent.getTweetContent(tweetID);
-					String countLike = CountLikeTweet.countLikeTweet(tweetID);	//そのツイートのいいね数を表示
-
-					String checklike = CheckLikeUser.checkLikeUser(sessionToken,tweetID);	//そのツイートにいいねをしているかの判定
-
-					String checkRT = CheckRTUser.checkRTUser(sessionToken,tweetID);		//そのツイートにＲＴしているかの判定
-					String countRT = CountRT.countRT(tweetID);	//そのツイートのＲＴ数を表示
-					String RTUser = user_name + "さんがRTしました";
-
-					//Beanにセット
-
-					String[] myTweetsArray = {user_serialno,user_id,user_name,valueTweet,checklike,countLike,checkRT,countRT,RTUser};
-
-
-
-					tweetTreeMap.put(tweetID, myTweetsArray);	//自分のツイートをすべて格納
-
-				}
+	        }catch(SQLException e){
+	        	e.printStackTrace();
+	        }catch (ParseException e) {
+				// TODO: handle exception
 			}
 
-			//自分のRTを格納
-
-			LinkedHashMap myRTtweetmap = ViewRT_Tweet.viewRT_Tweet(sessionToken);	//自分の全ツイートのTWEETS_SERIALNOを取得
-
-			Iterator myRTiterator = myRTtweetmap.keySet().iterator();	//TWEETS_SERIALNOをキーにする
-			while(myRTiterator.hasNext()) {
-				String tweetID = (String)myRTiterator.next();	//tweet_id
-
-				boolean tweetflg = tweetTreeMap.containsKey(tweetID);
-				if(tweetflg == false) {
-					String user_serialno = GetUserNo_fromTweet.GetUserNo(tweetID);
-					String user_id = GetUsersId.getUserId(user_serialno);
-					String user_name = GetUsersName.getUserName(user_serialno);
-					//System.out.println("user_nameは"+user_name);
-
-					String valueTweet = (String)myRTtweetmap.get(tweetID); //tweet内容
-					String countLike = CountLikeTweet.countLikeTweet(tweetID);	//そのツイートのいいね数を表示
-
-					String checklike = CheckLikeUser.checkLikeUser(sessionToken,tweetID);	//そのツイートにいいねをしているかの判定
-
-					String checkRT = CheckRTUser.checkRTUser(sessionToken,tweetID);		//そのツイートにＲＴしているかの判定
-					String countRT = CountRT.countRT(tweetID);	//そのツイートのＲＴ数を表示
-					String RTUser = "RT済み";
-
-					//Beanにセット
-
-					String[] myTweetsArray = {user_serialno,user_id,user_name,valueTweet,checklike,countLike,checkRT,countRT,RTUser};
-
-
-
-					tweetTreeMap.put(tweetID, myTweetsArray);	//自分のツイートをすべて格納
-
-				}
-			}
-
-		}
-
-		//自分と自分のフォロワーのツイートを表示
-
-		LinkedHashMap myTweetmap = ViewMy_All_Tweet.viewMy_Tweet(sessionToken);	//自分の全ツイートのTWEETS_SERIALNOを取得
-
-
-
-		Iterator myiterator = myTweetmap.keySet().iterator();	//TWEETS_SERIALNOをキーにする
-		while(myiterator.hasNext()) {
-			MyTweetView_Been p = new MyTweetView_Been();	//BeanをNew
-
-
-			String tweetID = (String)myiterator.next();	//tweet_id
-			System.out.println("105行目"+tweetID);
-
-			boolean tweetflg = tweetTreeMap.containsKey(tweetID);
-			if(tweetflg == false) {
-
-				String user_serialno = GetUserNo_fromTweet.GetUserNo(tweetID);
-				String user_id = GetUsersId.getUserId(user_serialno);
-				String user_name = GetUsersName.getUserName(user_serialno);
-				//System.out.println("user_nameは"+user_name);
-
-				String valueTweet = (String)myTweetmap.get(tweetID); //tweet内容
-				String countLike = CountLikeTweet.countLikeTweet(tweetID);	//そのツイートのいいね数を表示
-
-				String checklike = CheckLikeUser.checkLikeUser(sessionToken,tweetID);	//そのツイートにいいねをしているかの判定
-
-				String checkRT = CheckRTUser.checkRTUser(sessionToken,tweetID);		//そのツイートにＲＴしているかの判定
-				String countRT = CountRT.countRT(tweetID);	//そのツイートのＲＴ数を表示
-
-				//Beanにセット
-
-				String[] myTweetsArray = {user_serialno,user_id,user_name,valueTweet,checklike,countLike,checkRT,countRT,""};
-
-				tweetTreeMap.put(tweetID, myTweetsArray);	//自分のツイートをすべて格納
-
-			}
-
-		}
-
-		Iterator setIterator = tweetTreeMap.keySet().iterator();
-
-		while(setIterator.hasNext()) {
-			String tweetID = (String)setIterator.next();
-			System.out.println("137行目"+tweetID);
-
-			String[] beanStrings = (String[])tweetTreeMap.get(tweetID);
-
-			MyTweetView_Been p = new MyTweetView_Been();	//BeanをNew
-
-			p.setSerialuserid(beanStrings[0]);
-			p.setId(beanStrings[1]);
-
-			p.setName(beanStrings[2]);
-
-			System.out.println(beanStrings[2]);
-
-
-			p.setTweet(beanStrings[3]);
-
-			p.setChecklike(beanStrings[4]);
-			p.setLikecounter(beanStrings[5]);
-			p.setCheckRT(beanStrings[6]);
-			p.setCheckRT(beanStrings[7]);
-
-			p.setRtuser(beanStrings[8]);
-
-			list.add(p);
-
-		}
-		*/
 
 		return list;
+
 	}
 }

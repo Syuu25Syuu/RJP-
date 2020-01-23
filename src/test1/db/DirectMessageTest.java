@@ -19,7 +19,7 @@ public class DirectMessageTest{
 	        System.out.println("接続完了");
 
 	        //SQL文を変数に格納する
-	        String sql="SELECT USERS_ID,USERS_NAME,dm.DM_CONTENT,dm.DM_SENDUSER,dm.DM_RECEIVEUSER,DM.DM_TIME FROM USERS users LEFT OUTER JOIN DM dm ON users.USERS_SERIALNO=dm.DM_SENDUSER WHERE (dm.DM_SENDUSER='"+SendUserNo+"' AND dm.DM_RECEIVEUSER='"+ReceiveUserNo+"') OR (dm.DM_SENDUSER='"+ReceiveUserNo+"' AND dm.DM_RECEIVEUSER='"+SendUserNo+"') ORDER BY DM.DM_TIME";
+	        String sql="SELECT USERS_ID,USERS_NAME,dm.DM_CONTENT,dm.DM_SENDUSER,dm.DM_RECEIVEUSER,DM.DM_TIME,users.USERS_PROF_IMAGE FROM USERS users LEFT OUTER JOIN DM dm ON users.USERS_SERIALNO=dm.DM_SENDUSER WHERE (dm.DM_SENDUSER='"+SendUserNo+"' AND dm.DM_RECEIVEUSER='"+ReceiveUserNo+"') OR (dm.DM_SENDUSER='"+ReceiveUserNo+"' AND dm.DM_RECEIVEUSER='"+SendUserNo+"') ORDER BY DM.DM_TIME";
 
 	        //Statementインターフェイスを実装するクラスの
 	        //インスタンスを取得する
@@ -34,6 +34,7 @@ public class DirectMessageTest{
 	        	String senduserno=rs.getString("DM_SENDUSER");
 	        	String receiveuserno=rs.getString("DM_RECEIVEUSER");
 	        	String dmtime=rs.getString("DM_TIME");
+	        	String icon=rs.getString("USERS_PROF_IMAGE");
 
 	        	System.out.println("ユーザID:"+id);
 	        	System.out.println("ユーザ名:"+name);
@@ -41,6 +42,7 @@ public class DirectMessageTest{
 	        	System.out.println("送信者No:"+senduserno);
 	        	System.out.println("受信者No:"+receiveuserno);
 	        	System.out.println("送信時間:"+dmtime);
+	        	System.out.println("アイコン画像のパス:"+icon);
 
 	        	ArrayList<String> childdata=new ArrayList<String>();
 
@@ -50,6 +52,7 @@ public class DirectMessageTest{
 	        	childdata.add(senduserno);
 	        	childdata.add(receiveuserno);
 	        	childdata.add(dmtime);
+	        	childdata.add(icon);
 
 	        	data.add(childdata);
 
