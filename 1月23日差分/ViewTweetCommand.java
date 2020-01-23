@@ -2,17 +2,19 @@
 
 package test1;
 
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 import test1.been.MyTweetView_Been;
 import test1.db.CheckLikeUser;
-import test1.db.CountLikeTweet;
+import test1.db.CheckRTUser;
 import test1.db.GetChildrenTweetSerialNo;
 import test1.db.GetTweetContent;
 import test1.db.GetUserNo_fromTweet;
 import test1.db.GetUsersId;
 import test1.db.GetUsersName;
+import test1.db.OracleConnector;
 
 public class ViewTweetCommand extends AbstractCommand {
 
@@ -25,22 +27,26 @@ public class ViewTweetCommand extends AbstractCommand {
 
 		String replyid = reqc.getParameter("tweet_id")[0];		//返信先のツイートID
 
+		Connection cn = new OracleConnector().getCn();
+
 		/*ここからリプライを表示する処理*/
 
 		ArrayList list = new ArrayList<>();
 
-
 		String parentSerialUserNo = GetUserNo_fromTweet.GetUserNo(replyid);	//返信先のユーザーシリアルナンバーを取得
 
-		String parentUserName = GetUsersName.getUserName(parentSerialUserNo);
+		String parentUserName = GetUsersName.getUserName(parentSerialUserNo, cn);
 
-		String parentUserId = GetUsersId.getUserId(parentSerialUserNo);
+		String parentUserId = GetUsersId.getUserId(parentSerialUserNo,cn);
 
 		String parentTweetContent = GetTweetContent.getTweetContent(replyid);
 
-		String parentLikeCheck = CheckLikeUser.checkLikeUser(sessionToken, replyid);
+		String parentLikeCheck = CheckLikeUser.checkLikeUser(sessionToken, replyid, cn);
 
-		String parentLikeCount = CountLikeTweet.countLikeTweet(replyid);
+		String parentRTCheck = CheckRTUser.checkRTUser(sessionToken, replyid, cn);	//親のツイートがRTされているかのチェック
+
+
+
 
 		System.out.println("-------------serialuserid-----------------は"+parentSerialUserNo);
 
@@ -63,15 +69,15 @@ public class ViewTweetCommand extends AbstractCommand {
 
 			String childrenSerialUserNo = GetUserNo_fromTweet.GetUserNo(childTweetId);
 
-			String childrenUserName = GetUsersName.getUserName(childrenSerialUserNo);
+			String childrenUserName = GetUsersName.getUserName(childrenSerialUserNo,cn);
 
-			String childrenUserId = GetUsersId.getUserId(childrenSerialUserNo);
+			String childrenUserId = GetUsersId.getUserId(childrenSerialUserNo,cn);
 
 			String childrenTweetContent = GetTweetContent.getTweetContent(childTweetId);
 
-			String childrenCheckLike = CheckLikeUser.checkLikeUser(sessionToken, childTweetId);
+			String childrenCheckLike = CheckLikeUser.checkLikeUser(sessionToken,childTweetId, cn);
 
-			String childrenLikeCount = CountLikeTweet.countLikeTweet(childTweetId);
+			String childrenCheckRT = CheckRTUser.checkRTUser(sessionToken, childTweetId, cn);
 
 			//String tweetID = GetTweets_Serialno.getTweets_Serialno(sessionToken);
 
@@ -86,7 +92,7 @@ public class ViewTweetCommand extends AbstractCommand {
 				b.setSessionToken(sessionToken);
 				b.setTweet(parentTweetContent);
 				b.setTweetId(replyid);
-				b.setLikecounter(parentLikeCount);
+				b.setCheckRT(parentRTCheck);
 				b.setChecklike(parentLikeCheck);
 				list.add(b);
 				flg = false;
@@ -100,7 +106,8 @@ public class ViewTweetCommand extends AbstractCommand {
 				b.setId(childrenUserId);
 				b.setTweet(childrenTweetContent);
 				b.setChecklike(childrenCheckLike);
-				b.setLikecounter(childrenLikeCount);
+				b.setCheckRT(parentRTCheck);
+				b.setChecklike(parentLikeCheck);
 				b.setTweetId(childTweetId);
 				//b.setParentSerialUserNo(parentSerialUserNo);
 				//b.setParentUserId(parentUserId);
@@ -113,8 +120,8 @@ public class ViewTweetCommand extends AbstractCommand {
 				b.setName(childrenUserName);
 				b.setId(childrenUserId);
 				b.setTweet(childrenTweetContent);
-				b.setChecklike(childrenCheckLike);
-				b.setLikecounter(childrenLikeCount);
+				b.setCheckRT(parentRTCheck);
+				b.setChecklike(parentLikeCheck);
 				b.setTweetId(childTweetId);
 				//b.setParentSerialUserNo(parentSerialUserNo);
 				//b.setParentUserId("@"+parentUserId);
@@ -135,7 +142,7 @@ public class ViewTweetCommand extends AbstractCommand {
 			b.setSessionToken(sessionToken);
 			b.setTweet(parentTweetContent);
 			b.setTweetId(replyid);
-			b.setLikecounter(parentLikeCount);
+			b.setCheckRT(parentRTCheck);
 			b.setChecklike(parentLikeCheck);
 			list.add(b);
 			flg = false;
@@ -152,3 +159,4 @@ public class ViewTweetCommand extends AbstractCommand {
 	}
 
 }
+
