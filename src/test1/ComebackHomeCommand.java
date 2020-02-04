@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import test1.db.ComebackHome;
+import test1.db.GetHeader;
 import test1.db.OracleConnector;
 
 public class ComebackHomeCommand extends AbstractCommand {
@@ -20,14 +21,20 @@ public class ComebackHomeCommand extends AbstractCommand {
 
 		ArrayList list = new ArrayList();
 
+		ArrayList header = new ArrayList();
+
 		try {
 			list = ComebackHome.comeBackHome(sessionToken, cn);
+
+			header = GetHeader.getHeader(sessionToken,cn);
+
 
 			cn.close();
 		}catch(Exception e) {
 				e.printStackTrace();
 		}
 
+		reqc.setResult(header);
         resc.setResult(list);
         resc.setTarget("home");
 

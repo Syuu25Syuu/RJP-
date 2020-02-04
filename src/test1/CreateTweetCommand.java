@@ -1,11 +1,11 @@
 package test1;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 import test1.db.ComebackHome;
 import test1.db.CreateTweet;
+import test1.db.GetHeader;
 import test1.db.OracleConnector;
 
 public class CreateTweetCommand extends AbstractCommand {
@@ -24,17 +24,24 @@ public class CreateTweetCommand extends AbstractCommand {
 
 		CreateTweet.createTweet(sessionToken,tweet,cn); //return password
 
-		ArrayList list = ComebackHome.comeBackHome(sessionToken,cn);
+		ArrayList list = new ArrayList();
+		ArrayList header = new ArrayList();
 
 		try {
+			list = ComebackHome.comeBackHome(sessionToken, cn);
+
+			header = GetHeader.getHeader(sessionToken,cn);
+
+
 			cn.close();
-		} catch (SQLException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
+		}catch(Exception e) {
+				e.printStackTrace();
 		}
 
+		reqc.setResult(header);
         resc.setResult(list);
         resc.setTarget("home");
+
 
 
 		return resc;

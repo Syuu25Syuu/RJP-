@@ -25,6 +25,8 @@ public class LikeAjaxServlet extends HttpServlet{
 		String sessionToken = req.getParameter("sessionToken");
 		String tweetID = req.getParameter("tweetID");
 
+		tweetID = tweetID.replace("like","");
+
 		System.out.println("sessionTokenは"+sessionToken);
 		System.out.println("tweetIDは"+tweetID);
 		//follow()の引数に取得したパラメータを入れる

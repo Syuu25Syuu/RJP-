@@ -18,6 +18,8 @@ public class GoChangeProfileCommand extends AbstractCommand {
 		ResponseContext resc = new WebResponseContext();
 
 		String  sessionToken = reqc.getParameter("user_session")[0];	//sessionTokenであるUSERS_SERIALNOを取得
+		String  img = reqc.getParameter("image_path")[0];
+
 		Connection cn = new OracleConnector().getCn();
 
 		ArrayList list = new ArrayList();
@@ -33,6 +35,8 @@ public class GoChangeProfileCommand extends AbstractCommand {
 			bean.setName(name);
 
 			bean.setProfile(profString);
+
+			bean.setProfImage(img);
 
 			System.out.println("こんにちはこんばんは"+name);
 

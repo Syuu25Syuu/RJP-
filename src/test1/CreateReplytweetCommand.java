@@ -1,17 +1,19 @@
 package test1;
 
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 import test1.been.MyTweetView_Been;
 import test1.db.CheckLikeUser;
-import test1.db.CountLikeTweet;
+import test1.db.CheckRTUser;
 import test1.db.CreateReplyTweet;
 import test1.db.GetChildrenTweetSerialNo;
 import test1.db.GetTweetContent;
 import test1.db.GetUserNo_fromTweet;
 import test1.db.GetUsersId;
 import test1.db.GetUsersName;
+import test1.db.OracleConnector;
 
 public class CreateReplytweetCommand extends AbstractCommand {
 
@@ -26,6 +28,7 @@ public class CreateReplytweetCommand extends AbstractCommand {
 
 		String replycontent = reqc.getParameter("replycontent")[0];	//返信の内容
 
+		Connection cn = new OracleConnector().getCn();
 
 
 		CreateReplyTweet.createReplyTweet(sessionToken, replyid, replycontent);		//ツイートにリプライできる
@@ -37,15 +40,15 @@ public class CreateReplytweetCommand extends AbstractCommand {
 
 		String parentSerialUserNo = GetUserNo_fromTweet.GetUserNo(replyid);	//返信先のユーザーシリアルナンバーを取得
 
-		String parentUserName = GetUsersName.getUserName(parentSerialUserNo);
+		String parentUserName = GetUsersName.getUserName(parentSerialUserNo,cn);
 
-		String parentUserId = GetUsersId.getUserId(parentSerialUserNo);
+		String parentUserId = GetUsersId.getUserId(parentSerialUserNo,cn);
 
 		String parentTweetContent = GetTweetContent.getTweetContent(replyid);
 
-		String parentLikeCheck = CheckLikeUser.checkLikeUser(sessionToken, replyid);
+		String parentLikeCheck = CheckLikeUser.checkLikeUser(sessionToken, replyid, cn);
 
-		String parentLikeCount = CountLikeTweet.countLikeTweet(replyid);
+		String parentRTCheck = CheckRTUser.checkRTUser(sessionToken, replyid, cn);	//親のツイートがRTされているかのチェック
 
 		System.out.println("-------------serialuserid-----------------は"+parentSerialUserNo);
 
@@ -68,26 +71,29 @@ public class CreateReplytweetCommand extends AbstractCommand {
 
 			String childrenSerialUserNo = GetUserNo_fromTweet.GetUserNo(childTweetId);
 
-			String childrenUserName = GetUsersName.getUserName(childrenSerialUserNo);
+			String childrenUserName = GetUsersName.getUserName(childrenSerialUserNo,cn);
 
-			String childrenUserId = GetUsersId.getUserId(childrenSerialUserNo);
+			String childrenUserId = GetUsersId.getUserId(childrenSerialUserNo,cn);
 
 			String childrenTweetContent = GetTweetContent.getTweetContent(childTweetId);
 
-			String childrenCheckLike = CheckLikeUser.checkLikeUser(sessionToken, childTweetId);
+			String childrenCheckLike = CheckLikeUser.checkLikeUser(sessionToken,childTweetId, cn);
 
-			String childrenLikeCount = CountLikeTweet.countLikeTweet(childTweetId);
+			String childrenCheckRT = CheckRTUser.checkRTUser(sessionToken, childTweetId, cn);
+
+
 
 			b = new MyTweetView_Been();
 
 			if(flg==true) {
+				//親ツイートの格納
 				b.setSerialuserid(parentSerialUserNo);
 				b.setName(parentUserName);
 				b.setId(parentUserId);
 				b.setSessionToken(sessionToken);
 				b.setTweet(parentTweetContent);
 				b.setTweetId(replyid);
-				b.setLikecounter(parentLikeCount);
+				b.setCheckRT(parentRTCheck);
 				b.setChecklike(parentLikeCheck);
 				list.add(b);
 
@@ -102,8 +108,9 @@ public class CreateReplytweetCommand extends AbstractCommand {
 				b.setId(childrenUserId);
 				b.setTweet(childrenTweetContent);
 				b.setChecklike(childrenCheckLike);
-				b.setLikecounter(childrenLikeCount);
 				b.setTweetId(childTweetId);
+				b.setChecklike(childrenCheckLike);
+				b.setCheckRT(childrenCheckRT);
 				//b.setParentSerialUserNo(parentSerialUserNo);
 				//b.setParentUserId(parentUserId);
 
@@ -115,8 +122,9 @@ public class CreateReplytweetCommand extends AbstractCommand {
 				b.setId(childrenUserId);
 				b.setTweet(childrenTweetContent);
 				b.setChecklike(childrenCheckLike);
-				b.setLikecounter(childrenLikeCount);
 				b.setTweetId(childTweetId);
+				b.setChecklike(childrenCheckLike);
+				b.setCheckRT(childrenCheckRT);
 				//b.setParentSerialUserNo(parentSerialUserNo);
 				//b.setParentUserId("@"+parentUserId);
 				System.out.println("if文には入ってないよ");

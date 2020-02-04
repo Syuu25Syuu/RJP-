@@ -26,6 +26,11 @@ public class ComebackHome {
 	        cn.setAutoCommit(false);
 
 	        String myName = GetUsersName.getUserName(sessionToken, cn);
+	        String profName = GetUsersName.getUserName(sessionToken, cn);	//プロフィールのユーザー名
+	        String profId = GetUsersId.getUserId(sessionToken, cn);	//プロフィールのユーザーID
+	        String prof = GetProfile.getProfile(sessionToken, cn);
+	              /*1月23日追加*/
+	        String profImage = GetUSERS_PROF_IMAGE.getProfile(sessionToken, cn);
 
 	        System.out.println("myNameは"+myName);
 
@@ -96,6 +101,8 @@ public class ComebackHome {
 
 	            aStrings[6] = GetUsersId.getUserId(users_Serialno, cn);	//そのツイートをした人のuser_id
 
+	            aStrings[7] = tweetTimeString;
+
 
 
 
@@ -104,10 +111,10 @@ public class ComebackHome {
 	            	Date rtDate = sdFormat.parse(rtTimeString);
 	            	String rtUser = rs.getString(4);	//tweetをRTしたユーザー名
 	            	//System.out.println("ここは生きていますか？"+rtUser);	//生きてた
-	            	aStrings[7] = rtUser;
+	            	aStrings[8] = rtUser;
 	            	if (aStrings[1].equals(sessionToken)) {
 
-	            		if(aStrings[7].equals(myName)) {
+	            		if(aStrings[8].equals(myName)) {
 
 
 	    	            	map.put(rtDate,aStrings);
@@ -116,7 +123,7 @@ public class ComebackHome {
 
 	            		}
 					}else {
-		            	aStrings[7] = rtUser;
+		            	aStrings[8] = rtUser;
 
 		            	map.put(rtDate,aStrings);
 					}
@@ -126,6 +133,7 @@ public class ComebackHome {
 	            }
 
 	         }
+
 
 	        for (Date key : map.keySet()) {
 				String tweetID = (String)map.get(key)[0];
@@ -163,7 +171,11 @@ public class ComebackHome {
 
 	        	String checkRT = (String)tweetMap.get(key)[4];
 
-	        	String rtUserName = (String)tweetMap.get(key)[7];
+	        	String tweetDate = (String)tweetMap.get(key)[7];
+
+	        	String rtUserName = (String)tweetMap.get(key)[8];
+
+	        	String icon = GetUSERS_PROF_IMAGE.getProfile(userSerialNo, cn);
 
 
 	        	if(rtUserName != null) {
@@ -183,6 +195,9 @@ public class ComebackHome {
 	        	bean.setCheckRT(checkRT);
 	        	bean.setSerialuserid(userSerialNo);
 	        	bean.setRtuser(rtUserName);
+	        	bean.setTweetdate(tweetDate);
+	        	bean.setIcon(icon);
+	        	bean.setProfImage(profImage);
 	        	list.add(bean);
 
 	        }

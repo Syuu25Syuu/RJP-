@@ -24,6 +24,8 @@ public class FollowAjaxServlet extends HttpServlet{
 		//フォローされた人のシリアルナンバー(followedNo)を取得
 		String sessionToken = req.getParameter("userNo");
 		String  followedNo = req.getParameter("followedNo");
+		
+		
 		//follow()の引数に取得したパラメータを入れる
 		//取得したパラメータをDBに格納するメソッド(Follows表に)
 

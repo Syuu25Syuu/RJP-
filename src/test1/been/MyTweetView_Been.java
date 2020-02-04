@@ -29,6 +29,12 @@ public class MyTweetView_Been implements Serializable{
 
 	private String profile;
 
+	private String followbtn;
+
+	private String profImage;
+
+	private String icon;
+
 	public String getCountFollowers() {
 		return countFollowers;
 	}
@@ -143,5 +149,29 @@ public class MyTweetView_Been implements Serializable{
 	}
 	public void setProfile(String profile) {
 		this.profile = profile;
+	}
+	public String getFollowbtn() {
+		return followbtn;
+	}
+	public void setFollowbtn(String followbtn) {
+		this.followbtn = followbtn;
+	}
+	public String getProfImage() {
+		return profImage;
+	}
+	public void setProfImage(String profImage) {
+		this.profImage = profImage;
+	}
+	public String getTweetdate() {
+		return tweetdate;
+	}
+	public void setTweetdate(String tweetdate) {
+		this.tweetdate = tweetdate;
+	}
+	public String getIcon() {
+		return icon;
+	}
+	public void setIcon(String icon) {
+		this.icon = icon;
 	}
 }

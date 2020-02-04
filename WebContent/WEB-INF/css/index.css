@@ -18,17 +18,17 @@ div.tweetdata{
   border: solid 2px #fff;
 }
 
-/*プロフィールで使う予定で未定
+/*プロフィールで使う予定で未定*/
 .pro{
   border-radius: 50%;
-    height: 100px;
-    width: 100px;
+    height: 50px;
+    width: 50px;
     position: relative;
 }
 div.main div.tweetdata img.pro{
     position: absolute;
 }
-*/
+
 /*テキストボックスのデザイン*/
 .box{
   border: 1px solid #15202B;

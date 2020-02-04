@@ -49,24 +49,43 @@
 
 	<c:forEach var="data" items="${result}" end = "0">
 
+
+	<!-- プロフィールのツイート切り替え用のform -->
+
 	<form id = "likeform" method = "post" action = "showproflike">
 			<input type="hidden" name = "sessionToken" type = "text" value="${sessionScope.token.sessionToken}">
 	 		<input type="hidden" name = "serialuserid" type = "text" value="${data.serialuserid}">
+
 	</form>
 
 	<form id = "tweetform" method = 'post' action = 'showprofiles' >
 		<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">
 		<input type="hidden" name = "user_id" type = "text" value="${data.serialuserid}">
+		<input type="hidden" name = "image_path" id = "image_path" type = "text" value="${data.profImage}">
+	</form>
+
+	<form id = "profchangeform" method = 'post' action='goChangeProfile'>
+		<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">
+		<input type="hidden" name = "image_path" id = "image_path" type = "text" value="${data.profImage}">
 	</form>
 
 
 
+	<!-- ここまで -->
+
+
+		<img id="mypic1" name = "mypic1" src="${data.profImage}" class="panel-img">
+
+		<!-- 名前とID表示 -->
 		<h2>${data.profUserName}</h2>
 		<h5>@${data.profUserId}</h5>
 
-		<input type="checkbox" id="${data.serialuserid}"  class="followbtn" ${data.checkFollow}>
+		<!-- フォロワーボタン -->
+		<input type="checkbox" id="${data.serialuserid}"  class="${data.followbtn}" ${data.checkFollow}>
 		<input type="hidden" value="${sessionScope.token.sessionToken }" id="sessionId"></input>
 
+
+		<!-- プロフィールの文 -->
 		<h3>${data.profile}</h3>
 
 		<form method = 'post' action = 'showFollows'>
@@ -98,6 +117,9 @@
 
 	<c:forEach var="data" items="${result}">
 		 ${data.rtuser}
+
+		 <img id="mypic1" name = "mypic1" src="${data.icon}" class="panel-img">
+
     	<form method = 'post' action = 'showprofiles'>
 
 	 		<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">

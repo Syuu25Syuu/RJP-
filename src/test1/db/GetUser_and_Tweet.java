@@ -30,6 +30,14 @@ public class GetUser_and_Tweet {
 	        String profId = GetUsersId.getUserId(no, cn);	//プロフィールのユーザーID
 	        String prof = GetProfile.getProfile(no, cn);
 	        String checkfollow = CheckFollow.checkFollow(sessionToken, no, cn);
+	        String flgfollowbtn ="followbtn";		//プロフィールのユーザーと自分が同一化判定する
+
+	        /*1月23日追加*/
+	        String profImage = GetUSERS_PROF_IMAGE.getProfile(no, cn);
+
+	        if(sessionToken.equals(no)) {
+	        	flgfollowbtn = "changeProf";
+	        }
 
 	        //SQL文を変数に格納する
 	        String sql="select TWEETS.TWEETS_DATE,rt.RT_TIME,USERS_SERIALNO,USERS_NAME,tweets.TWEETS_SERIALNO,tweets.USERS_NO,tweets.TWEETS_CONTENT from users "+
@@ -94,12 +102,14 @@ public class GetUser_and_Tweet {
 
 	            aStrings[6] = GetUsersId.getUserId(users_Serialno, cn);	//そのツイートをした人のuser_id
 
+	            aStrings[7] = tweetTimeString;
+
 
 	            if(rtTimeString!=null) {
 	            	Date rtDate = sdFormat.parse(rtTimeString);
 
 	            	//System.out.println("ここは生きていますか？"+rtUser);	//生きてた
-	            	aStrings[7] = profName;
+	            	aStrings[8] = profName;
 
 		            map.put(rtDate,aStrings);
 
@@ -130,6 +140,10 @@ public class GetUser_and_Tweet {
 	        	bean.setCheckFollow(checkfollow);
 
 	        	bean.setProfile(prof);
+
+	        	bean.setFollowbtn(flgfollowbtn);
+
+	        	bean.setProfImage(profImage);
 
 	        	list.add(bean);
 
@@ -172,7 +186,9 @@ public class GetUser_and_Tweet {
 
 		        	String checkRT = (String)tweetMap.get(key)[4];
 
-		        	String rtUserName = (String)tweetMap.get(key)[7];
+		        	String tweetDate = (String)tweetMap.get(key)[7];
+
+		        	String rtUserName = (String)tweetMap.get(key)[8];
 
 
 		        	if(rtUserName != null) {
@@ -184,9 +200,11 @@ public class GetUser_and_Tweet {
 
 		        	}
 
-		        	String countFollowers = CountFollowers.countFollowers(userSerialNo, cn);
+		        	String countFollowers = CountFollowers.countFollowers(no, cn);
 
-		        	String countFollows = CountFollows.countFollows(userSerialNo, cn);
+		        	String countFollows = CountFollows.countFollows(no, cn);
+
+		        	String icon = GetUSERS_PROF_IMAGE.getProfile(userSerialNo, cn);
 
 		        	bean.setName(userName);
 		        	bean.setId(userId);
@@ -202,6 +220,10 @@ public class GetUser_and_Tweet {
 		        	bean.setProfUserId(profId);
 		        	bean.setProfile(prof);
 		        	bean.setCheckFollow(checkfollow);
+		        	bean.setFollowbtn(flgfollowbtn);
+		        	bean.setProfImage(profImage);
+		        	bean.setTweetdate(tweetDate);
+		        	bean.setIcon(icon);
 		        	list.add(bean);
 
 		        }

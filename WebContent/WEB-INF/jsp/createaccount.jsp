@@ -26,6 +26,63 @@ window.onload = function(){
 }
 
 
+
+
+
+var pics_src =["/test1/images/icon/ice.png","/test1/images/icon/banana.png","/test1/images/icon/game.png","/test1/images/icon/kungfu.png","/test1/images/icon/man.png","/test1/images/icon/tree.png","/test1/images/icon/truck.png","/test1/images/icon/pirates.png","/test1/images/icon/torch.png","/test1/images/icon/bank.png","/test1/images/icon/pc.png","/test1/images/icon/peaches.png","/test1/images/icon/dna.png","/test1/images/icon/japan.png","/test1/images/icon/beard.png","/test1/images/icon/glasses.png","/test1/images/icon/injection.png","/test1/images/icon/wolf.png","/test1/images/icon/camera.png","/test1/images/icon/gun.png"];
+
+
+
+var num1 = 0;
+
+
+
+
+window.onload = function () {    //ページ読み込み時に実行される
+        GOD1(2);
+        num3 = 0;
+};
+
+	function GOD1(num2){
+       num1 = num2;
+       slideshowL();
+  	};
+
+function slideshowL(){
+     console.log(num1);
+    if (num1 == 19) {
+        num1 = 0;
+    }
+    else {
+        num1 ++;
+
+    }
+         console.log("Lだよ"+num1);
+
+    document.getElementById("mypic1").src=pics_src[num1];
+    document.getElementById("mypic2").value=pics_src[num1];
+
+
+}
+
+
+function slideshowR(){
+     console.log("Rだよ"+num1);
+    if (num1 == 0) {
+		num1 =19;
+    }
+    else {
+        num1 --;
+    }
+         console.log(num1);
+
+         document.getElementById("mypic1").src=pics_src[num1];
+         document.getElementById("mypic2").value=pics_src[num1];
+
+    }
+
+
+
 </script>
 </head>
 
@@ -54,172 +111,28 @@ window.onload = function(){
 </div>
 
 
-<!-- 2020/01/16 さわだ画像選択追加 ーーーーーーーーーーーーーーーーー-->
-<!--上段のキャラクターが配置されているエリア  -->
-	<div id="container-top-characters" class="site-width">
 
-	    <!-- for属性の値とinputタグのid属性の値を同じにすることで、ブラウザでラベルをクリックした際に、inputタグをクリックしたのと同じ動作が可能になる -->
-	    <!-- labelタグにはjsで使うクラス「js-panel-select」を用意しておく-->
-	    <label for="ice" class="panel panel-ceo js-panel-select">
-	        <!-- ラジオボタンを用意する-->
-	        <input type="radio" name="ceo-select" value="0" id="ice">
-	        <img class="panel-img" src="/test1/images/icon/ice.png">
-	    </label>
-	    <label for="banana" class="panel panel-ceo js-panel-select">
-	        <input type="radio" name="ceo-select" value="1" id="banana">
-	        <img class="panel-img" src="/test1/images/icon/banana.png">
-	    </label>
-	    <label for="game" class="panel panel-ceo js-panel-select">
-	        <input type="radio" name="ceo-select" value="2" id="game">
-	        <img class="panel-img" src="/test1/images/icon/game.png">
-	    </label>
-	    <label for="kungfu" class="panel panel-ceo js-panel-select">
-	        <input type="radio" name="ceo-select" value="3" id="kungfu">
-	        <img class="panel-img" src="/test1/images/icon/kungfu.png">
-	    </label>
-	    <label for="man" class="panel panel-ceo js-panel-select">
-	        <input type="radio" name="ceo-select" value="3" id="man">
-	        <img class="panel-img" src="/test1/images/icon/man.png">
-	    </label>
-	    <label for="tree" class="panel panel-ceo js-panel-select">
-	        <input type="radio" name="ceo-select" value="3" id="tree">
-	        <img class="panel-img" src="/test1/images/icon/tree.png">
-	    </label>
-	    <label for="truck" class="panel panel-ceo js-panel-select">
-	        <input type="radio" name="ceo-select" value="3" id="truck">
-	        <img class="panel-img" src="/test1/images/icon/truck.png">
-	    </label>
-	    <label for="pirates" class="panel panel-ceo js-panel-select">
-	        <input type="radio" name="ceo-select" value="3" id="pirates">
-	        <img class="panel-img" src="/test1/images/icon/pirates.png">
-	    </label>
-	    <label for="torch" class="panel panel-ceo js-panel-select">
-	        <input type="radio" name="ceo-select" value="3" id="torch">
-	        <img class="panel-img" src="/test1/images/icon/torch.png">
-	    </label>
-	    <label for="bank" class="panel panel-ceo js-panel-select">
-	        <input type="radio" name="ceo-select" value="3" id="bank">
-	        <img class="panel-img" src="/test1/images/icon/bank.png">
-	    </label>
-	</div>
+		<br>
 
-	<!--下段のキャラクターが配置されているエリア  -->
-	<div id="container-bottom-characters" class="site-width">
-	    <label for="pc" class="panel panel-ceo js-panel-select">
-	        <input type="radio" name="ceo-select" value="3" id="pc">
-	        <img class="panel-img" src="/test1/images/icon/pc.png">
-	    </label>
-	    <label for="peaches" class="panel panel-ceo js-panel-select">
-	        <input type="radio" name="ceo-select" value="4" id="peaches">
-	        <img class="panel-img" src="/test1/images/icon/peaches.png">
-	    </label>
-	    <label for="dna" class="panel panel-ceo js-panel-select">
-	        <input type="radio" name="ceo-select" value="4" id="dna">
-	        <img class="panel-img" src="/test1/images/icon/dna.png">
-	    </label>
-	    <label for="japan" class="panel panel-ceo js-panel-select">
-	        <input type="radio" name="ceo-select" value="4" id="japan">
-	        <img class="panel-img" src="/test1/images/icon/japan.png">
-	    </label>
-	    <label for="beard" class="panel panel-ceo js-panel-select">
-	        <input type="radio" name="ceo-select" value="4" id="beard">
-	        <img class="panel-img" src="/test1/images/icon/beard.png">
-	    </label>
-	    <label for="glasses" class="panel panel-ceo js-panel-select">
-	        <input type="radio" name="ceo-select" value="4" id="glasses">
-	        <img class="panel-img" src="/test1/images/icon/glasses.png">
-	    </label>
-	    <label for="injection" class="panel panel-ceo js-panel-select">
-	        <input type="radio" name="ceo-select" value="4" id="injection">
-	        <img class="panel-img" src="/test1/images/icon/injection.png">
-	    </label>
-	    <label for="wolf" class="panel panel-ceo js-panel-select">
-	        <input type="radio" name="ceo-select" value="4" id="wolf">
-	        <img class="panel-img" src="/test1/images/icon/wolf.png">
-	    </label>
-	    <label for="camera" class="panel panel-ceo js-panel-select">
-	        <input type="radio" name="ceo-select" value="4" id="camera">
-	        <img class="panel-img" src="/test1/images/icon/camera.png">
-	    </label>
-	    <label for="gun" class="panel panel-ceo js-panel-select">
-	        <input type="radio" name="ceo-select" value="4" id="gun">
-	        <img class="panel-img" src="/test1/images/icon/gun.png">
-	    </label>
-	</div>
+	  <p class="rink1" onclick="slideshowR()">←</p>
+    <p class="rink2" onclick="slideshowL()">→</p>
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-<script>
+		<a id="m1">
+              <img id="mypic1" name = "mypic1" src="" class="panel-img">
+              <input type="hidden" id="mypic2" name = "mypic2" value="" class="panel-img">
+         </a>
 
-	////キャラクター選択
-	//クラス js-panel-select のDOMを変数に入れる
-	var $selectPanel = $('.js-panel-select');
 
-	//変数$selectPanelの要素をクリックしたとき
-	$selectPanel.on('click', function(e){
-	    //変数$selectPanelの要素のCSSを変更して、枠線を透明にする（前回クリックしたときの赤い枠線を消すため）
-	    $selectPanel.css('border', '5px rgba(0,0,0,0) solid');
-	    //クリックした要素のCSSを変更して枠線を赤くする
-	    $(this).css('border', '5px red solid');
+	<br>
 
-	    var imgSrc = $(this).children('img').attr('src');
-	    $(this).children('input').val(imgSrc);
-
-	    alert($(this).children('input').val());
-
-	});
-
-</script>
-<style>
-		/*
-	======================================
-	キャラクター選択画面
-	======================================
-	*/
-	.characters-select-area img{
-	    width: 100%;
-	}
-	.character-area{
-	    float: left;
-	}
-	input[type=radio] {
-	    display: none;/*ラジオボタンを見えないようにするCSS*/
-	}
-	.panel-ceo{
-	    width: 10vw;
-	    display: block;
-	    float: left;
-	    box-sizing: border-box;
-	}
-	#container-top-characters{
-	    margin: 0 auto;
-	    width: 100vw;
-	    overflow: hidden;
-	}
-	#container-bottom-characters{
-	    margin: 0 auto;
-	    width: 100vw;
-	    overflow: hidden;
-	}
-	.btn{
-	    width: 50vw;
-	    margin: 0 auto;
-	    display: block;
-	    font-size: 6vw;
-	}
-	.js-panel-select{
-	    border: 5px rgba(0,0,0,0) solid;/*キャラクターパネルのデフォルトのCSS*/
-	}
-	.js-btn-permit{
-	    background-color: yellow ;/*活性のときのボタンのCSS*/
-	}
-</style>
-<!-- ここまで -->
 
 <br><div id="soushin"><input type="submit" onclick="CheckPassword()" value="送信" ></div>
 </form>
 
 
 	<input type="hidden" id = "flg1" type = "text" value="${sessionScope.flg}">
+
+
 
 
 

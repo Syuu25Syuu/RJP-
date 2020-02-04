@@ -27,20 +27,30 @@ public class KeyConfirmationPRCommand extends AbstractCommand{
 			//送信先(ユーザー検索ページ)
 			resc.setTarget("serchuserPR");
 		}
-		//間違えた回数が3回未満の場合
-		else if((int)userdata.get(1)<2) {
-			//入力された数字があっていた場合
-			if((int)userdata.get(0)==keynumber) {
+		//入力された数字があっていた場合
+		else if((int)userdata.get(0)==keynumber) {
+			//かつ入力回数が3回以下の場合
+			if((int)userdata.get(1) < 3) {
 				System.out.println("入力されたキーナンバーがあっていました");
-				//ユーザーIDに対応したListを消す
 				PRManagement.deleteUserData(userid);
 				//requestScopeにユーザーIDをセットする
 				reqc.setResult(userid);
 				//送信先(パスワード変更)
 				resc.setTarget("changepasswordformPR");
 			}
-			//入力した値があってない場合
+			//入力回数が3回を超えた場合
 			else {
+				System.out.println("アクセスした回数が3回を超えました");
+				//ユーザーIDに対応したListを消す
+				PRManagement.deleteUserData(userid);
+				//送信先(ユーザー検索ページ)
+				resc.setTarget("serchuserPR");
+			}
+		}
+		//入力された数字が間違っていた場合
+		else {
+			//かつ入力回数が3回以下の場合
+			if((int)userdata.get(1) < 2) {
 				//requestにセットするリスト
 				ArrayList requestdata=new ArrayList();
 
@@ -54,14 +64,14 @@ public class KeyConfirmationPRCommand extends AbstractCommand{
 				//送信先(同じページ)
 				resc.setTarget("numberformPR");
 			}
-		}
-		//上記以外の場合(入力を3回間違えた場合)
-		else {
-			System.out.println("アクセスした回数が3回を超えました");
-			//ユーザーIDに対応したListを消す
-			PRManagement.deleteUserData(userid);
-			//送信先(ユーザー検索ページ)
-			resc.setTarget("serchuserPR");
+			//入力回数が3回を超えた場合
+			else {
+				System.out.println("アクセスした回数が3回を超えました");
+				//ユーザーIDに対応したListを消す
+				PRManagement.deleteUserData(userid);
+				//送信先(ユーザー検索ページ)
+				resc.setTarget("serchuserPR");
+			}
 		}
 		return resc;
 	}

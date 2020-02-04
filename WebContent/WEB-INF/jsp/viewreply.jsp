@@ -16,6 +16,7 @@
 
 <script>
 	<%@include file="./js/likecheck.js" %>
+	<%@include file="./js/rtcheck.js" %>
 </script>
 
 </head>
@@ -95,6 +96,17 @@
 			<div id = "sessionToken">${sessionScope.token.sessionToken}</div>
 
 	    </form>
+
+
+	   	<form method = "post" action = 'rttweet'>
+
+	    	RTはこちら→<INPUT type="checkbox" id="${data.tweetId}"  class="rtbtn" ${data.checkRT}>
+			<div id ="rtcount"></div>
+	    	<input type="hidden" name = "sessionToken" type = "text" value="${sessionScope.token.sessionToken}">
+	    	<input type="hidden" name = "tweetID" type = "text" value="${data.tweetId}">
+
+	    </form>
+
 	    <br><br>
   </c:forEach>
 

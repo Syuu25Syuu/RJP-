@@ -39,7 +39,14 @@
 			<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">
 		</form>
 
-		<div><img src="/test1/images/dina2.png" class="a"></div>
+
+		<form method = "post" action = "showprofiles" id = "showprofiles">
+			<c:forEach var="data" items="${requestbeen}" end = "0">
+				<div onclick = "document.getElementById('showprofiles').submit();"><img src="${data.profImage}" class="a"></div>
+	 			<input type="hidden" name = "user_session" type = "text" value="${sessionScope.token.sessionToken}">
+	 			<input type="hidden" name = "user_id" type = "text" value="${data.serialuserid}">
+			</c:forEach>
+		</form>
 
 		<form method = "post" action = "followershowDM" id = "followershowDM">
 			<div class="bn" onclick = "document.getElementById('followershowDM').submit();">
@@ -87,9 +94,11 @@
 	 		<input type="hidden" name = "user_id" type = "text" value="${data.serialuserid}">
 
 	 		<!-- ここを変えた(12-13) -->
+			<img src= "${data.icon}" class="pro">
 	 		<input type = "submit" name = "user_name" value= " ${data.name}" class="button username">
 	 		<input type = "submit" name = "user_id" value= " ＠${data.id}" class="button userid">
 	 		<!-- 以上 -->
+	 		${data.tweetdate}
 
 	    </form>
 	    <br>
