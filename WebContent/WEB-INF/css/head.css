@@ -1,0 +1,80 @@
+*{
+	margin: 0px;
+	padding: 0px;
+}
+
+/*heder全指定*/
+div.header{
+	color: #fff;
+	background-color: #15202B;
+	border-bottom:thin solid #fff;
+	height: 100%;
+}
+
+/*ボタン*/
+div.header div.button,div.header input{
+	background-color: #15202B;
+}
+
+ div.button div.bn{
+   margin: auto;
+ }
+
+  div.button img{
+    width: 100px;
+  }
+
+  div.button img.a{
+    border-radius: 50%;
+ }
+
+  div.button img:hover{
+    opacity: 0.5;
+    cursor: pointer;
+  }
+
+  div.button img:active{
+    position: relative;
+    top: 3px;
+  }
+
+  .button{
+      display: -webkit-flex;
+      display: flex;
+      -webkit-justify-content: space-evenly;
+      justify-content: space-evenly;
+  }
+
+  /*検索*/
+  div form.sr{
+    box-sizing: border-box;
+    position: relative;
+    border: 1px solid #999;
+    padding: 3px 10px;
+    border-radius: 20px;
+    height: 2.3em;
+    width: 260px;
+    overflow: hidden;
+    margin: 0 0 0 auto;
+  }
+  div form.sr input[type="text"]{
+    border: none;
+    height: 2.0em;
+  }
+  div form.sr input[type="text"]:focus {
+    outline: 0;
+  }
+  div form.sr input[type="submit"]{
+    cursor: pointer;
+    font-family: FontAwesome;
+    font-size: 1.3em;
+    border: none;
+    background: none;
+    color: #fff;
+    position: absolute;
+    width: 2.5em;
+    height: 2.5em;
+    right: 0;
+    top: -10px;
+    outline : none;
+  }
