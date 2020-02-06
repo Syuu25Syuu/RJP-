@@ -5,6 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+	<%@include file="./../css/serchuser.css" %>
+</style>
 </head>
 <body>
 	<h1>ユーザ検索</h1>

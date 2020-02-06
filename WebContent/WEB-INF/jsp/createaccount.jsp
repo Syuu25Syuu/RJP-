@@ -5,7 +5,9 @@
 <head>
 
 <title>ログインベース</title>
-
+<style>
+	<%@include file="./../css/createaccount.css" %>
+</style>
 <script>
 function CheckPassword(){
     // 入力値取得
@@ -87,6 +89,7 @@ function slideshowR(){
 </head>
 
 <body style="">
+<h1>アカウント作成</h1>
 <form method="POST" action="createaccount" name="frml">
 <div id="n">名前:<input type="text" name="name"  placeholder="名前" required></div>
 
@@ -114,15 +117,19 @@ function slideshowR(){
 
 		<br>
 
-	  <p class="rink1" onclick="slideshowR()">←</p>
-    <p class="rink2" onclick="slideshowL()">→</p>
 
 		<a id="m1">
               <img id="mypic1" name = "mypic1" src="" class="panel-img">
               <input type="hidden" id="mypic2" name = "mypic2" value="" class="panel-img">
          </a>
-
-
+<div class="button">
+	<div class="rink1 rl" onclick="slideshowR()">
+		<img src="/test1/images/left.png">
+	</div>
+   	<div class="rink2 rl" onclick="slideshowL()">
+   		<img src="/test1/images/right.png">
+   	</div>
+</div>
 	<br>
 
 

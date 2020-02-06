@@ -5,10 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <title>ログインページ</title>
+<style>
+	<%@include file="./../css/login.css" %>
+</style>
 </head>
 <body>
-	<h1>Login</h1>
-	<form method='post' action='login'>
+	<h1>ログイン</h1>
+	<form method='post' action='login'autocomplete="off">
 		ユーザーID:<input type='text' name='name'><br>
 		パスワード:<input type='text' name='pass'><br><br>
 

@@ -29,7 +29,7 @@ public class SearchUserPRTest {
 	         USERS表から取得する
 	         */
 	        //SQL文を変数に格納する
-	        String sql="select USERS_SERIALNO,USERS_ID,USERS_NAME from users where Users_mail = '"+MailAddress+"'";
+	        String sql="select USERS_SERIALNO,USERS_ID,USERS_NAME,USERS_PROF_IMAGE from users where Users_mail = '"+MailAddress+"'";
 
 	        //Statementインターフェイスを実装するクラスの
 	        //インスタンスを取得する
@@ -47,11 +47,13 @@ public class SearchUserPRTest {
 	        	String serialNO = rs.getString(1);
 	        	String userID = rs.getString(2);
 	        	String userName = rs.getString(3);
+	        	String userImage = rs.getString(4);
 
 	        	SerchBean sb = new SerchBean();
 	        	sb.setUserNo(serialNO);
 	        	sb.setUserName(userName);
 	        	sb.setUserId(userID);
+	        	sb.setUserIcon(userImage);
 
 	        	data.add(sb);
 

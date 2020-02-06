@@ -1,0 +1,31 @@
+*{
+  color: #fff;
+}
+
+*:focus{
+  outline: none;
+}
+
+body{
+	background-color: #15202B;
+}
+
+input{
+	border: 1px solid #fff;
+	background-color: #15202B;
+}
+
+.username{
+	font-size: 25px;
+	color: #fff;
+	  margin:0px;
+}
+
+.userid{
+	color: #687784;
+	  margin:0px;
+}
+
+.note{
+	color:#ff0000;
+}

@@ -6,6 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+	<%@include file="./../css/serchresult.css" %>
+</style>
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 
 </head>
@@ -14,8 +17,9 @@
 	<h1>検索結果</h1>
 
 	<c:forEach var = "search" items = "${requestbeen}">
-	<div id="">ユーザー名:${search.userName}</div>
-	<div id="">ユーザーID:${search.userId}</div>
+	<img src="${search.userIcon }">
+	<p class="username">${search.userName}</p>
+	<p class="userid">@${search.userId}</p>
 	</c:forEach>
 
 	<div id="">上記のユーザーにパスワード変更用のメールを送信します</div>

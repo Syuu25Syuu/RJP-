@@ -6,6 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+	<%@include file="./../css/serchresult.css" %>
+</style>
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 <script>
 
@@ -15,19 +18,14 @@
 
 	<h1>検索結果</h1>
 
-
-	<table border="1">
-		<tr><th>name</th><th>id</th></tr>
 			<c:forEach var = "search" items = "${requestbeen}">
 			<form method="post" action="confirmationPR">
-				<tr>
-					<td>${search.userName}</td>
-					<td>${search.userId}</td>
-					<td><input type="hidden" name="userid" value="${search.userId}"><input type="submit" class="btn" value="確認画面へ"></td>
-				</tr>
+				<img src="${search.userIcon }">
+				<p class="username">${search.userName}</p>
+				<p class="userid">@${search.userId}</p>
+				<input type="hidden" name="userid" value="${search.userId}"><input type="submit" class="btn" value="確認画面へ">
 			</form>
 			</c:forEach>
-	</table>
 
 </body>
 </html>
