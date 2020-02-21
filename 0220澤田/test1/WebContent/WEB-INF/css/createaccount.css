@@ -1,0 +1,24 @@
+*{
+  color: #fff;
+}
+
+*:focus{
+  outline: none;
+}
+
+body{
+	background-color: #15202B;
+}
+
+input{
+	border: 1px solid #fff;
+	background-color: #15202B;
+}
+
+.button{
+	display: -webkit-flex;
+}
+
+.rl{
+	padding:10px;
+}
