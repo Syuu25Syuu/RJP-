@@ -1,19 +1,19 @@
 変更ファイル
 
-ComebackHomeCommand.java
-SearchUserPRCommand.java
-FollowerShowDMCommand.java
-NotifyCommand.java
+//ComebackHomeCommand.java
+//SearchUserPRCommand.java
+//FollowerShowDMCommand.java
+//NotifyCommand.java
 
 jsonフォルダー
 
-RTAjaxServlet.java
-LikeAjaxServlet.java
-FollowAjaxServlet.java
-SendMessageDMAjaxServlet.java
+//RTAjaxServlet.java
+//LikeAjaxServlet.java
+//FollowAjaxServlet.java
+//SendMessageDMAjaxServlet.java
 
-NotifyBean.java
+//NotifyBean.java
 
-SearchUserPRTest.java
-FollowerShowTest.java
+//SearchUserPRTest.java
+//FollowerShowTest.java
 SearchUserTest.java

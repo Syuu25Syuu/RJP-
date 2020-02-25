@@ -1,0 +1,98 @@
+package test1.file;
+import java.sql.Connection;
+import java.util.ArrayList;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+
+import test1.db.ComebackHome;
+import test1.db.CreateTweet;
+import test1.db.GetHeader;
+import test1.db.OracleConnector;
+
+@WebServlet("/UploadServlet")
+@MultipartConfig(location="/tmp", maxFileSize=58576000)
+public class UploadServlet extends HttpServlet {
+	String sessionToken="";
+    String tweet="";
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse res) {
+    	try {
+    		System.out.println("UploadServletへようこそ！");
+	    	req.setCharacterEncoding("UTF-8");
+	    	sessionToken = req.getParameter("sessionToken");	//sessionTokenを取得
+			tweet = req.getParameter("contents");	//ツイートの内容を取得
+			Part part = req.getPart("inputFile");	//投稿された画像を取得
+
+			String name="";
+			String newName = "";
+
+			String fullPath="";		//画像を保存するパスを指定する変数
+
+			 String writePath ="";
+
+			System.out.println(part.getSize());
+
+			if(part.getSize()>0) {		//ツイートに画像が含まれるか判定
+				 name = this.getFileName(part);	//画像の名前を取得
+
+				 System.out.println("画像の名前さんだよ！！！"+name);
+
+				 newName = ChangeImageName.changeImageName(name);
+
+				 String pathString ="C:/eclipse/pleiades/workspace/test1/WebContent/images/uploaded/";
+
+				 //String pathString ="C:/eclipse/pleiades/workspace/test1/image";
+
+				 fullPath = pathString+newName;
+
+				 part.write(fullPath);		//画像を書き込む
+
+				 writePath = "/test1/images/uploaded/"+newName;
+
+			}else {
+
+			}
+
+			System.out.println(sessionToken+tweet+part);
+
+
+
+			//String writePath = "../iamge/"+newName;
+
+		    CreateTweet.createTweet(sessionToken, tweet, writePath);
+
+		    Connection cn = new OracleConnector().getCn();
+		    ArrayList list = ComebackHome.comeBackHome(sessionToken, cn);
+		    ArrayList header = GetHeader.getHeader(sessionToken, cn);		//ヘッダー用
+		    req.setAttribute("result",list);
+		    req.setAttribute("requestbeen",header);
+
+		    RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/jsp/home.jsp");
+		    dispatcher.forward(req, res);
+
+    	}catch (Exception e) {
+    		e.printStackTrace();
+		}
+    }
+
+    private String getFileName(Part part) {
+        String name = null;
+        for (String dispotion : part.getHeader("Content-Disposition").split(";")) {
+            if (dispotion.trim().startsWith("filename")) {
+                name = dispotion.substring(dispotion.indexOf("=") + 1).replace("\"", "").trim();
+                System.out.println("1段階"+name);
+                name = name.substring(name.lastIndexOf("\\") + 1);
+                System.out.println("2段階"+name);
+                break;
+            }
+        }
+        return name;
+    }
+}
