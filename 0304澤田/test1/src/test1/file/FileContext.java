@@ -30,7 +30,7 @@ public class FileContext {
 
 	     System.out.println("1段階"+name+":::::"+part);
 
-	     String pathString ="C:/pleiades/workspace/test1/WebContent/WEB-INF/uploaded/";
+	     String pathString ="C:/eclipse/pleiades/workspace/test1/WebContent/WEB-INF/uploaded/";
 
 	     fullPath = pathString+name;
 

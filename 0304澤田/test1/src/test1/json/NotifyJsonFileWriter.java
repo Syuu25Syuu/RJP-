@@ -24,7 +24,7 @@ public class NotifyJsonFileWriter {
 
 		try {
 			// 1.ファイルのパスを指定する
-	        File file = new File("C:/pleiades/workspace/test1/src/test1/json/notify.json");
+	        File file = new File("C:/eclipse/pleiades/workspace/test1/src/test1/json/notify.json");
 
 	        // 2.ファイルが存在しない場合に例外が発生するので確認する
 	        if (!file.exists()) {
@@ -58,7 +58,7 @@ public class NotifyJsonFileWriter {
 		try {
 	        ArrayList alldatalist = getAllData();
 
-            FileWriter fw = new FileWriter("C:/pleiades/workspace/test1/src/test1/json/notify.json");
+            FileWriter fw = new FileWriter("C:/eclipse/pleiades/workspace/test1/src/test1/json/notify.json");
             PrintWriter pw = new PrintWriter(new BufferedWriter(fw));
 
             System.out.println(alldatalist);
@@ -94,7 +94,7 @@ public class NotifyJsonFileWriter {
 		try {
 			ArrayList alldatalist = getAllData();
 
-            FileWriter fw = new FileWriter("C:/pleiades/workspace/test1/src/test1/json/notify.json");
+            FileWriter fw = new FileWriter("C:/eclipse/pleiades/workspace/test1/src/test1/json/notify.json");
             PrintWriter pw = new PrintWriter(new BufferedWriter(fw));
 
             String showCount = "0";

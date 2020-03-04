@@ -59,7 +59,7 @@ public class UploadServlet extends HttpServlet {
 
 				 newName = ChangeImageName.changeImageName(name);
 
-				 String pathString ="C:/pleiades/workspace/test1/WebContent/images/uploaded/";
+				 String pathString ="C:/eclipse/pleiades/workspace/test1/WebContent/images/uploaded/";
 
 				 //String pathString ="C:/eclipse/pleiades/workspace/test1/image";
 

@@ -22,7 +22,7 @@ public class NotifyJsonFileReader {
 		JsonNode node = null;
 
 	    try {
-	        node = mapper.readTree(new File("C:/pleiades/workspace/test1/src/test1/json/notify.json"));
+	        node = mapper.readTree(new File("C:/eclipse/pleiades/workspace/test1/src/test1/json/notify.json"));
 	    }catch (Exception e) {
 			e.printStackTrace();
 		}
