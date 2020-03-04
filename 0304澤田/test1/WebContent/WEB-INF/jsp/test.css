@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+.button {
+  display       : inline-block;
+  font-size     : 11pt;        /* 文字サイズ */
+  text-align    : center;      /* 文字位置   */
+  cursor        : pointer;     /* カーソル   */
+  padding       : 5px 3px;   /* 余白       */
+  background    : rgba(255, 255, 255, 0.10);     /* 背景色     */
+  color         : #000000;     /* 文字色     */
+  line-height   : 1em;         /* 1行の高さ  */
+  transition    : .3s;         /* なめらか変化 */
+}
+.button:hover {
+}
+
+#parent{
+	color:blue;
+}
+#sessionToken{
+	display:none;
+}
