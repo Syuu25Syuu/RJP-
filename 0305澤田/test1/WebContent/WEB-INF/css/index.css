@@ -1,0 +1,282 @@
+/*全体の文字の色*/
+*{
+  color: #fff;
+}
+
+/*大部分の背景色*/
+.color,input,form,body,.button{
+	background-color: #15202B;
+}
+
+/*フォーカスされた時のスタイルを無しにする*/
+*:focus{
+  outline: none;
+}
+
+/*ここから下がツイート内容についてのCSS*/
+div.tweetdata{
+  border: solid 2px #fff;
+}
+
+/*プロフィールで使う予定で未定*/
+.pro{
+  border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    position: relative;
+}
+div.main div.tweetdata img.pro{
+    position: absolute;
+}
+
+/*テキストボックスのデザイン*/
+.box{
+  border: 1px solid #15202B;
+  resize: none;
+  font-size: 20px;
+}
+
+.box:focus::placeholder{
+  color: #fff;
+}
+/*ツイートボタンのデザイン*/
+.tweetbutton{
+  display: block;
+  margin-left: auto;
+  margin-right: 600px;
+  border: 1px solid #999;
+  padding: 3px 10px;
+  border-radius: 20px;
+  height: 2.3em;
+}
+
+/*ユーザネーム,ID,ツイート内容のデザイン*/
+
+#sessionToken{
+	display:none;
+}
+
+.tweetdata input{
+	display: inline-block;
+}
+
+.button{
+	border:none;
+}
+.usertweet{
+	text-align:left;
+}
+
+.username,.usertweet{
+	font-size: 25px;
+	color: #fff;
+}
+
+.userid,.rtuser{
+	color: #687784;
+}
+
+/*いいねボタン*/
+.heart {
+	position: absolute;
+	transform: translate(-50%, -50%);
+}
+
+input.likebtn[type="checkbox"] {
+	position: absolute;
+	left: -9999px;
+}
+
+label.ht {
+	top: 50px;
+	left: 50px;
+	width: 100px;
+	height: 100px;
+	position: absolute;
+	transform: translate(-50%, -50%);
+	background: url(https://cssanimation.rocks/images/posts/steps/heart.png) no-repeat;
+	cursor: pointer;
+	border-radius: 50%;
+	margin-left:10px;
+}
+
+label.ht:hover{
+	border-radius: 50%;
+	border: solid 2px rgb(119, 50, 74);
+}
+
+
+input.likebtn:checked + label.ht {
+	background-position: -2800px 0;
+		transition: background 1s steps(28);
+	}
+	@keyframes fave-heart {
+		0% {
+	    background-position: 0 0;
+	}
+		100% {
+	    background-position: -2800px 0;
+	}
+}
+
+.likecount{
+	position: absolute;
+	margin-left: 150px;
+	margin-top:35px;
+}
+/*リツイートボタン*/
+.retweet{
+	position: absolute;
+	margin-left: 200px;
+}
+.retweet label.retweetbefore:before {
+	top: 50px;
+	left: 50px;
+	height: 100px;
+	width: 100px;
+	border-radius: 50%;
+	border: solid 2px #15202B;
+	backface-visibility: hidden;
+	position: absolute;
+	transform: translate(-50%, -50%);
+	text-align: center;
+	display: inline-block;
+	content: url("/test1/images/rt.png");
+	line-height: 120px;
+}
+
+
+.retweet input.retweetafter:checked ~ label.retweetbefore:before {
+	content: url("/test1/images/rtw.png");
+}
+
+.retweet input.retweetafter {
+	display: none;
+}
+
+.retweet label.retweetbefore:hover::before{
+	border-radius: 50%;
+	border: solid 2px rgb(79, 212, 35);
+}
+
+.rtcount{
+	position: absolute;
+	margin-left: 150px;
+	margin-top:35px;
+}
+/*リプライボタン*/
+input.balloon {
+	display: none;
+}
+
+.replybox{
+    display: flex;
+    justify-content: center;
+    overflow: auto;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    opacity: 0;
+    transition: opacity 0.5s, transform 0s 0.5s;
+    transform: scale(0);
+}
+
+.rep{
+	position: absolute;
+	width: 100px;
+    height: 100px;
+}
+
+.reply{
+    position: relative;
+    align-self: center;
+    max-width: 800px;
+    box-sizing: border-box;
+    background-color: transparent;
+    line-height: 1.4em;
+    transition: 0.5s;
+    border: solid 2px rgb(0, 0, 0);
+    border-radius: 20px;
+}
+
+.repbox,.replycontent{
+	border-radius: 20px;
+	padding:5px 5px 5px 5px;
+}
+
+.replycontent{
+
+}
+
+.close_button{
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+
+.replyballoon input:checked ~ .replybox{
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 0.5s;
+}
+
+.replaybutton{
+  display: block;
+  border: 1px solid #999;
+  padding: 3px 10px;
+  border-radius: 20px;
+  height: 2.3em;
+}
+
+.open_button{
+	top: 50px;
+    left: 50px;
+    padding: 34px 34px 34px 34px;
+    border-radius: 50%;
+    position: relative;
+    transform: translate(-50%, -50%);
+    content: url("/test1/images/balloon.png");
+    margin-left:400px;
+}
+
+.balloon{
+	width: 100px;
+    height: 100px;
+}
+
+label.open_button:hover{
+    border-radius: 50%;
+    border: solid 2px rgb(29,161,242);
+  }
+
+.rpcount{
+	position: absolute;
+	margin-left: 550px;
+	margin-top:35px;
+}
+/* 削除ボタン */
+.deletebtn{
+	position: absolute;
+	margin-left: 600px;
+	margin-top:33px;
+}
+/* 画像の拡大縮小*/
+.tweetImgage{
+	height:250px;
+	width:250px;
+	border-radius:10%;
+}
+.NonImage{
+	display:none;
+}
+.rank{
+	display:inline-block;
+	padding:5px;
+}
