@@ -1,0 +1,5 @@
+{
+"5":[{"request_user_no":"161","request_user_name":"ろうそく","request_user_icon_path":"/test1/images/icon/torch.png","servlet_name":"viewtweet","type":"like","tweet_id":"301"},{"request_user_no":"161","request_user_name":"ろうそく","request_user_icon_path":"/test1/images/icon/torch.png","servlet_name":"viewtweet","type":"retweet","tweet_id":"301"},{"request_user_no":"161","request_user_name":"ろうそく","request_user_icon_path":"/test1/images/icon/torch.png","servlet_name":"showprofiles","type":"follow","tweet_id":""},{"request_user_no":"181","request_user_name":"アルフォート","request_user_icon_path":"/test1/images/icon/ice.png","servlet_name":"showprofiles","type":"follow","tweet_id":""}],
+"1":[{"request_user_no":"7","request_user_name":"yamada","request_user_icon_path":"test/icon7.png","servlet_name":"FollowServlet","type":"follow","tweet_id":""}],
+"50":[{"request_user_no":"7","request_user_name":"yamada","request_user_icon_path":"test/icon7.png","servlet_name":"FollowServlet","type":"follow","tweet_id":""}]
+}
